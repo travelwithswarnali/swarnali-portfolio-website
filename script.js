@@ -4,6 +4,26 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ─── INTRO SOUND — plays once per session on page load ─── */
+  if (!sessionStorage.getItem('introSoundPlayed')) {
+    const introSound = new Audio('assets/sound/intro.mp3');
+    introSound.volume = 0.5;
+    const playSound = () => {
+      introSound.play().then(() => {
+        sessionStorage.setItem('introSoundPlayed', '1');
+      }).catch(() => {});
+      document.removeEventListener('click', playSound);
+      document.removeEventListener('keydown', playSound);
+    };
+    introSound.play().then(() => {
+      sessionStorage.setItem('introSoundPlayed', '1');
+    }).catch(() => {
+      // Browser blocked autoplay — wait for first interaction
+      document.addEventListener('click', playSound, { once: true });
+      document.addEventListener('keydown', playSound, { once: true });
+    });
+  }
+
   /* ─── CURSOR INVERSION CIRCLE ─── */
   const cursor = document.getElementById('cursorCircle');
   let mouseX = 0, mouseY = 0;
