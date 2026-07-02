@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roll No. 24 — Photography &amp; Film</title>
+  <meta name="description" content="Photography and film by Swarnali Chakraborty. Festivals, films, and commercial work across India." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ── Homepage-specific ── */
+    .home-hero {
+      height: 100svh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 0 24px;
+    }
+
+    .home-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 60%,
+        oklch(0.22 0.04 55 / 0.6) 0%,
+        oklch(0.13 0.018 50) 70%);
+      z-index: 0;
+    }
+
+    .home-hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .home-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--primary);
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 1.4s forwards;
+      margin-bottom: 24px;
+    }
+
+    .home-title {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 18vw, 16rem);
+      font-weight: 700;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      opacity: 0;
+      animation: fadeUp 1.2s ease-out 1.6s forwards;
+    }
+
+    .home-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 10.8vw, 9.6rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+      margin-top: 12px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease-out 1.9s forwards;
+    }
+
+    .home-subtitle {
+      font-family: var(--font-mono);
+      font-size: 14.3px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 2.3s forwards;
+    }
+
+    .home-scroll-hint {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: oklch(0.45 0.015 65);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 2.4s forwards;
+    }
+
+    .home-scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, oklch(0.45 0.015 65), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── Roll portals ── */
+    .rolls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .roll-card {
+      position: relative;
+      height: 70svh;
+      min-height: 400px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .roll-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .roll-card:nth-child(1) .roll-bg {
+      background: linear-gradient(135deg,
+        oklch(0.2 0.04 55) 0%,
+        oklch(0.14 0.025 70) 60%,
+        oklch(0.12 0.015 50) 100%);
+    }
+    .roll-card:nth-child(2) .roll-bg {
+      background: linear-gradient(135deg,
+        oklch(0.16 0.03 40) 0%,
+        oklch(0.18 0.035 60) 50%,
+        oklch(0.12 0.015 50) 100%);
+    }
+    .roll-card:nth-child(3) .roll-bg {
+      background: linear-gradient(135deg,
+        oklch(0.18 0.04 65) 0%,
+        oklch(0.15 0.03 50) 50%,
+        oklch(0.11 0.01 40) 100%);
+    }
+
+    .roll-card:hover .roll-bg {
+      transform: scale(1.04);
+    }
+
+    .roll-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, oklch(0.1 0.015 50 / 0.9) 0%, transparent 60%);
+      transition: opacity 0.5s ease;
+    }
+
+    .roll-card:hover .roll-overlay {
+      opacity: 0.7;
+    }
+
+    .roll-content {
+      position: relative;
+      z-index: 1;
+      padding: 40px;
+      width: 100%;
+    }
+
+    .roll-num {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 12px;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+
+    .roll-card:hover .roll-num { opacity: 1; }
+
+    .roll-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
+    }
+
+    .roll-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 280px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+    }
+
+    .roll-card:hover .roll-desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .roll-arrow {
+      display: inline-block;
+      margin-top: 20px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+    }
+
+    .roll-card:hover .roll-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @media (max-width: 768px) {
+      .rolls {
+        grid-template-columns: 1fr;
+      }
+      .roll-card {
+        height: 50svh;
+      }
+      .roll-desc { opacity: 1; transform: none; }
+      .roll-arrow { opacity: 1; transform: none; }
+    }
+
+    /* ── About strip ── */
+    .about-strip {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 96px 40px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--primary);
+      padding-top: 8px;
+    }
+
+    .about-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .about-text p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    @media (max-width: 768px) {
+      .about-strip {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 64px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursorCircle" class="cursor-circle"></div>
+
+  <div id="pageLoader" class="page-loader">
+    <span>Loading reel...</span>
+  </div>
+
+  <div class="viewfinder" id="viewfinder">
+    <div class="vf-corner tl"></div>
+    <div class="vf-corner tr"></div>
+    <div class="vf-corner bl"></div>
+    <div class="vf-corner br"></div>
+    <div class="vf-rec"><span class="rec-dot"></span> REC <span class="vf-timecode">00:00:00:00</span></div>
+    <div class="vf-top-right"><span>XAVC S 4K</span><span>24p</span><span>120Mbps</span></div>
+    <div class="vf-center"></div>
+    <div class="vf-af">AF-C</div>
+    <div class="vf-scene-title">Index</div>
+    <div class="vf-battery"><span>▮▮▮▮ 100%</span><span>SD 214GB</span></div>
+    <div class="vf-frame-label">24mm GM</div>
+    <div class="vf-info"><span>FE 24mm F1.4 GM</span><span>Sony α7 IV</span></div>
+    <div class="vf-settings"><span>P</span><span>1/60</span><span>F1.4</span><span>ISO 800</span></div>
+    <div class="vf-meter"><span>-2</span><div class="vf-meter-bar"><div class="vf-meter-fill"></div></div><span>+2</span></div>
+  </div>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header">
+    <a href="index.html" class="logo logo-rec">
+      <span class="rec-dot"></span> REC
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Index</a></li>
+        <li><a href="festivals.html">Festivals</a></li>
+        <li><a href="films.html">Films</a></li>
+        <li><a href="journey.html">Journey</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="contact.html" class="hire-link">Hire</a>
+  </header>
+
+  <main>
+
+    <section class="home-hero">
+      <div class="home-hero-content">
+        <p class="home-eyebrow">Photography &amp; Film · India</p>
+        <h1 class="home-title">Incredible India</h1>
+        <p class="home-tagline">Through my lens</p>
+        <p class="home-subtitle">Swarnali Chakraborty</p>
+      </div>
+      <div class="home-scroll-hint">Scroll</div>
+    </section>
+
+    <section class="rolls">
+      <a href="festivals.html" class="roll-card">
+        <div class="roll-bg"></div>
+        <div class="roll-overlay"></div>
+        <div class="roll-content">
+          <p class="roll-num">Roll · 01</p>
+          <h2 class="roll-title">Festivals</h2>
+          <p class="roll-desc">Music, culture and collective energy — documented as it happens.</p>
+          <span class="roll-arrow">View work →</span>
+        </div>
+      </a>
+      <a href="films.html" class="roll-card">
+        <div class="roll-bg"></div>
+        <div class="roll-overlay"></div>
+        <div class="roll-content">
+          <p class="roll-num">Roll · 02</p>
+          <h2 class="roll-title">Films</h2>
+          <p class="roll-desc">Short films, brand stories and documentary work across formats.</p>
+          <span class="roll-arrow">View work →</span>
+        </div>
+      </a>
+      <a href="journey.html" class="roll-card">
+        <div class="roll-bg"></div>
+        <div class="roll-overlay"></div>
+        <div class="roll-content">
+          <p class="roll-num">Roll · 03</p>
+          <h2 class="roll-title">Journey</h2>
+          <p class="roll-desc">Editorial-leaning brand work for fashion, lifestyle and hospitality.</p>
+          <span class="roll-arrow">View work →</span>
+        </div>
+      </a>
+    </section>
+
+    <div style="border-top: 1px solid var(--border);">
+      <div class="about-strip">
+        <p class="about-label reveal">Studio</p>
+        <div class="about-text">
+          <h2 class="reveal">Light, patience<br>and one camera.</h2>
+          <p class="reveal">Based in India, working worldwide. Roll No. 24 is the practice of Swarnali Chakraborty — a photographer and filmmaker drawn to the quiet moments between performances, the textures of a brand before it becomes noise, and the weight of light at golden hour on the last day of a festival.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-headline">
+        <h3>Let's make something unforgettable.</h3>
+        <p>Available worldwide for festival coverage, brand films and commercial campaigns.</p>
+      </div>
+      <div class="footer-col">
+        <p class="col-title">Studio</p>
+        <p class="studio-name">Swarnali Chakraborty</p>
+        <p>India · worldwide</p>
+        <a href="tel:+919073196040">+91 90731 96040</a>
+      </div>
+      <div class="footer-col">
+        <p class="col-title">Elsewhere</p>
+        <a href="https://www.instagram.com/travelwithswarnali/" target="_blank" rel="noopener">@travelwithswarnali</a>
+        <p>Vimeo · on request</p>
+        <p>Behance · on request</p>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 — Swarnali Chakraborty · Shot on light &amp; memory</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

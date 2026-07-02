@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Festival Coverage — Roll No. 24</title>
+  <meta name="description" content="Festival photography across music, culture and art — documented as it happens." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ── Hero gradient (no photo) ── */
+    .hero-gradient-only {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 30% 50%, oklch(0.25 0.06 60 / 0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 75% 30%, oklch(0.2 0.04 40 / 0.4) 0%, transparent 60%),
+        linear-gradient(to top, var(--bg) 0%, oklch(0.15 0.03 55) 100%);
+    }
+
+    /* ── Hero overrides for festivals page ── */
+    .hero-title-festivals {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 10vw, 10rem);
+      font-weight: 300;
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.85rem, 1.4vw, 1rem);
+      color: var(--muted);
+      line-height: 1.85;
+      margin-top: 32px;
+      max-width: 380px;
+    }
+
+    .hero-frontrow {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.6vw, 1.3rem);
+      font-style: italic;
+      color: var(--primary);
+      margin-top: 20px;
+    }
+
+    /* ── Explore theme section ── */
+    .explore-theme {
+      border-top: 1px solid var(--border);
+      padding: 80px 40px;
+      max-width: 1600px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    .explore-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .explore-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .explore-body {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 480px;
+      align-self: end;
+    }
+
+    @media (max-width: 768px) {
+      .explore-theme { grid-template-columns: 1fr; gap: 32px; padding: 60px 24px; }
+    }
+
+    /* ── Featured festivals list ── */
+    .festivals-list {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .festivals-list-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 80px;
+      gap: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: oklch(0.4 0.015 60);
+      margin-bottom: 0;
+    }
+
+    .festival-row {
+      display: grid;
+      grid-template-columns: 40px 1fr 1fr 80px;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      transition: background 0.3s ease;
+      cursor: none;
+    }
+
+    .festival-row:hover {
+      background: oklch(0.16 0.02 50 / 0.5);
+      margin: 0 -40px;
+      padding: 20px 40px;
+    }
+
+    .festival-row:hover .f-arrow { opacity: 1; transform: translateX(0); }
+
+    .festival-row .f-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: oklch(0.38 0.015 60);
+    }
+
+    .festival-row .f-name {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-weight: 400;
+    }
+
+    .festival-row .f-location,
+    .festival-row .f-year {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .festival-row .f-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .festival-row .f-arrow {
+      font-size: 14px;
+      color: var(--primary);
+      text-align: right;
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .festivals-list { padding: 60px 24px; }
+      .festivals-list-header { grid-template-columns: 1fr 1fr; }
+      .festivals-list-header .hide-sm,
+      .festival-row .f-num { display: none; }
+      .festival-row { grid-template-columns: 1fr 60px; }
+      .festival-row:hover { margin: 0 -24px; padding: 20px 24px; }
+    }
+
+    /* ══════════════════════════════════════
+       FESTIVAL OVERLAY
+    ══════════════════════════════════════ */
+    .fest-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: oklch(0.09 0.015 50 / 0.98);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.45s ease;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .fest-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .fest-overlay-inner {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 88px 60px 80px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 80px;
+      align-items: start;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.45s ease 0.1s, transform 0.45s ease 0.1s;
+    }
+
+    .fest-overlay.open .fest-overlay-inner {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Close button */
+    .fest-close {
+      position: fixed;
+      top: 24px;
+      right: 40px;
+      z-index: 1002;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: 1px solid oklch(0.28 0.02 50 / 0.5);
+      padding: 10px 20px;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease 0.3s, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .fest-overlay.open .fest-close {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .fest-close:hover { color: var(--fg); border-color: oklch(0.5 0.02 60 / 0.6); }
+
+    /* ── Gallery ── */
+    .fest-gallery { display: flex; flex-direction: column; gap: 6px; }
+
+    .fest-gallery-main {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: oklch(0.13 0.018 50);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .fest-gallery-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .fest-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+
+    .fest-gallery-thumb {
+      aspect-ratio: 1;
+      background: oklch(0.13 0.018 50);
+      overflow: hidden;
+    }
+
+    .fest-gallery-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .fest-gallery-thumb:hover img { transform: scale(1.06); }
+
+    /* ── Details panel ── */
+    .fest-details {
+      position: sticky;
+      top: 88px;
+    }
+
+    .fest-details-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--primary);
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .fest-details-name {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 4.5vw, 5rem);
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      margin-bottom: 28px;
+    }
+
+    .fest-details-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
+      font-style: italic;
+      font-weight: 300;
+      color: oklch(0.72 0.02 70);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .fest-details-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 36px;
+    }
+
+    .fest-meta { border-top: 1px solid var(--border); }
+
+    .fest-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 20px;
+    }
+
+    .fest-meta-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: oklch(0.42 0.015 60);
+      flex-shrink: 0;
+    }
+
+    .fest-meta-val {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--fg);
+      text-align: right;
+    }
+
+    @media (max-width: 1024px) {
+      .fest-overlay-inner {
+        grid-template-columns: 1fr;
+        padding: 80px 32px 64px;
+        gap: 48px;
+      }
+      .fest-details { position: static; }
+      .fest-close { right: 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .fest-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .fest-overlay-inner { padding: 72px 20px 56px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="cursorCircle" class="cursor-circle"></div>
+
+  <div id="pageLoader" class="page-loader">
+    <span>Loading reel...</span>
+  </div>
+
+  <div class="viewfinder" id="viewfinder">
+    <div class="vf-corner tl"></div>
+    <div class="vf-corner tr"></div>
+    <div class="vf-corner bl"></div>
+    <div class="vf-corner br"></div>
+    <div class="vf-rec"><span class="rec-dot"></span> REC <span class="vf-timecode">00:00:02:08</span></div>
+    <div class="vf-top-right"><span>XAVC S 4K</span><span>24p</span><span>120Mbps</span></div>
+    <div class="vf-center"></div>
+    <div class="vf-af">AF-C</div>
+    <div class="vf-scene-title">Festivals</div>
+    <div class="vf-battery"><span>▮▮▮▯ 82%</span><span>SD 214GB</span></div>
+    <div class="vf-frame-label">85mm GM</div>
+    <div class="vf-info"><span>FE 85mm F1.4 GM</span><span>Sony α7 IV</span></div>
+    <div class="vf-settings"><span>A</span><span>1/800</span><span>F1.4</span><span>ISO 1600</span></div>
+    <div class="vf-meter"><span>-2</span><div class="vf-meter-bar"><div class="vf-meter-fill"></div></div><span>+2</span></div>
+  </div>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header">
+    <a href="index.html" class="logo logo-rec">
+      <span class="rec-dot"></span> REC
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Index</a></li>
+        <li><a href="festivals.html" class="active">Festivals</a></li>
+        <li><a href="films.html">Films</a></li>
+        <li><a href="journey.html">Journey</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="contact.html" class="hire-link">Hire</a>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-gradient-only"></div>
+      <div class="hero-content">
+        <div class="hero-inner">
+          <p class="hero-tag">Festivals</p>
+          <h1 class="hero-title-festivals">
+            Where culture<br>comes <span class="italic-accent">alive.</span>
+          </h1>
+          <p class="hero-subtitle">
+            India is a living, breathing mosaic of traditions.<br>
+            Thousands of festivals. Countless stories.<br>
+            Many still waiting to be seen.
+          </p>
+          <p class="hero-frontrow">This is my front row.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="explore-theme reveal">
+      <div>
+        <span class="explore-label">Explore by theme</span>
+        <h2 class="explore-heading">Art &amp; Cultural<br>Festivals</h2>
+      </div>
+      <p class="explore-body">India is home to over 1,000 festivals.<br>Here are some rare, raw, and remarkable celebrations most people don't even know exist.</p>
+    </div>
+
+    <section class="festivals-list">
+      <div class="festivals-list-header" style="grid-template-columns: 40px 1fr 1fr 80px;">
+        <span></span>
+        <span>Festival</span>
+        <span class="hide-sm">Location</span>
+        <span>Type</span>
+      </div>
+
+      <div class="festival-row reveal" data-festival="faguli">
+        <span class="f-num">01</span>
+        <span class="f-name">Faguli Festival</span>
+        <span class="f-location">Chamoli, Uttarakhand</span>
+        <span class="f-tag">Ritual</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="wari">
+        <span class="f-num">02</span>
+        <span class="f-name">Wari Festival</span>
+        <span class="f-location">Pandharpur, Maharashtra</span>
+        <span class="f-tag">Cultural</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="ganesh">
+        <span class="f-num">03</span>
+        <span class="f-name">Ganesh Festival</span>
+        <span class="f-location">Mumbai, Maharashtra</span>
+        <span class="f-tag">Cultural</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="durga">
+        <span class="f-num">04</span>
+        <span class="f-name">Durga Puja Festival</span>
+        <span class="f-location">Kolkata, West Bengal</span>
+        <span class="f-tag">Cultural</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="theyyam">
+        <span class="f-num">05</span>
+        <span class="f-name">Theyyam Festival</span>
+        <span class="f-location">Kannur, Kerala</span>
+        <span class="f-tag">Ritual</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="widow_holi">
+        <span class="f-num">06</span>
+        <span class="f-name">Widow Holi</span>
+        <span class="f-location">Vrindavan, Uttar Pradesh</span>
+        <span class="f-tag">Cultural</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="mathura_holi">
+        <span class="f-num">07</span>
+        <span class="f-name">Mathura Holi</span>
+        <span class="f-location">Mathura, Uttar Pradesh</span>
+        <span class="f-tag">Cultural</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="raulane">
+        <span class="f-num">08</span>
+        <span class="f-name">Raulane Festival</span>
+        <span class="f-location">Maharashtra, India</span>
+        <span class="f-tag">Tribal</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="hornbill">
+        <span class="f-num">09</span>
+        <span class="f-name">Hornbill Festival</span>
+        <span class="f-location">Kisama, Nagaland</span>
+        <span class="f-tag">Tribal</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="thrissur">
+        <span class="f-num">10</span>
+        <span class="f-name">Thrissur Pooram Festival</span>
+        <span class="f-location">Thrissur, Kerala</span>
+        <span class="f-tag">Ritual</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="dahi_handi">
+        <span class="f-num">11</span>
+        <span class="f-name">Dahi Handi Festival</span>
+        <span class="f-location">Mumbai, Maharashtra</span>
+        <span class="f-tag">Cultural</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="dev_deepavali">
+        <span class="f-num">12</span>
+        <span class="f-name">Dev Deepavali Festival</span>
+        <span class="f-location">Varanasi, Uttar Pradesh</span>
+        <span class="f-tag">Spiritual</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="masan_holi">
+        <span class="f-num">13</span>
+        <span class="f-name">Masan Holi</span>
+        <span class="f-location">Varanasi, Uttar Pradesh</span>
+        <span class="f-tag">Ritual</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="bhootakola">
+        <span class="f-num">14</span>
+        <span class="f-name">Bhootakola Festival</span>
+        <span class="f-location">Tulunadu, Karnataka</span>
+        <span class="f-tag">Ritual</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="headhunter">
+        <span class="f-num">15</span>
+        <span class="f-name">Last Tattooed Headhunter</span>
+        <span class="f-location">Arunachal Pradesh</span>
+        <span class="f-tag">Tribal</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="losar">
+        <span class="f-num">16</span>
+        <span class="f-name">Losar Festival, Himachal</span>
+        <span class="f-location">Spiti Valley, Himachal</span>
+        <span class="f-tag">Cultural</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="dhuno_purano">
+        <span class="f-num">17</span>
+        <span class="f-name">Dhuno Porano Festival</span>
+        <span class="f-location">West Bengal, India</span>
+        <span class="f-tag">Spiritual</span>
+        <span class="f-arrow">→</span>
+      </div>
+      <div class="festival-row reveal" data-festival="kulasai">
+        <span class="f-num">18</span>
+        <span class="f-name">Kulasai Dasara Festival</span>
+        <span class="f-location">Kulasai, Tamil Nadu</span>
+        <span class="f-tag">Ritual</span>
+        <span class="f-arrow">→</span>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h3 class="reveal">Covering an event?</h3>
+      <a href="contact.html" class="cta-btn reveal">Get in touch →</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-headline">
+        <h3>Let's make something unforgettable.</h3>
+        <p>Available worldwide for festival coverage, brand films and commercial campaigns.</p>
+      </div>
+      <div class="footer-col">
+        <p class="col-title">Studio</p>
+        <p class="studio-name">Swarnali Chakraborty</p>
+        <p>India · worldwide</p>
+        <a href="tel:+919073196040">+91 90731 96040</a>
+      </div>
+      <div class="footer-col">
+        <p class="col-title">Elsewhere</p>
+        <a href="https://www.instagram.com/travelwithswarnali/" target="_blank" rel="noopener">@travelwithswarnali</a>
+        <p>Vimeo · on request</p>
+        <p>Behance · on request</p>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 — Swarnali Chakraborty · Shot on light &amp; memory</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+
+  <!-- ── Festival full-screen overlay ── -->
+  <div class="fest-overlay" id="festOverlay" aria-modal="true" role="dialog" aria-hidden="true">
+    <button class="fest-close" id="festClose">✕ &nbsp;Close</button>
+    <div class="fest-overlay-inner">
+
+      <!-- Left: photo gallery -->
+      <div class="fest-gallery" id="festGallery">
+        <div class="fest-gallery-main" id="festMainPhoto"></div>
+        <div class="fest-gallery-grid" id="festThumbGrid"></div>
+      </div>
+
+      <!-- Right: details -->
+      <div class="fest-details">
+        <span class="fest-details-tag" id="festTag"></span>
+        <h2 class="fest-details-name" id="festName"></h2>
+        <p class="fest-details-tagline" id="festTagline"></p>
+        <p class="fest-details-desc" id="festDesc"></p>
+        <div class="fest-meta" id="festMeta"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    /* ══════════════════════════════════════
+       FESTIVAL DATA
+       To add photos: put the filename in the photos array.
+       Empty string = placeholder slot.
+       Add as many entries to photos[] as you like.
+    ══════════════════════════════════════ */
+    const FESTIVALS = {
+      faguli: {
+        tag: 'Ritual',
+        name: 'Faguli Festival',
+        tagline: 'When the forest becomes a temple.',
+        desc: 'A rare winter festival from the high Himalayas of Uttarakhand — effigies burn, masks dance, and an entire village steps outside ordinary time.',
+        meta: [
+          { label: 'Place',  value: 'Chamoli, Uttarakhand' },
+          { label: 'Season', value: 'February – March' },
+          { label: 'Type',   value: 'Ritual' },
+        ],
+        photos: [],
+      },
+      wari: {
+        tag: 'Cultural',
+        name: 'Wari Festival',
+        tagline: 'Two million feet, one direction.',
+        desc: 'The Pandharpur Wari is one of the largest pilgrimages on earth — a weeks-long walk through Maharashtra by devotees of Vitthal, moving in total devotion.',
+        meta: [
+          { label: 'Place',  value: 'Pandharpur, Maharashtra' },
+          { label: 'Season', value: 'June – July' },
+          { label: 'Type',   value: 'Pilgrimage · Cultural' },
+        ],
+        photos: [],
+      },
+      ganesh: {
+        tag: 'Cultural',
+        name: 'Ganesh Festival',
+        tagline: 'Ten days the city forgets itself.',
+        desc: 'Ganesh Chaturthi in Mumbai is not a festival — it is a transformation. Streets become temples, neighbourhoods compete in art and devotion, and the idol goes home to the sea.',
+        meta: [
+          { label: 'Place',  value: 'Mumbai, Maharashtra' },
+          { label: 'Season', value: 'August – September' },
+          { label: 'Type',   value: 'Cultural' },
+        ],
+        photos: [],
+      },
+      durga: {
+        tag: 'Cultural',
+        name: 'Durga Puja Festival',
+        tagline: 'Art, devotion, and the smell of incense at midnight.',
+        desc: 'Kolkata\'s Durga Puja is the world\'s largest open-air art installation — each pandal a universe, each night a procession through light and sound.',
+        meta: [
+          { label: 'Place',  value: 'Kolkata, West Bengal' },
+          { label: 'Season', value: 'October' },
+          { label: 'Type',   value: 'Cultural' },
+        ],
+        photos: [],
+      },
+      theyyam: {
+        tag: 'Ritual · Cultural',
+        name: 'Theyyam Festival',
+        tagline: 'The divine wears makeup.',
+        desc: 'A living ritual art form from the Malabar coast — where the performer becomes the deity. Theyyam is fire, paint, and a thousand years of belief made visible in a single face.',
+        meta: [
+          { label: 'Place',        value: 'Kannur, Kerala' },
+          { label: 'Season',       value: 'November → May' },
+          { label: 'Type',         value: 'Ritual · Cultural' },
+          { label: 'Photographed', value: '2025' },
+          { label: 'Camera',       value: 'Sony α7 IV · 85mm F1.4 GM' },
+        ],
+        photos: ['theyyam.jpg'],
+      },
+      widow_holi: {
+        tag: 'Cultural',
+        name: 'Widow Holi',
+        tagline: 'Colour returned to those who were told to live without it.',
+        desc: 'For centuries, widows in Vrindavan were forbidden from celebrating Holi. Now they play — with flowers, with colour, with reclaimed joy. One of the most quietly radical images in India.',
+        meta: [
+          { label: 'Place',  value: 'Vrindavan, Uttar Pradesh' },
+          { label: 'Season', value: 'March' },
+          { label: 'Type',   value: 'Cultural' },
+        ],
+        photos: [],
+      },
+      mathura_holi: {
+        tag: 'Cultural',
+        name: 'Mathura Holi',
+        tagline: 'Where Holi was born.',
+        desc: 'Holi began here — in the land of Krishna. Mathura and Vrindavan celebrate for over a week, each day a different ritual, a different village, a different shade of impossible colour.',
+        meta: [
+          { label: 'Place',  value: 'Mathura, Uttar Pradesh' },
+          { label: 'Season', value: 'March' },
+          { label: 'Type',   value: 'Cultural' },
+        ],
+        photos: [],
+      },
+      raulane: {
+        tag: 'Tribal',
+        name: 'Raulane Festival',
+        tagline: 'A dance between worlds.',
+        desc: 'A rare tribal celebration from Maharashtra — drummers, masked performers and ancient invocations that have been passed down without being written down.',
+        meta: [
+          { label: 'Place',  value: 'Maharashtra, India' },
+          { label: 'Season', value: 'Varies' },
+          { label: 'Type',   value: 'Tribal · Ritual' },
+        ],
+        photos: [],
+      },
+      hornbill: {
+        tag: 'Tribal · Cultural',
+        name: 'Hornbill Festival',
+        tagline: 'The festival of festivals.',
+        desc: 'Nine days in December when all of Nagaland\'s tribes gather — dances, feasts, traditional sports and the kind of colour that has no name in any other language.',
+        meta: [
+          { label: 'Place',        value: 'Kisama, Nagaland' },
+          { label: 'Season',       value: 'December' },
+          { label: 'Type',         value: 'Tribal · Cultural' },
+          { label: 'Photographed', value: '2023' },
+        ],
+        photos: [],
+      },
+      thrissur: {
+        tag: 'Ritual',
+        name: 'Thrissur Pooram Festival',
+        tagline: 'Elephants, percussion, and pure Kerala spectacle.',
+        desc: 'The most spectacular temple festival in India — two groups of caparisoned elephants face each other at the Vadakkumnathan temple while the most complex percussion orchestra on earth plays overhead.',
+        meta: [
+          { label: 'Place',  value: 'Thrissur, Kerala' },
+          { label: 'Season', value: 'April – May' },
+          { label: 'Type',   value: 'Ritual · Cultural' },
+        ],
+        photos: [],
+      },
+      dahi_handi: {
+        tag: 'Cultural',
+        name: 'Dahi Handi Festival',
+        tagline: 'The human pyramid as an act of faith.',
+        desc: 'Young men form human pyramids ten storeys high to break a pot of curd hung in the air. Janmashtami in Mumbai is competition, devotion, and daredevilry in the same breath.',
+        meta: [
+          { label: 'Place',  value: 'Mumbai, Maharashtra' },
+          { label: 'Season', value: 'August' },
+          { label: 'Type',   value: 'Cultural' },
+        ],
+        photos: [],
+      },
+      dev_deepavali: {
+        tag: 'Spiritual',
+        name: 'Dev Deepavali Festival',
+        tagline: 'A thousand lamps on the river.',
+        desc: 'Fifteen days after Diwali, the gods are said to descend to earth and bathe in the Ganga. The entire riverfront of Varanasi is lit with a million earthen lamps — the most beautiful thing I have ever seen.',
+        meta: [
+          { label: 'Place',  value: 'Varanasi, Uttar Pradesh' },
+          { label: 'Season', value: 'November' },
+          { label: 'Type',   value: 'Spiritual · Cultural' },
+        ],
+        photos: [],
+      },
+      masan_holi: {
+        tag: 'Ritual',
+        name: 'Masan Holi',
+        tagline: 'Holi played with ash, at the cremation ground.',
+        desc: 'At Manikarnika Ghat — where bodies burn around the clock — Aghoris and sadhus smear themselves with the ash of the dead and play Holi. A meditation on life, death, and the blurring of both.',
+        meta: [
+          { label: 'Place',  value: 'Varanasi, Uttar Pradesh' },
+          { label: 'Season', value: 'March' },
+          { label: 'Type',   value: 'Ritual' },
+        ],
+        photos: [],
+      },
+      bhootakola: {
+        tag: 'Ritual',
+        name: 'Bhootakola Festival',
+        tagline: 'Spirit possession as community ritual.',
+        desc: 'In Tulunadu, Karnataka, Bhootakola is a night-long ritual where a performer becomes a spirit — settling disputes, blessing families, speaking truths that ordinary people cannot. The line between performance and possession is deliberately unclear.',
+        meta: [
+          { label: 'Place',  value: 'Tulunadu, Karnataka' },
+          { label: 'Season', value: 'October – March' },
+          { label: 'Type',   value: 'Ritual' },
+        ],
+        photos: [],
+      },
+      headhunter: {
+        tag: 'Tribal',
+        name: 'Last Tattooed Headhunter',
+        tagline: 'The last living face of a vanishing tradition.',
+        desc: 'In Arunachal Pradesh, the elder women of the Wancho tribe carry facial tattoos that mark them as part of a headhunting lineage. Each face is a document of a world that will not exist after them.',
+        meta: [
+          { label: 'Place',  value: 'Arunachal Pradesh' },
+          { label: 'Season', value: 'Ongoing' },
+          { label: 'Type',   value: 'Tribal · Documentary' },
+        ],
+        photos: [],
+      },
+      losar: {
+        tag: 'Cultural',
+        name: 'Losar Festival, Himachal',
+        tagline: 'New Year at 4,000 metres.',
+        desc: 'In the Spiti Valley, Losar is celebrated in a landscape of frozen monasteries and snowfields — butter lamps lit against the dark, monks in crimson, and a silence that only altitude creates.',
+        meta: [
+          { label: 'Place',  value: 'Spiti Valley, Himachal Pradesh' },
+          { label: 'Season', value: 'February' },
+          { label: 'Type',   value: 'Cultural · Buddhist' },
+        ],
+        photos: [],
+      },
+      dhuno_purano: {
+        tag: 'Spiritual',
+        name: 'Dhuno Porano Festival',
+        tagline: 'When fire meets faith.',
+        desc: 'A night of incense-burning ritual from West Bengal — devotees fan clay censers in a rhythmic trance while the temple fills with smoke and song. An act of offering that has no translation.',
+        meta: [
+          { label: 'Place',  value: 'West Bengal, India' },
+          { label: 'Season', value: 'October' },
+          { label: 'Type',   value: 'Spiritual · Ritual' },
+        ],
+        photos: [],
+      },
+      kulasai: {
+        tag: 'Ritual',
+        name: 'Kulasai Dasara Festival',
+        tagline: 'Nine nights of the goddess.',
+        desc: 'In the small town of Kulasai near Tamil Nadu\'s coast, men dress as women to embody the goddess Mutharamman — a ritual crossdressing tradition that is older than memory and stranger than anything else in India.',
+        meta: [
+          { label: 'Place',  value: 'Kulasai, Tamil Nadu' },
+          { label: 'Season', value: 'October' },
+          { label: 'Type',   value: 'Ritual · Cultural' },
+        ],
+        photos: [],
+      },
+    };
+
+    /* ══════════════════════════════════════
+       OVERLAY LOGIC
+    ══════════════════════════════════════ */
+    const overlay    = document.getElementById('festOverlay');
+    const closeBtn   = document.getElementById('festClose');
+    const mainPhoto  = document.getElementById('festMainPhoto');
+    const thumbGrid  = document.getElementById('festThumbGrid');
+    const festTag    = document.getElementById('festTag');
+    const festName   = document.getElementById('festName');
+    const festTagline = document.getElementById('festTagline');
+    const festDesc   = document.getElementById('festDesc');
+    const festMeta   = document.getElementById('festMeta');
+
+    function openFestival(key) {
+      const data = FESTIVALS[key];
+      if (!data) return;
+
+      /* Populate details */
+      festTag.textContent     = data.tag;
+      festName.textContent    = data.name;
+      festTagline.textContent = data.tagline;
+      festDesc.textContent    = data.desc;
+
+      festMeta.innerHTML = data.meta
+        .map(m => `<div class="fest-meta-row">
+          <span class="fest-meta-label">${m.label}</span>
+          <span class="fest-meta-val">${m.value}</span>
+        </div>`).join('');
+
+      /* Only real photos */
+      const photos = data.photos.filter(p => p);
+      const gallery = document.getElementById('festGallery');
+      const inner   = document.querySelector('.fest-overlay-inner');
+
+      mainPhoto.innerHTML = '';
+      thumbGrid.innerHTML = '';
+
+      if (photos.length === 0) {
+        /* No photos — hide gallery, single-column layout */
+        gallery.style.display = 'none';
+        inner.style.gridTemplateColumns = '1fr';
+        inner.style.maxWidth = '720px';
+      } else {
+        gallery.style.display = '';
+        inner.style.gridTemplateColumns = '';
+        inner.style.maxWidth = '';
+
+        /* Main photo */
+        const main = document.createElement('img');
+        main.src = photos[0];
+        main.alt = '';
+        main.loading = 'lazy';
+        mainPhoto.appendChild(main);
+
+        /* Thumbs — only if more than 1 photo */
+        const thumbs = photos.slice(1);
+        thumbGrid.style.display = thumbs.length ? '' : 'none';
+        thumbs.forEach(src => {
+          const wrap = document.createElement('div');
+          wrap.className = 'fest-gallery-thumb';
+          const img = document.createElement('img');
+          img.src = src; img.alt = ''; img.loading = 'lazy';
+          wrap.appendChild(img);
+          thumbGrid.appendChild(wrap);
+        });
+      }
+
+      /* Open */
+      overlay.setAttribute('aria-hidden', 'false');
+      overlay.classList.add('open');
+      overlay.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFestival() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    /* Row clicks */
+    document.querySelectorAll('.festival-row[data-festival]').forEach(row => {
+      row.addEventListener('click', () => openFestival(row.dataset.festival));
+    });
+
+    /* Close button + ESC */
+    closeBtn.addEventListener('click', closeFestival);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeFestival();
+    });
+
+    /* Click outside content closes */
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeFestival();
+    });
+  </script>
+</body>
+</html>

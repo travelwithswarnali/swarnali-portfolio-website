@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Films — Roll No. 24</title>
+  <meta name="description" content="Short films, brand stories and documentary work by Swarnali Chakraborty." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    .hero-gradient-only {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 70% at 70% 40%, oklch(0.2 0.03 40 / 0.5) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 50% at 20% 70%, oklch(0.18 0.04 55 / 0.4) 0%, transparent 60%),
+        linear-gradient(to top, var(--bg) 0%, oklch(0.14 0.025 45) 100%);
+    }
+
+    /* ── Film cards ── */
+    .films-grid {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .film-card {
+      background: var(--bg);
+      padding: 48px;
+      position: relative;
+      transition: background 0.4s ease;
+      overflow: hidden;
+    }
+
+    .film-card:hover { background: oklch(0.16 0.02 50); }
+
+    .film-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .film-num {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .film-format {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+    }
+
+    .film-card h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 400;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .film-card .film-client {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .film-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 380px;
+    }
+
+    .film-duration {
+      margin-top: 28px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: oklch(0.4 0.015 60);
+    }
+
+    .film-play-hint {
+      position: absolute;
+      bottom: 32px;
+      right: 32px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .film-card:hover .film-play-hint {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .films-grid {
+        grid-template-columns: 1fr;
+        padding: 60px 24px;
+      }
+      .film-card { padding: 32px; }
+    }
+
+    /* ── Approach section ── */
+    .approach {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .approach-text h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .approach-text p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .approach-specs {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+    }
+
+    .spec-row .spec-label {
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .spec-row .spec-val {
+      color: var(--fg);
+    }
+
+    @media (max-width: 768px) {
+      .approach {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        padding: 60px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursorCircle" class="cursor-circle"></div>
+
+  <div id="pageLoader" class="page-loader">
+    <span>Loading reel...</span>
+  </div>
+
+  <div class="viewfinder" id="viewfinder">
+    <div class="vf-corner tl"></div>
+    <div class="vf-corner tr"></div>
+    <div class="vf-corner bl"></div>
+    <div class="vf-corner br"></div>
+    <div class="vf-rec"><span class="rec-dot"></span> REC <span class="vf-timecode">00:00:01:14</span></div>
+    <div class="vf-top-right"><span>XAVC S 4K</span><span>24p</span><span>120Mbps</span></div>
+    <div class="vf-center"></div>
+    <div class="vf-af">AF-C</div>
+    <div class="vf-scene-title">Films</div>
+    <div class="vf-battery"><span>▮▮▮▯ 71%</span><span>SD 214GB</span></div>
+    <div class="vf-frame-label">50mm GM</div>
+    <div class="vf-info"><span>FE 50mm F1.2 GM</span><span>Sony α7 IV</span></div>
+    <div class="vf-settings"><span>S</span><span>1/50</span><span>F1.8</span><span>ISO 3200</span></div>
+    <div class="vf-meter"><span>-2</span><div class="vf-meter-bar"><div class="vf-meter-fill"></div></div><span>+2</span></div>
+  </div>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header">
+    <a href="index.html" class="logo logo-rec">
+      <span class="rec-dot"></span> REC
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Index</a></li>
+        <li><a href="festivals.html">Festivals</a></li>
+        <li><a href="films.html" class="active">Films</a></li>
+        <li><a href="journey.html">Journey</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="contact.html" class="hire-link">Hire</a>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="hero-gradient-only"></div>
+      <div class="hero-content">
+        <div class="hero-inner">
+          <p class="hero-tag">Roll · 02 / Films</p>
+          <h1 class="hero-title">
+            Stories told<br>
+            <span class="italic-accent">in frames.</span>
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <div style="padding: 0 40px;" class="films-grid-wrap">
+      <div class="films-grid" style="padding: 0; margin: 0; max-width: 100%;">
+        <div class="film-card reveal-card">
+          <div class="film-card-header">
+            <span class="film-num">Film · 01</span>
+            <span class="film-format">Brand Film</span>
+          </div>
+          <h3>The Slow Season</h3>
+          <p class="film-client">Royal Enfield</p>
+          <p>A road film about the spaces between destinations — highways, chai stops, and twilight in the hills.</p>
+          <p class="film-duration">06:42 · 4K · 24fps</p>
+          <div class="film-play-hint">▶</div>
+        </div>
+        <div class="film-card reveal-card">
+          <div class="film-card-header">
+            <span class="film-num">Film · 02</span>
+            <span class="film-format">Documentary</span>
+          </div>
+          <h3>Weavers of Varanasi</h3>
+          <p class="film-client">Good Earth</p>
+          <p>A short documentary following three brocade weavers across one monsoon season on the ghats.</p>
+          <p class="film-duration">18:20 · 4K · 24fps</p>
+          <div class="film-play-hint">▶</div>
+        </div>
+        <div class="film-card reveal-card">
+          <div class="film-card-header">
+            <span class="film-num">Film · 03</span>
+            <span class="film-format">Short Film</span>
+          </div>
+          <h3>Still Water</h3>
+          <p class="film-client">Independent</p>
+          <p>A silent portrait of a woman returning to her childhood home in Coorg. No dialogue, no score.</p>
+          <p class="film-duration">11:05 · 4K · 24fps</p>
+          <div class="film-play-hint">▶</div>
+        </div>
+        <div class="film-card reveal-card">
+          <div class="film-card-header">
+            <span class="film-num">Film · 04</span>
+            <span class="film-format">Campaign Film</span>
+          </div>
+          <h3>Before the Bloom</h3>
+          <p class="film-client">Forest Essentials</p>
+          <p>Dawn harvest in Uttarakhand — the origin story of an ingredient, told without narration.</p>
+          <p class="film-duration">03:30 · 4K · 24fps</p>
+          <div class="film-play-hint">▶</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="approach">
+      <div class="approach-text reveal">
+        <h2>Made the way<br><em>it deserves.</em></h2>
+        <p>Every film starts with listening. The brief is a starting point, not a ceiling. We shoot on Sony cinema bodies, grade to Rec.709 or P3, and deliver broadcast-ready masters alongside social cuts.</p>
+      </div>
+      <div class="approach-specs reveal">
+        <div class="spec-row">
+          <span class="spec-label">Camera</span>
+          <span class="spec-val">Sony FX3 / α7 IV</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Format</span>
+          <span class="spec-val">XAVC S 4K · 120Mbps</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Frame rate</span>
+          <span class="spec-val">24fps · 48fps · 120fps</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Colour</span>
+          <span class="spec-val">S-Log3 → custom LUT</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Delivery</span>
+          <span class="spec-val">H.264 · ProRes · DCP</span>
+        </div>
+        <div class="spec-row">
+          <span class="spec-label">Sound</span>
+          <span class="spec-val">Rode NTG5 · Mix</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h3 class="reveal">Have a story to tell?</h3>
+      <a href="contact.html" class="cta-btn reveal">Start a project →</a>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-headline">
+        <h3>Let's make something unforgettable.</h3>
+        <p>Available worldwide for festival coverage, brand films and commercial campaigns.</p>
+      </div>
+      <div class="footer-col">
+        <p class="col-title">Studio</p>
+        <p class="studio-name">Swarnali Chakraborty</p>
+        <p>India · worldwide</p>
+        <a href="tel:+919073196040">+91 90731 96040</a>
+      </div>
+      <div class="footer-col">
+        <p class="col-title">Elsewhere</p>
+        <a href="https://www.instagram.com/travelwithswarnali/" target="_blank" rel="noopener">@travelwithswarnali</a>
+        <p>Vimeo · on request</p>
+        <p>Behance · on request</p>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 — Swarnali Chakraborty · Shot on light &amp; memory</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

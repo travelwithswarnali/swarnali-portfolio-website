@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Roll No. 24</title>
+  <meta name="description" content="Get in touch to discuss festival coverage, brand films and commercial projects." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ── Contact layout ── */
+    .contact-wrap {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 140px 40px 96px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 120px;
+      align-items: start;
+    }
+
+    /* ── Left: info ── */
+    .contact-info-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 32px;
+    }
+
+    .contact-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+    }
+
+    .contact-heading em { font-style: italic; color: var(--primary); }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 48px;
+    }
+
+    .detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-row:first-child { border-top: 1px solid var(--border); }
+
+    .detail-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: oklch(0.45 0.015 65);
+    }
+
+    .detail-value {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: var(--fg);
+      transition: color 0.3s ease;
+    }
+
+    a.detail-value:hover { color: var(--primary); }
+
+    .availability-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: oklch(0.72 0.15 150);
+      border: 1px solid oklch(0.72 0.15 150 / 0.3);
+      padding: 8px 16px;
+    }
+
+    .availability-badge .avail-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: oklch(0.72 0.15 150);
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+
+    /* ── Right: form ── */
+    .contact-form {
+      padding-top: 4px;
+    }
+
+    .form-group {
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-group:first-of-type {
+      border-top: 1px solid var(--border);
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: oklch(0.45 0.015 65);
+      padding: 16px 0 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      display: block;
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.5;
+      padding: 0 0 16px;
+      resize: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group select {
+      cursor: none;
+    }
+
+    .form-group select option {
+      background: oklch(0.17 0.014 50);
+      color: var(--fg);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: oklch(0.4 0.015 60);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 40px;
+    }
+
+    .form-row .form-group {
+      border-right: none;
+    }
+
+    .form-submit {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .submit-btn {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      padding: 16px 40px;
+      background: var(--primary);
+      color: var(--bg);
+      border: 1px solid var(--primary);
+      cursor: none;
+      transition: all 0.4s ease;
+    }
+
+    .submit-btn:hover {
+      background: transparent;
+      color: var(--primary);
+    }
+
+    .form-note {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: oklch(0.4 0.015 60);
+    }
+
+    @media (max-width: 1024px) {
+      .contact-wrap {
+        grid-template-columns: 1fr;
+        gap: 64px;
+        padding: 120px 24px 80px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cursorCircle" class="cursor-circle"></div>
+
+  <div id="pageLoader" class="page-loader">
+    <span>Loading reel...</span>
+  </div>
+
+  <div class="viewfinder" id="viewfinder">
+    <div class="vf-corner tl"></div>
+    <div class="vf-corner tr"></div>
+    <div class="vf-corner bl"></div>
+    <div class="vf-corner br"></div>
+    <div class="vf-rec"><span class="rec-dot"></span> REC <span class="vf-timecode">00:00:00:00</span></div>
+    <div class="vf-top-right"><span>XAVC S 4K</span><span>24p</span><span>120Mbps</span></div>
+    <div class="vf-center"></div>
+    <div class="vf-af">MF</div>
+    <div class="vf-scene-title">Contact</div>
+    <div class="vf-battery"><span>▮▮▮▮ 95%</span><span>SD 214GB</span></div>
+    <div class="vf-frame-label">35mm GM</div>
+    <div class="vf-info"><span>FE 35mm F1.4 GM</span><span>Sony α7 IV</span></div>
+    <div class="vf-settings"><span>P</span><span>1/125</span><span>F2.8</span><span>ISO 200</span></div>
+    <div class="vf-meter"><span>-2</span><div class="vf-meter-bar"><div class="vf-meter-fill"></div></div><span>+2</span></div>
+  </div>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="site-header">
+    <a href="index.html" class="logo logo-rec">
+      <span class="rec-dot"></span> REC
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Index</a></li>
+        <li><a href="festivals.html">Festivals</a></li>
+        <li><a href="films.html">Films</a></li>
+        <li><a href="journey.html">Journey</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+    <a href="contact.html" class="hire-link" style="color: var(--primary);">Hire</a>
+  </header>
+
+  <main>
+    <div class="contact-wrap">
+
+      <!-- Left column: info -->
+      <div class="contact-info reveal">
+        <p class="contact-info-label">Get in touch</p>
+        <h1 class="contact-heading">
+          Let's make<br>something<br><em>together.</em>
+        </h1>
+
+        <div class="contact-details">
+          <div class="detail-row">
+            <span class="detail-label">Email</span>
+            <a href="mailto:Travelwithswarnali@gmail.com" class="detail-value">Travelwithswarnali@gmail.com</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Phone</span>
+            <a href="tel:+919073196040" class="detail-value">+91 90731 96040</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Instagram</span>
+            <a href="https://www.instagram.com/travelwithswarnali/" target="_blank" rel="noopener" class="detail-value">@travelwithswarnali</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Based in</span>
+            <span class="detail-value">India · available worldwide</span>
+          </div>
+        </div>
+
+        <div class="availability-badge">
+          <span class="avail-dot"></span>
+          Available for 2026 bookings
+        </div>
+      </div>
+
+      <!-- Right column: form -->
+      <form class="contact-form reveal" name="enquiry" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="project">Project type</label>
+          <select id="project" name="project" required>
+            <option value="" disabled selected>Select a category</option>
+            <option value="festival">Festival Coverage</option>
+            <option value="brand-film">Brand Film</option>
+            <option value="commercial">Commercial / Brand Campaign</option>
+            <option value="lookbook">Lookbook / Editorial</option>
+            <option value="product">Product Photography</option>
+            <option value="documentary">Documentary</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="budget">Approximate budget</label>
+          <select id="budget" name="budget">
+            <option value="" disabled selected>Select a range</option>
+            <option value="under-1l">Under ₹1L</option>
+            <option value="1l-3l">₹1L – ₹3L</option>
+            <option value="3l-6l">₹3L – ₹6L</option>
+            <option value="above-6l">Above ₹6L</option>
+            <option value="discuss">Prefer to discuss</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Tell me about the project</label>
+          <textarea id="message" name="message" placeholder="Dates, location, brief — anything that helps." rows="5"></textarea>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="submit-btn">Send enquiry →</button>
+          <span class="form-note">Usually replies within 48 hrs</span>
+        </div>
+      </form>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-headline">
+        <h3>Let's make something unforgettable.</h3>
+        <p>Available worldwide for festival coverage, brand films and commercial campaigns.</p>
+      </div>
+      <div class="footer-col">
+        <p class="col-title">Studio</p>
+        <p class="studio-name">Swarnali Chakraborty</p>
+        <p>India · worldwide</p>
+        <a href="tel:+919073196040">+91 90731 96040</a>
+      </div>
+      <div class="footer-col">
+        <p class="col-title">Elsewhere</p>
+        <a href="https://www.instagram.com/travelwithswarnali/" target="_blank" rel="noopener">@travelwithswarnali</a>
+        <p>Vimeo · on request</p>
+        <p>Behance · on request</p>
+      </div>
+    </div>
+    <p class="footer-bottom">© 2026 — Swarnali Chakraborty · Shot on light &amp; memory</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.submit-btn');
+      btn.textContent = 'Sent ✓';
+      btn.style.background = 'transparent';
+      btn.style.color = 'oklch(0.72 0.15 150)';
+      btn.style.borderColor = 'oklch(0.72 0.15 150 / 0.4)';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
