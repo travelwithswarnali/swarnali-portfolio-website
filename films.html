@@ -25,9 +25,11 @@
       transform: translateX(-50%) translateY(-50%);
       min-width: 100%;
       min-height: 100%;
-      width: auto;
-      height: auto;
+      width: 177.78vh;
+      height: 56.25vw;
+      border: none;
       z-index: 0;
+      pointer-events: none;
     }
 
     .films-hero-overlay {
@@ -343,7 +345,7 @@
   <main>
 
     <section class="hero">
-      <video class="films-hero-video" id="heroFilmVideo" src="assets/IMG_2337.MP4" autoplay muted loop playsinline></video>
+      <iframe class="films-hero-video" src="https://drive.google.com/file/d/1ck7JDEcAhsYvJRU6L2rU9tfYUObfu5RH/preview" allow="autoplay" allowfullscreen frameborder="0"></iframe>
       <div class="films-hero-overlay"></div>
       <div class="hero-content">
         <div class="hero-inner">
@@ -672,14 +674,6 @@
 
   <script src="script.js" defer></script>
   <script>
-    /* Hero video — unmute on first interaction */
-    const heroVid = document.getElementById('heroFilmVideo');
-    if (heroVid) {
-      document.addEventListener('click', () => {
-        heroVid.muted = false;
-      }, { once: true });
-    }
-
     const overlay  = document.getElementById('filmOverlay');
     const overlayVideo = document.getElementById('filmOverlayVideo');
     const closeBtn = document.getElementById('filmOverlayClose');
