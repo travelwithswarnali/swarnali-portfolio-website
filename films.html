@@ -286,6 +286,15 @@
     }
 
     .film-overlay-close:hover { color: var(--primary); }
+
+    .film-overlay-inner iframe {
+      display: block;
+      width: 100%;
+      height: 56.25vw;
+      max-height: 85vh;
+      border: none;
+      background: #000;
+    }
   </style>
 </head>
 <body>
@@ -537,8 +546,8 @@
           </div>
         </div>
 
-        <div class="film-card film-card--playable reveal-card" data-video="assets/film/altius hospital.mp4">
-          <video class="film-preview" src="assets/film/altius hospital.mp4" muted loop playsinline preload="metadata"></video>
+        <div class="film-card film-card--playable reveal-card" data-video="https://drive.google.com/file/d/1OpdMqYRNvGBbWNqIrH_75xdXZZYMAtHo/preview" data-type="iframe">
+          <video class="film-preview" muted loop playsinline preload="none"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
               <span class="film-num">12</span>
@@ -699,9 +708,29 @@
       /* Click: open full overlay */
       card.addEventListener('click', () => {
         if (preview) { preview.pause(); preview.currentTime = 0; }
-        overlayVideo.src = card.dataset.video;
-        overlayVideo.load();
-        overlayVideo.play();
+
+        const inner = document.querySelector('.film-overlay-inner');
+
+        if (card.dataset.type === 'iframe') {
+          overlayVideo.style.display = 'none';
+          let iframe = document.getElementById('filmOverlayIframe');
+          if (!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.id = 'filmOverlayIframe';
+            iframe.allow = 'autoplay';
+            inner.appendChild(iframe);
+          }
+          iframe.src = card.dataset.video;
+          iframe.style.display = 'block';
+        } else {
+          const iframe = document.getElementById('filmOverlayIframe');
+          if (iframe) { iframe.style.display = 'none'; iframe.src = ''; }
+          overlayVideo.style.display = 'block';
+          overlayVideo.src = card.dataset.video;
+          overlayVideo.load();
+          overlayVideo.play();
+        }
+
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
       });
@@ -711,6 +740,9 @@
       overlay.classList.remove('open');
       overlayVideo.pause();
       overlayVideo.src = '';
+      const iframe = document.getElementById('filmOverlayIframe');
+      if (iframe) { iframe.src = ''; iframe.style.display = 'none'; }
+      overlayVideo.style.display = 'block';
       document.body.style.overflow = '';
     }
 
