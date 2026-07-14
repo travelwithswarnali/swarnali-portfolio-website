@@ -23,6 +23,16 @@
         linear-gradient(to top, var(--bg) 0%, oklch(0.15 0.03 55) 100%);
     }
 
+    /* ── Festivals hero image overlay ── */
+    .festivals-hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to top, var(--bg) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.35) 100%);
+    }
+
+    .hero .hero-content { position: relative; z-index: 2; }
+
     /* ── Hero overrides for festivals page ── */
     .hero-title-festivals {
       font-family: var(--font-display);
@@ -404,8 +414,8 @@
     <nav>
       <ul class="nav-links">
         <li><a href="index.html">Index</a></li>
-        <li><a href="festivals.html" class="active">Festivals</a></li>
         <li><a href="films.html">Films</a></li>
+        <li><a href="festivals.html" class="active">Festivals</a></li>
         <li><a href="journey.html">Journey</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -416,7 +426,8 @@
   <main>
 
     <section class="hero">
-      <div class="hero-gradient-only"></div>
+      <img class="hero-img" src="assets/IMG_2338.PNG" alt="" style="object-fit:cover;object-position:center;" />
+      <div class="festivals-hero-overlay"></div>
       <div class="hero-content">
         <div class="hero-inner">
           <p class="hero-tag">Festivals</p>
@@ -649,7 +660,9 @@
           { label: 'Season', value: 'February – March' },
           { label: 'Type',   value: 'Ritual' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/faguli festival/DSC04985.JPG',
+        ],
       },
       wari: {
         tag: 'Cultural',
@@ -661,7 +674,27 @@
           { label: 'Season', value: 'June – July' },
           { label: 'Type',   value: 'Pilgrimage · Cultural' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/wari festival/DSC04355.JPG',
+          'assets/Festival photos/wari festival/DSC04373.JPG',
+          'assets/Festival photos/wari festival/DSC04407.JPG',
+          'assets/Festival photos/wari festival/DSC04428.JPG',
+          'assets/Festival photos/wari festival/DSC04505.JPG',
+          'assets/Festival photos/wari festival/DSC04509.JPG',
+          'assets/Festival photos/wari festival/DSC04514.JPG',
+          'assets/Festival photos/wari festival/DSC04655.JPG',
+          'assets/Festival photos/wari festival/DSC05092.JPG',
+          'assets/Festival photos/wari festival/DSC05105.JPG',
+          'assets/Festival photos/wari festival/DSC05287.JPG',
+          'assets/Festival photos/wari festival/DSC05391.JPG',
+          'assets/Festival photos/wari festival/DSC05403.JPG',
+          'assets/Festival photos/wari festival/DSC05498.JPG',
+          'assets/Festival photos/wari festival/DSC05592.JPG',
+          'assets/Festival photos/wari festival/post 10.JPG',
+          'assets/Festival photos/wari festival/post 5.JPG',
+          'assets/Festival photos/wari festival/post 7.JPG',
+          'assets/Festival photos/wari festival/story 6.JPG',
+        ],
       },
       ganesh: {
         tag: 'Cultural',
@@ -673,7 +706,13 @@
           { label: 'Season', value: 'August – September' },
           { label: 'Type',   value: 'Cultural' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/Ganesh festival/DSC_0439.JPG',
+          'assets/Festival photos/Ganesh festival/DSC_2598.JPG',
+          'assets/Festival photos/Ganesh festival/DSC_3178.JPG',
+          'assets/Festival photos/Ganesh festival/DSC09522.JPG',
+          'assets/Festival photos/Ganesh festival/SPI03077.JPG',
+        ],
       },
       durga: {
         tag: 'Cultural',
@@ -685,7 +724,16 @@
           { label: 'Season', value: 'October' },
           { label: 'Type',   value: 'Cultural' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/durga puja/DSC03178.JPG',
+          'assets/Festival photos/durga puja/DSC03208.JPG',
+          'assets/Festival photos/durga puja/DSC03275.JPG',
+          'assets/Festival photos/durga puja/DSC03294.JPG',
+          'assets/Festival photos/durga puja/DSC03309.JPG',
+          'assets/Festival photos/durga puja/IMG_0613.JPG',
+          'assets/Festival photos/durga puja/IMG_1812.JPG',
+          'assets/Festival photos/durga puja/IMG_1814.JPG',
+        ],
       },
       theyyam: {
         tag: 'Ritual · Cultural',
@@ -699,7 +747,23 @@
           { label: 'Photographed', value: '2025' },
           { label: 'Camera',       value: 'Sony α7 IV · 85mm F1.4 GM' },
         ],
-        photos: ['theyyam.jpg'],
+        photos: [
+          'assets/Festival photos/Theyyam/DSC08815.JPG',
+          'assets/Festival photos/Theyyam/DSC08843 2.JPG',
+          'assets/Festival photos/Theyyam/DSC08843.JPG',
+          'assets/Festival photos/Theyyam/DSC08876.JPG',
+          'assets/Festival photos/Theyyam/DSC08911.JPG',
+          'assets/Festival photos/Theyyam/DSC08993.JPG',
+          'assets/Festival photos/Theyyam/DSC09207.JPG',
+          'assets/Festival photos/Theyyam/DSC09335.JPG',
+          'assets/Festival photos/Theyyam/DSC09366.JPG',
+          'assets/Festival photos/Theyyam/DSC09563.JPG',
+          'assets/Festival photos/Theyyam/DSC09642.JPG',
+          'assets/Festival photos/Theyyam/DSC09694.JPG',
+          'assets/Festival photos/Theyyam/DSC09719.JPG',
+          'assets/Festival photos/Theyyam/DSC09733.JPG',
+          'assets/Festival photos/Theyyam/DSC09768.JPG',
+        ],
       },
       widow_holi: {
         tag: 'Cultural',
@@ -711,7 +775,18 @@
           { label: 'Season', value: 'March' },
           { label: 'Type',   value: 'Cultural' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/Widow holi/DSC_0032.jpg',
+          'assets/Festival photos/Widow holi/DSC_0065(1).jpg',
+          'assets/Festival photos/Widow holi/DSC_0069(2).jpg',
+          'assets/Festival photos/Widow holi/DSC_0072.jpg',
+          'assets/Festival photos/Widow holi/DSC_0099.jpg',
+          'assets/Festival photos/Widow holi/DSC_0178.jpg',
+          'assets/Festival photos/Widow holi/DSC_0281.jpg',
+          'assets/Festival photos/Widow holi/DSC_0282.jpg',
+          'assets/Festival photos/Widow holi/DSC_0677.jpg',
+          'assets/Festival photos/Widow holi/shared1.JPG',
+        ],
       },
       mathura_holi: {
         tag: 'Cultural',
@@ -748,7 +823,15 @@
           { label: 'Type',         value: 'Tribal · Cultural' },
           { label: 'Photographed', value: '2023' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/Hornbill festival/DSC00035.JPG',
+          'assets/Festival photos/Hornbill festival/DSC00196.JPG',
+          'assets/Festival photos/Hornbill festival/DSC00587.JPG',
+          'assets/Festival photos/Hornbill festival/DSC00616.JPG',
+          'assets/Festival photos/Hornbill festival/IMG_6976.JPG',
+          'assets/Festival photos/Hornbill festival/potrait 3.JPG',
+          'assets/Festival photos/Hornbill festival/potrait 7.JPG',
+        ],
       },
       thrissur: {
         tag: 'Ritual',
@@ -760,7 +843,18 @@
           { label: 'Season', value: 'April – May' },
           { label: 'Type',   value: 'Ritual · Cultural' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/Thrissur pooram/DSC00164.JPG',
+          'assets/Festival photos/Thrissur pooram/DSC00165.JPG',
+          'assets/Festival photos/Thrissur pooram/DSC00182.JPG',
+          'assets/Festival photos/Thrissur pooram/DSC00199.JPG',
+          'assets/Festival photos/Thrissur pooram/DSC00257.JPG',
+          'assets/Festival photos/Thrissur pooram/DSC00258.JPG',
+          'assets/Festival photos/Thrissur pooram/DSC00264.JPG',
+          'assets/Festival photos/Thrissur pooram/DSC00273.JPG',
+          'assets/Festival photos/Thrissur pooram/DSC00801.JPG',
+          'assets/Festival photos/Thrissur pooram/DSC00806 2.JPG',
+        ],
       },
       dahi_handi: {
         tag: 'Cultural',
@@ -772,7 +866,11 @@
           { label: 'Season', value: 'August' },
           { label: 'Type',   value: 'Cultural' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/Dahi handi/DSC01223.JPG',
+          'assets/Festival photos/Dahi handi/DSC01244.JPG',
+          'assets/Festival photos/Dahi handi/DSC01256.JPG',
+        ],
       },
       dev_deepavali: {
         tag: 'Spiritual',
@@ -796,7 +894,28 @@
           { label: 'Season', value: 'March' },
           { label: 'Type',   value: 'Ritual' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/Masaan holi/DSC00349.JPG',
+          'assets/Festival photos/Masaan holi/DSC00362.JPG',
+          'assets/Festival photos/Masaan holi/DSC00370.JPG',
+          'assets/Festival photos/Masaan holi/DSC00427.JPG',
+          'assets/Festival photos/Masaan holi/DSC00434.JPG',
+          'assets/Festival photos/Masaan holi/DSC00442.JPG',
+          'assets/Festival photos/Masaan holi/DSC00446.JPG',
+          'assets/Festival photos/Masaan holi/DSC00472.JPG',
+          'assets/Festival photos/Masaan holi/DSC00486.JPG',
+          'assets/Festival photos/Masaan holi/DSC00512.JPG',
+          'assets/Festival photos/Masaan holi/DSC00515.JPG',
+          'assets/Festival photos/Masaan holi/DSC00533.JPG',
+          'assets/Festival photos/Masaan holi/IMG_1445_jpg.jpg',
+          'assets/Festival photos/Masaan holi/IMG_2723.PNG',
+          'assets/Festival photos/Masaan holi/IMG_5741.JPG',
+          'assets/Festival photos/Masaan holi/IMG_5752.JPG',
+          'assets/Festival photos/Masaan holi/0BC524FB-5D7F-4A3E-8C6A-5068E0323119.jpg',
+          'assets/Festival photos/Masaan holi/DF5D454F-59F4-4B14-91EB-FA207393EC61.jpg',
+          'assets/Festival photos/Masaan holi/dji_fly_20240322_124154_0024_1711086235767_photo.JPG',
+          'assets/Festival photos/Masaan holi/dji_fly_20240322_124440_0031_1711086161302_photo.JPG',
+        ],
       },
       bhootakola: {
         tag: 'Ritual',
@@ -808,7 +927,22 @@
           { label: 'Season', value: 'October – March' },
           { label: 'Type',   value: 'Ritual' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/bhootakola/DSC_0074.jpg',
+          'assets/Festival photos/bhootakola/DSC_0091.jpg',
+          'assets/Festival photos/bhootakola/DSC_0241.jpg',
+          'assets/Festival photos/bhootakola/DSC_0285.jpg',
+          'assets/Festival photos/bhootakola/DSC_0316.jpg',
+          'assets/Festival photos/bhootakola/face expression.jpg',
+          'assets/Festival photos/bhootakola/IMG_2739.JPG',
+          'assets/Festival photos/bhootakola/IMG_4486.JPG',
+          'assets/Festival photos/bhootakola/IMG_8171.JPG',
+          'assets/Festival photos/bhootakola/IMG_8172.JPG',
+          'assets/Festival photos/bhootakola/IMG_8174.JPG',
+          'assets/Festival photos/bhootakola/IMG_8177.JPG',
+          'assets/Festival photos/bhootakola/IMG_8178.JPG',
+          'assets/Festival photos/bhootakola/IMG_9650.JPG',
+        ],
       },
       headhunter: {
         tag: 'Tribal',
@@ -820,7 +954,13 @@
           { label: 'Season', value: 'Ongoing' },
           { label: 'Type',   value: 'Tribal · Documentary' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/last tattooted headhunters/IMG_2720.PNG',
+          'assets/Festival photos/last tattooted headhunters/IMG_2721.PNG',
+          'assets/Festival photos/last tattooted headhunters/IMG_6987.JPG',
+          'assets/Festival photos/last tattooted headhunters/IMG_6988.JPG',
+          'assets/Festival photos/last tattooted headhunters/IMG_6998.JPG',
+        ],
       },
       losar: {
         tag: 'Cultural',
@@ -832,7 +972,19 @@
           { label: 'Season', value: 'February' },
           { label: 'Type',   value: 'Cultural · Buddhist' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/Losar festival/DSC_0019.jpg',
+          'assets/Festival photos/Losar festival/DSC00885.JPG',
+          'assets/Festival photos/Losar festival/DSC00944.JPG',
+          'assets/Festival photos/Losar festival/DSC00983.JPG',
+          'assets/Festival photos/Losar festival/IMG_2099.jpg',
+          'assets/Festival photos/Losar festival/IMG_2652.JPG',
+          'assets/Festival photos/Losar festival/IMG_4144.JPG',
+          'assets/Festival photos/Losar festival/IMG_4427.JPG',
+          'assets/Festival photos/Losar festival/IMG_8242.JPG',
+          'assets/Festival photos/Losar festival/IMG_9512.JPG',
+          'assets/Festival photos/Losar festival/SPI08040.jpg',
+        ],
       },
       dhuno_purano: {
         tag: 'Spiritual',
@@ -844,7 +996,9 @@
           { label: 'Season', value: 'October' },
           { label: 'Type',   value: 'Spiritual · Ritual' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/Dhuno porano/DSC03698.JPG',
+        ],
       },
       kulasai: {
         tag: 'Ritual',
@@ -856,7 +1010,26 @@
           { label: 'Season', value: 'October' },
           { label: 'Type',   value: 'Ritual · Cultural' },
         ],
-        photos: [],
+        photos: [
+          'assets/Festival photos/Kulasai dasara/IMG_2717_jpg.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_2890.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_2937.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_2940.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_2941.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_2942.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_2945.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_3233_jpg.jpg',
+          'assets/Festival photos/Kulasai dasara/IMG_3260.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_3271.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_3271(1).JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_3292.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_3316.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_3317.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_3318.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_3726.JPG',
+          'assets/Festival photos/Kulasai dasara/IMG_4489.JPG',
+          'assets/Festival photos/Kulasai dasara/pic 17.JPG',
+        ],
       },
     };
 

@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
-    /* ── Homepage-specific ── */
+    /* ── Hero ── */
     .home-hero {
       height: 100svh;
       min-height: 600px;
@@ -27,19 +27,31 @@
       padding: 0 24px;
     }
 
-    .home-hero::before {
-      content: '';
+    .home-hero-bg {
+      position: absolute;
+      inset: -3%;
+      background-image: url('assets/Blurred%20behind%20.jpeg');
+      background-size: cover;
+      background-position: center 40%;
+      filter: blur(2px) brightness(0.75);
+      z-index: 0;
+    }
+
+    .home-hero-overlay {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 60%,
-        oklch(0.22 0.04 55 / 0.6) 0%,
-        oklch(0.13 0.018 50) 70%);
-      z-index: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.25) 0%,
+        rgba(0,0,0,0.35) 50%,
+        rgba(0,0,0,0.55) 100%
+      );
+      z-index: 1;
     }
 
     .home-hero-content {
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .home-eyebrow {
@@ -50,247 +62,353 @@
       color: var(--primary);
       opacity: 0;
       animation: fadeUp 0.8s ease-out 1.4s forwards;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .home-title {
       font-family: var(--font-display);
-      font-size: clamp(5rem, 18vw, 16rem);
+      font-size: clamp(3.5rem, 11vw, 10rem);
       font-weight: 700;
-      line-height: 0.9;
+      line-height: 0.92;
       letter-spacing: -0.03em;
       opacity: 0;
       animation: fadeUp 1.2s ease-out 1.6s forwards;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.6), 0 0 60px rgba(0,0,0,0.4);
     }
 
     .home-tagline {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 10.8vw, 9.6rem);
+      font-size: clamp(2rem, 6.5vw, 6rem);
       font-weight: 300;
       font-style: italic;
       line-height: 1;
       letter-spacing: -0.02em;
       color: var(--primary);
-      margin-top: 12px;
+      margin-top: 10px;
       opacity: 0;
       animation: fadeUp 0.9s ease-out 1.9s forwards;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.5);
     }
 
     .home-subtitle {
       font-family: var(--font-mono);
-      font-size: 14.3px;
-      letter-spacing: 0.3em;
+      font-size: 11px;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 32px;
+      color: rgba(255,255,255,0.8);
+      margin-top: 28px;
+      text-align: center;
       opacity: 0;
       animation: fadeUp 0.8s ease-out 2.3s forwards;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.6);
     }
 
-    .home-scroll-hint {
+    .home-by { color: var(--primary); margin-right: 4px; }
+
+    .home-chevron {
       position: absolute;
-      bottom: 36px;
+      bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: oklch(0.45 0.015 65);
+      z-index: 2;
+      color: oklch(0.5 0.02 60);
+      font-size: 22px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out 2.6s forwards, chevronBob 2.5s ease-in-out 3.4s infinite;
+    }
+
+    @keyframes chevronBob {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── About section ── */
+    .home-about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+      border-top: 1px solid var(--border);
+    }
+
+    .home-about-left {
+      padding: 80px 64px 80px 40px;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 2.4s forwards;
+      justify-content: center;
+      max-width: 680px;
     }
 
-    .home-scroll-hint::after {
-      content: '';
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, oklch(0.45 0.015 65), transparent);
-      animation: scrollLine 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollLine {
-      0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
-      50% { opacity: 1; transform: scaleY(1); }
-    }
-
-    /* ── Roll portals ── */
-    .rolls {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-    }
-
-    .roll-card {
-      position: relative;
-      height: 70svh;
-      min-height: 400px;
-      overflow: hidden;
+    .about-label-row {
       display: flex;
-      align-items: flex-end;
-      text-decoration: none;
-      color: inherit;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
     }
 
-    .roll-bg {
-      position: absolute;
-      inset: 0;
-      transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .roll-card:nth-child(1) .roll-bg {
-      background: linear-gradient(135deg,
-        oklch(0.2 0.04 55) 0%,
-        oklch(0.14 0.025 70) 60%,
-        oklch(0.12 0.015 50) 100%);
-    }
-    .roll-card:nth-child(2) .roll-bg {
-      background: linear-gradient(135deg,
-        oklch(0.16 0.03 40) 0%,
-        oklch(0.18 0.035 60) 50%,
-        oklch(0.12 0.015 50) 100%);
-    }
-    .roll-card:nth-child(3) .roll-bg {
-      background: linear-gradient(135deg,
-        oklch(0.18 0.04 65) 0%,
-        oklch(0.15 0.03 50) 50%,
-        oklch(0.11 0.01 40) 100%);
-    }
-
-    .roll-card:hover .roll-bg {
-      transform: scale(1.04);
-    }
-
-    .roll-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, oklch(0.1 0.015 50 / 0.9) 0%, transparent 60%);
-      transition: opacity 0.5s ease;
-    }
-
-    .roll-card:hover .roll-overlay {
-      opacity: 0.7;
-    }
-
-    .roll-content {
-      position: relative;
-      z-index: 1;
-      padding: 40px;
-      width: 100%;
-    }
-
-    .roll-num {
+    .about-label-row span {
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 10px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--primary);
-      margin-bottom: 12px;
-      opacity: 0.7;
-      transition: opacity 0.3s ease;
     }
 
-    .roll-card:hover .roll-num { opacity: 1; }
+    .about-label-row::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--primary);
+      opacity: 0.3;
+    }
 
-    .roll-title {
+    .about-heading {
       font-family: var(--font-display);
-      font-size: clamp(2rem, 3.5vw, 3.5rem);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -0.01em;
-      margin-bottom: 12px;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 28px;
     }
 
-    .roll-desc {
-      font-size: 13px;
+    .about-heading em {
+      font-style: italic;
+      color: var(--primary);
+    }
+
+    .about-bio {
+      font-size: 15px;
+      line-height: 1.8;
       color: var(--muted);
-      line-height: 1.5;
-      max-width: 280px;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+      max-width: 480px;
+      margin-bottom: 40px;
     }
 
-    .roll-card:hover .roll-desc {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .roll-arrow {
-      display: inline-block;
-      margin-top: 20px;
+    .about-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       font-family: var(--font-mono);
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--primary);
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+      color: var(--fg);
+      border: 1px solid var(--border);
+      padding: 14px 24px;
+      text-decoration: none;
+      transition: border-color 0.3s, color 0.3s;
+      width: fit-content;
     }
 
-    .roll-card:hover .roll-arrow {
-      opacity: 1;
-      transform: translateX(0);
+    .about-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+    .about-socials {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 28px;
     }
 
-    @media (max-width: 768px) {
-      .rolls {
-        grid-template-columns: 1fr;
-      }
-      .roll-card {
-        height: 50svh;
-      }
-      .roll-desc { opacity: 1; transform: none; }
-      .roll-arrow { opacity: 1; transform: none; }
+    .about-social-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s ease;
     }
 
-    /* ── About strip ── */
-    .about-strip {
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 96px 40px;
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 80px;
-      align-items: start;
+    .about-social-link:hover { color: var(--primary); }
+
+    .home-about-right {
+      position: relative;
+      overflow: hidden;
     }
 
-    .about-label {
+    .home-about-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* ── Explore Work ── */
+    .home-work {
+      padding: 80px 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .work-label {
       font-family: var(--font-mono);
       font-size: 10px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--primary);
-      padding-top: 8px;
+      margin-bottom: 40px;
     }
 
-    .about-text h2 {
+    .work-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .work-card {
+      position: relative;
+      height: 480px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .work-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      filter: brightness(0.55) saturate(0.8);
+    }
+
+    .work-card:hover .work-card-bg {
+      transform: scale(1.05);
+      filter: brightness(0.45) saturate(0.7);
+    }
+
+    .work-card-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 36px 32px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+    }
+
+    .work-card-title {
       font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-size: clamp(1.8rem, 2.5vw, 2.8rem);
       font-weight: 400;
-      line-height: 1.2;
-      margin-bottom: 24px;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
     }
 
-    .about-text p {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 600px;
+    .work-card-sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: oklch(0.65 0.12 65);
+    }
+
+    .work-card-arrow {
+      position: absolute;
+      top: 28px;
+      right: 28px;
+      font-family: var(--font-mono);
+      font-size: 18px;
+      color: var(--primary);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .work-card:hover .work-card-arrow { opacity: 1; transform: translateX(0); }
+
+    @media (max-width: 1024px) {
+      .home-about { grid-template-columns: 1fr; }
+      .home-about-right { height: 60vw; }
+      .home-about-left { padding: 60px 24px; }
     }
 
     @media (max-width: 768px) {
-      .about-strip {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        padding: 64px 24px;
-      }
+      .work-cards { grid-template-columns: 1fr; }
+      .work-card { height: 320px; }
+      .home-work { padding: 60px 24px; }
+    }
+
+    /* ── Film Strip ── */
+    /* ── Film Reel ── */
+    .film-reel-section {
+      padding: 80px 0;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .film-reel-stage {
+      width: 100%;
+    }
+
+    .film-tape {
+      background: #0c0b09;
+      overflow: hidden;
+      border-top: 3px solid #2a2825;
+      border-bottom: 3px solid #2a2825;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    }
+
+    .film-tape-track {
+      display: flex;
+      width: max-content;
+      animation: tapeRoll 40s linear infinite;
+    }
+
+    .film-tape:hover .film-tape-track {
+      animation-play-state: paused;
+    }
+
+    .tape-unit {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sp-band {
+      height: 20px;
+      background-color: #0c0b09;
+      background-image: repeating-linear-gradient(
+        to right,
+        transparent 0px, transparent 10px,
+        rgba(228, 216, 192, 0.92) 10px, rgba(228, 216, 192, 0.92) 23px,
+        transparent 23px, transparent 36px
+      );
+    }
+
+    .sp-band--top { padding-top: 5px; }
+    .sp-band--bot { padding-bottom: 5px; }
+
+    .frames-band {
+      display: flex;
+      gap: 6px;
+      padding: 6px 0;
+      background: #0c0b09;
+    }
+
+    .fr {
+      width: 280px;
+      height: 190px;
+      flex-shrink: 0;
+      border: 1.5px solid #242220;
+      overflow: hidden;
+      position: relative;
+      background: #0e0d0b;
+    }
+
+    .fr img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+
+    @keyframes tapeRoll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 768px) {
+      .fr { width: 200px; height: 135px; }
     }
   </style>
 </head>
@@ -328,8 +446,8 @@
     <nav>
       <ul class="nav-links">
         <li><a href="index.html" class="active">Index</a></li>
-        <li><a href="festivals.html">Festivals</a></li>
         <li><a href="films.html">Films</a></li>
+        <li><a href="festivals.html">Festivals</a></li>
         <li><a href="journey.html">Journey</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -339,58 +457,137 @@
 
   <main>
 
+    <!-- ── Hero ── -->
     <section class="home-hero">
+      <div class="home-hero-bg"></div>
+      <div class="home-hero-overlay"></div>
       <div class="home-hero-content">
         <p class="home-eyebrow">Photography &amp; Film · India</p>
         <h1 class="home-title">Incredible India</h1>
         <p class="home-tagline">Through my lens</p>
-        <p class="home-subtitle">Swarnali Chakraborty</p>
+        <p class="home-subtitle"><span class="home-by">by</span> Swarnali Chakraborty</p>
       </div>
-      <div class="home-scroll-hint">Scroll</div>
+      <div class="home-chevron">&#8964;</div>
     </section>
 
-    <section class="rolls">
-      <a href="festivals.html" class="roll-card">
-        <div class="roll-bg"></div>
-        <div class="roll-overlay"></div>
-        <div class="roll-content">
-          <p class="roll-num">Roll · 01</p>
-          <h2 class="roll-title">Festivals</h2>
-          <p class="roll-desc">Music, culture and collective energy — documented as it happens.</p>
-          <span class="roll-arrow">View work →</span>
+    <!-- ── About ── -->
+    <section class="home-about">
+      <div class="home-about-left reveal">
+        <div class="about-label-row"><span>About me</span></div>
+        <h2 class="about-heading">Every place has a pulse.<br><em>I film what it feels like.</em></h2>
+        <p class="about-bio">Award-winning travel filmmaker documenting festivals, culture, landscapes, and untold stories across India through cinematic visuals.</p>
+        <div class="about-socials">
+          <a href="https://www.instagram.com/travelwithswarnali/?hl=en" target="_blank" rel="noopener" class="about-social-link" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+            <span>@travelwithswarnali</span>
+          </a>
+          <a href="https://www.youtube.com/@travelwithswarnali" target="_blank" rel="noopener" class="about-social-link" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+            <span>travelwithswarnali</span>
+          </a>
+          <a href="https://www.linkedin.com/in/swarnali-chakraborty-7a0a82189/" target="_blank" rel="noopener" class="about-social-link" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 10v7"/><path d="M7 7v.01"/><path d="M11 17v-4a3 3 0 0 1 6 0v4"/><path d="M11 10v7"/></svg>
+            <span>swarnali-chakraborty</span>
+          </a>
         </div>
-      </a>
-      <a href="films.html" class="roll-card">
-        <div class="roll-bg"></div>
-        <div class="roll-overlay"></div>
-        <div class="roll-content">
-          <p class="roll-num">Roll · 02</p>
-          <h2 class="roll-title">Films</h2>
-          <p class="roll-desc">Short films, brand stories and documentary work across formats.</p>
-          <span class="roll-arrow">View work →</span>
-        </div>
-      </a>
-      <a href="journey.html" class="roll-card">
-        <div class="roll-bg"></div>
-        <div class="roll-overlay"></div>
-        <div class="roll-content">
-          <p class="roll-num">Roll · 03</p>
-          <h2 class="roll-title">Journey</h2>
-          <p class="roll-desc">Editorial-leaning brand work for fashion, lifestyle and hospitality.</p>
-          <span class="roll-arrow">View work →</span>
-        </div>
-      </a>
+        <a href="contact.html" class="about-btn">More about me &nbsp;→</a>
+      </div>
+      <div class="home-about-right">
+        <img src="assets/NAV01978.JPG" alt="Swarnali Chakraborty" />
+      </div>
     </section>
 
-    <div style="border-top: 1px solid var(--border);">
-      <div class="about-strip">
-        <p class="about-label reveal">Studio</p>
-        <div class="about-text">
-          <h2 class="reveal">Light, patience<br>and one camera.</h2>
-          <p class="reveal">Based in India, working worldwide. Roll No. 24 is the practice of Swarnali Chakraborty — a photographer and filmmaker drawn to the quiet moments between performances, the textures of a brand before it becomes noise, and the weight of light at golden hour on the last day of a festival.</p>
+    <!-- ── Explore Work ── -->
+    <section class="home-work reveal">
+      <p class="work-label">Explore my work</p>
+      <div class="work-cards">
+        <a href="films.html" class="work-card">
+          <div class="work-card-bg" style="background-image: url('assets/Festival photos/Losar festival/IMG_4427.JPG');"></div>
+          <div class="work-card-content">
+            <h3 class="work-card-title">Films</h3>
+            <p class="work-card-sub">Visual Stories</p>
+          </div>
+          <span class="work-card-arrow">→</span>
+        </a>
+        <a href="festivals.html" class="work-card">
+          <div class="work-card-bg" style="background-image: url('assets/Festival photos/Kulasai dasara/pic 17.JPG');"></div>
+          <div class="work-card-content">
+            <h3 class="work-card-title">Festivals</h3>
+            <p class="work-card-sub">Celebrating India</p>
+          </div>
+          <span class="work-card-arrow">→</span>
+        </a>
+        <a href="journey.html" class="work-card">
+          <div class="work-card-bg" style="background-image: url('assets/Creative direction cover.jpeg');"></div>
+          <div class="work-card-content">
+            <h3 class="work-card-title">Journey</h3>
+            <p class="work-card-sub">Creative Direction</p>
+          </div>
+          <span class="work-card-arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Film Reel ── -->
+    <section class="film-reel-section">
+      <div class="film-reel-stage">
+        <div class="film-tape">
+          <div class="film-tape-track">
+
+            <!-- Unit 1 -->
+            <div class="tape-unit">
+              <div class="sp-band sp-band--top"></div>
+              <div class="frames-band">
+                <div class="fr"><img src="assets/index/DSC_2598.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC_3178.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC01223.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC01244.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC02271.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC04355.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC04373.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC05092.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC05105.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC08724.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/IMG_1548.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/IMG_1549.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/IMG_1554.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/IMG_3410.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/post 5.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/post 7.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/SPI03077.JPG" alt="" /></div>
+              </div>
+              <div class="sp-band sp-band--bot"></div>
+            </div>
+
+            <!-- Unit 2 — duplicate for seamless loop -->
+            <div class="tape-unit">
+              <div class="sp-band sp-band--top"></div>
+              <div class="frames-band">
+                <div class="fr"><img src="assets/index/DSC_2598.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC_3178.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC01223.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC01244.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC02271.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC04355.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC04373.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC05092.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC05105.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/DSC08724.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/IMG_1548.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/IMG_1549.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/IMG_1554.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/IMG_3410.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/post 5.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/post 7.JPG" alt="" /></div>
+                <div class="fr"><img src="assets/index/SPI03077.JPG" alt="" /></div>
+              </div>
+              <div class="sp-band sp-band--bot"></div>
+            </div>
+
+          </div>
         </div>
       </div>
-    </div>
+    </section>
 
   </main>
 

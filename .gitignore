@@ -6,3 +6,9 @@
 
 # Claude Code app
 *.app.zip
+
+# Large video files (>100MB, exceed GitHub limit)
+assets/film/altius hospital.mp4
+assets/film/C2 Voc high res wd sub .mp4
+assets/Festival photos/LeapYear_Moombai finalV.mp4
+assets/Festival photos/IMG_9413.mp4

@@ -24,6 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ─── SHUTTER CLICK SOUND — plays on every click ─── */
+  const shutterBase = new Audio('assets/sound/intro.mp3');
+  shutterBase.volume = 0.35;
+
+  document.addEventListener('click', () => {
+    const shot = shutterBase.cloneNode();
+    shot.volume = 0.35;
+    shot.play().catch(() => {});
+  });
+
   /* ─── CURSOR INVERSION CIRCLE ─── */
   const cursor = document.getElementById('cursorCircle');
   let mouseX = 0, mouseY = 0;
