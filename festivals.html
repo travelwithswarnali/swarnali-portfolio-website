@@ -169,8 +169,8 @@
       filter: grayscale(0.55) brightness(0.72);
     }
 
-    /* ...except the one being hovered — restore original colors */
-    .carousel-card:hover img { filter: none; }
+    /* ...except the one being hovered — higher specificity wins */
+    .carousel-scene-wrap:hover .carousel-card:hover img { filter: none; }
 
     .carousel-card-overlay {
       position: absolute;
