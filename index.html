@@ -27,14 +27,15 @@
       padding: 0 24px;
     }
 
-    .home-hero-bg {
+    .home-hero-video {
       position: absolute;
-      inset: -3%;
-      background-image: url('assets/Blurred%20behind%20.jpeg');
-      background-size: cover;
-      background-position: center 40%;
-      filter: blur(2px) brightness(0.75);
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
       z-index: 0;
+      pointer-events: none;
     }
 
     .home-hero-overlay {
@@ -42,9 +43,9 @@
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(0,0,0,0.25) 0%,
-        rgba(0,0,0,0.35) 50%,
-        rgba(0,0,0,0.55) 100%
+        rgba(0,0,0,0.3) 0%,
+        rgba(0,0,0,0.4) 50%,
+        rgba(0,0,0,0.6) 100%
       );
       z-index: 1;
     }
@@ -233,182 +234,204 @@
       display: block;
     }
 
-    /* ── Explore Work ── */
-    .home-work {
-      padding: 80px 40px;
-      border-top: 1px solid var(--border);
-    }
-
-    .work-label {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 40px;
-    }
-
-    .work-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-
-    .work-card {
-      position: relative;
-      height: 480px;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-
-    .work-card-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-      filter: brightness(0.55) saturate(0.8);
-    }
-
-    .work-card:hover .work-card-bg {
-      transform: scale(1.05);
-      filter: brightness(0.45) saturate(0.7);
-    }
-
-    .work-card-content {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 36px 32px;
-      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
-    }
-
-    .work-card-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 2.5vw, 2.8rem);
-      font-weight: 400;
-      line-height: 1;
-      letter-spacing: -0.01em;
-      margin-bottom: 6px;
-    }
-
-    .work-card-sub {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: oklch(0.65 0.12 65);
-    }
-
-    .work-card-arrow {
-      position: absolute;
-      top: 28px;
-      right: 28px;
-      font-family: var(--font-mono);
-      font-size: 18px;
-      color: var(--primary);
-      opacity: 0;
-      transform: translateX(-6px);
-      transition: opacity 0.3s, transform 0.3s;
-    }
-
-    .work-card:hover .work-card-arrow { opacity: 1; transform: translateX(0); }
-
     @media (max-width: 1024px) {
       .home-about { grid-template-columns: 1fr; }
       .home-about-right { height: 60vw; }
       .home-about-left { padding: 60px 24px; }
     }
 
-    @media (max-width: 768px) {
-      .work-cards { grid-template-columns: 1fr; }
-      .work-card { height: 320px; }
-      .home-work { padding: 60px 24px; }
+    /* ── Scroll-Driven Film Reel ── */
+    .scroll-reel-section {
+      position: relative;
+      height: 420vh;
     }
 
-    /* ── Film Strip ── */
-    /* ── Film Reel ── */
-    .film-reel-section {
-      padding: 80px 0;
+    .scroll-reel-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
       background: var(--bg);
     }
 
-    .film-reel-stage {
-      width: 100%;
+    .scroll-reel-hud {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 32px 18px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
     }
 
-    .film-tape {
+    .scroll-reel-hud.visible { opacity: 1; }
+
+    .reel-hud-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .reel-hud-counter {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--primary);
+      letter-spacing: 0.08em;
+    }
+
+    .scroll-reel-strip { width: 100%; }
+
+    .reel-sprocket {
+      height: 22px;
       background: #0c0b09;
-      overflow: hidden;
-      border-top: 3px solid #2a2825;
-      border-bottom: 3px solid #2a2825;
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
-    }
-
-    .film-tape-track {
-      display: flex;
-      width: max-content;
-      animation: tapeRoll 40s linear infinite;
-    }
-
-    .film-tape:hover .film-tape-track {
-      animation-play-state: paused;
-    }
-
-    .tape-unit {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sp-band {
-      height: 20px;
-      background-color: #0c0b09;
       background-image: repeating-linear-gradient(
         to right,
-        transparent 0px, transparent 10px,
-        rgba(228, 216, 192, 0.92) 10px, rgba(228, 216, 192, 0.92) 23px,
-        transparent 23px, transparent 36px
+        transparent 0px, transparent 6px,
+        rgba(228,216,192,0.88) 6px, rgba(228,216,192,0.88) 20px,
+        transparent 20px, transparent 32px
       );
     }
 
-    .sp-band--top { padding-top: 5px; }
-    .sp-band--bot { padding-bottom: 5px; }
-
-    .frames-band {
+    .reel-track {
       display: flex;
-      gap: 6px;
-      padding: 6px 0;
+      gap: 4px;
+      padding: 4px 0;
       background: #0c0b09;
+      will-change: transform;
     }
 
-    .fr {
-      width: 280px;
-      height: 190px;
-      flex-shrink: 0;
-      border: 1.5px solid #242220;
-      overflow: hidden;
+    .reel-frame {
       position: relative;
+      flex-shrink: 0;
+      width: clamp(210px, 21vw, 320px);
+      height: clamp(140px, 14vw, 214px);
+      border: 1.5px solid #2a2825;
+      overflow: hidden;
       background: #0e0d0b;
     }
 
-    .fr img {
+    .reel-frame img {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
     }
 
-    @keyframes tapeRoll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
+    .reel-shutter {
+      position: absolute;
+      inset: 0;
+      background: #0c0b09;
+      transform-origin: top;
+      transform: scaleY(1);
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
     }
 
+    .reel-frame.open .reel-shutter { transform: scaleY(0); }
+
+    .reel-frame::after {
+      content: attr(data-num);
+      position: absolute;
+      bottom: 6px;
+      left: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.52rem;
+      color: rgba(228,216,192,0.4);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .scroll-reel-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding-top: 22px;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: opacity 0.5s ease;
+      animation: hintBob 2.2s ease-in-out infinite;
+    }
+
+    .scroll-reel-hint.hidden { opacity: 0; pointer-events: none; }
+
+    @keyframes hintBob {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(5px); }
+    }
+
+    /* ── Explore Links ── */
+    .home-explore {
+      padding: 80px 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .explore-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 40px;
+    }
+
+    .explore-link {
+      display: grid;
+      grid-template-columns: 44px 1fr 1fr auto;
+      align-items: center;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      transition: color 0.25s;
+      gap: 16px;
+    }
+
+    .explore-link:first-of-type { border-top: 1px solid var(--border); }
+    .explore-link:hover { color: var(--primary); }
+
+    .explore-num {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+    }
+
+    .explore-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .explore-sub {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .explore-arrow {
+      font-size: 1.1rem;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.25s, transform 0.25s;
+      color: var(--primary);
+    }
+
+    .explore-link:hover .explore-arrow { opacity: 1; transform: translateX(0); }
+
     @media (max-width: 768px) {
-      .fr { width: 200px; height: 135px; }
+      .home-explore { padding: 60px 24px; }
+      .explore-link { grid-template-columns: 36px 1fr auto; }
+      .explore-sub { display: none; }
+      .reel-frame { width: 180px; height: 120px; }
     }
   </style>
 </head>
@@ -459,7 +482,9 @@
 
     <!-- ── Hero ── -->
     <section class="home-hero">
-      <div class="home-hero-bg"></div>
+      <video class="home-hero-video" autoplay muted loop playsinline preload="auto">
+        <source src="assets/hero-intro.mp4" type="video/mp4">
+      </video>
       <div class="home-hero-overlay"></div>
       <div class="home-hero-content">
         <p class="home-eyebrow">Photography &amp; Film · India</p>
@@ -497,96 +522,64 @@
       </div>
     </section>
 
-    <!-- ── Explore Work ── -->
-    <section class="home-work reveal">
-      <p class="work-label">Explore my work</p>
-      <div class="work-cards">
-        <a href="films.html" class="work-card">
-          <div class="work-card-bg" style="background-image: url('assets/Festival photos/Losar festival/IMG_4427.JPG');"></div>
-          <div class="work-card-content">
-            <h3 class="work-card-title">Films</h3>
-            <p class="work-card-sub">Visual Stories</p>
+    <!-- ── Scroll-Driven Film Reel ── -->
+    <section class="scroll-reel-section" id="reelSection">
+      <div class="scroll-reel-sticky">
+        <div class="scroll-reel-hud" id="reelHud">
+          <span class="reel-hud-label">Frames from the field</span>
+          <span class="reel-hud-counter" id="reelCounter">01 / 17</span>
+        </div>
+        <div class="scroll-reel-strip">
+          <div class="reel-sprocket"></div>
+          <div class="reel-track" id="reelTrack">
+            <div class="reel-frame" data-num="01"><img src="assets/Index/DSC_2598.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="02"><img src="assets/Index/DSC_3178.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="03"><img src="assets/Index/DSC01223.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="04"><img src="assets/Index/DSC01244.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="05"><img src="assets/Index/DSC02271.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="06"><img src="assets/Index/DSC04355.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="07"><img src="assets/Index/DSC04373.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="08"><img src="assets/Index/DSC05092.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="09"><img src="assets/Index/DSC05105.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="10"><img src="assets/Index/DSC08724.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="11"><img src="assets/Index/IMG_1548.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="12"><img src="assets/Index/IMG_1549.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="13"><img src="assets/Index/IMG_1554.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="14"><img src="assets/Index/IMG_3410.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="15"><img src="assets/Index/post 5.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="16"><img src="assets/Index/post 7.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
+            <div class="reel-frame" data-num="17"><img src="assets/Index/SPI03077.JPG" alt="" loading="lazy"><div class="reel-shutter"></div></div>
           </div>
-          <span class="work-card-arrow">→</span>
-        </a>
-        <a href="festivals.html" class="work-card">
-          <div class="work-card-bg" style="background-image: url('assets/Festival photos/Kulasai dasara/pic 17.JPG');"></div>
-          <div class="work-card-content">
-            <h3 class="work-card-title">Festivals</h3>
-            <p class="work-card-sub">Celebrating India</p>
-          </div>
-          <span class="work-card-arrow">→</span>
-        </a>
-        <a href="journey.html" class="work-card">
-          <div class="work-card-bg" style="background-image: url('assets/Creative direction cover.jpeg');"></div>
-          <div class="work-card-content">
-            <h3 class="work-card-title">Journey</h3>
-            <p class="work-card-sub">Creative Direction</p>
-          </div>
-          <span class="work-card-arrow">→</span>
-        </a>
+          <div class="reel-sprocket"></div>
+        </div>
+        <div class="scroll-reel-hint" id="reelHint">
+          <span>scroll to open</span>
+          <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M2 7l4 4 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
       </div>
     </section>
 
-    <!-- ── Film Reel ── -->
-    <section class="film-reel-section">
-      <div class="film-reel-stage">
-        <div class="film-tape">
-          <div class="film-tape-track">
-
-            <!-- Unit 1 -->
-            <div class="tape-unit">
-              <div class="sp-band sp-band--top"></div>
-              <div class="frames-band">
-                <div class="fr"><img src="assets/index/DSC_2598.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC_3178.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC01223.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC01244.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC02271.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC04355.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC04373.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC05092.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC05105.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC08724.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/IMG_1548.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/IMG_1549.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/IMG_1554.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/IMG_3410.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/post 5.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/post 7.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/SPI03077.JPG" alt="" /></div>
-              </div>
-              <div class="sp-band sp-band--bot"></div>
-            </div>
-
-            <!-- Unit 2 — duplicate for seamless loop -->
-            <div class="tape-unit">
-              <div class="sp-band sp-band--top"></div>
-              <div class="frames-band">
-                <div class="fr"><img src="assets/index/DSC_2598.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC_3178.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC01223.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC01244.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC02271.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC04355.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC04373.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC05092.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC05105.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/DSC08724.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/IMG_1548.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/IMG_1549.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/IMG_1554.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/IMG_3410.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/post 5.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/post 7.JPG" alt="" /></div>
-                <div class="fr"><img src="assets/index/SPI03077.JPG" alt="" /></div>
-              </div>
-              <div class="sp-band sp-band--bot"></div>
-            </div>
-
-          </div>
-        </div>
-      </div>
+    <!-- ── Explore Work ── -->
+    <section class="home-explore reveal">
+      <p class="explore-eyebrow">Explore my work</p>
+      <a href="films.html" class="explore-link">
+        <span class="explore-num">01</span>
+        <span class="explore-title">Films</span>
+        <span class="explore-sub">Visual Stories</span>
+        <span class="explore-arrow">→</span>
+      </a>
+      <a href="festivals.html" class="explore-link">
+        <span class="explore-num">02</span>
+        <span class="explore-title">Festivals</span>
+        <span class="explore-sub">Celebrating India</span>
+        <span class="explore-arrow">→</span>
+      </a>
+      <a href="journey.html" class="explore-link">
+        <span class="explore-num">03</span>
+        <span class="explore-title">Journey</span>
+        <span class="explore-sub">Creative Direction</span>
+        <span class="explore-arrow">→</span>
+      </a>
     </section>
 
   </main>
@@ -614,5 +607,61 @@
   </footer>
 
   <script src="script.js" defer></script>
+  <script>
+    (function () {
+      const section = document.getElementById('reelSection');
+      const track   = document.getElementById('reelTrack');
+      const hud     = document.getElementById('reelHud');
+      const hint    = document.getElementById('reelHint');
+      const counter = document.getElementById('reelCounter');
+      if (!section || !track) return;
+
+      const frames = track.querySelectorAll('.reel-frame');
+      const total  = frames.length;
+
+      function update() {
+        const rect       = section.getBoundingClientRect();
+        const scrollable = rect.height - window.innerHeight;
+        const progress   = Math.max(0, Math.min(1, -rect.top / scrollable));
+
+        if (progress > 0.01) {
+          hud.classList.add('visible');
+          hint.classList.add('hidden');
+        } else {
+          hud.classList.remove('visible');
+          hint.classList.remove('hidden');
+        }
+
+        // Pan the strip: slides from right→left as you scroll
+        const overflow = track.scrollWidth - window.innerWidth;
+        if (overflow > 0) {
+          track.style.transform = 'translateX(' + (-progress * overflow) + 'px)';
+        }
+
+        // Open each frame as its center crosses 75% of the viewport width
+        let opened = 0;
+        frames.forEach(function (frame) {
+          const fr     = frame.getBoundingClientRect();
+          const center = fr.left + fr.width / 2;
+          if (center < window.innerWidth * 0.76) {
+            frame.classList.add('open');
+            opened++;
+          } else {
+            frame.classList.remove('open');
+          }
+        });
+
+        if (counter && opened > 0) {
+          counter.textContent =
+            String(Math.min(opened, total)).padStart(2, '0') + ' / ' +
+            String(total).padStart(2, '0');
+        }
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    })();
+  </script>
 </body>
 </html>

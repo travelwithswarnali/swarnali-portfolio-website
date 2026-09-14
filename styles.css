@@ -16,7 +16,7 @@
   --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --cursor-radius: 120px;
+  --cursor-radius: 60px;
 }
 
 html {
@@ -65,13 +65,13 @@ button { cursor: none; }
 }
 
 .cursor-circle.hovering {
-  width: 180px;
-  height: 180px;
+  width: 100px;
+  height: 100px;
 }
 
 .cursor-circle.clicking {
-  width: 90px;
-  height: 90px;
+  width: 44px;
+  height: 44px;
   transition: width 0.1s ease, height 0.1s ease;
 }
 

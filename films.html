@@ -16,6 +16,8 @@
     .hero {
       width: 100vw;
       margin-left: calc(-50vw + 50%);
+      height: 100svh;
+      min-height: 560px;
     }
 
     .films-hero-video {
@@ -40,7 +42,7 @@
         linear-gradient(to top, var(--bg) 0%, rgba(0,0,0,0.72) 40%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.45) 100%);
     }
 
-    .hero .hero-content { position: relative; z-index: 2; }
+    .hero .hero-content { position: absolute; inset: 0; z-index: 2; }
 
     /* ── MUBI-style film grid ── */
     .films-grid-wrap {
@@ -64,6 +66,17 @@
       cursor: pointer;
     }
 
+    /* Cover image — always visible beneath overlay */
+    .film-poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: 0;
+    }
+
     /* Video preview fills the card */
     .film-preview {
       position: absolute;
@@ -73,6 +86,7 @@
       object-fit: cover;
       opacity: 0;
       transition: opacity 0.5s ease;
+      z-index: 1;
     }
 
     .film-card:hover .film-preview {
@@ -83,6 +97,7 @@
     .film-card-overlay {
       position: absolute;
       inset: 0;
+      z-index: 2;
       background:
         linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.1) 100%);
       transition: background 0.4s ease;
@@ -345,7 +360,9 @@
   <main>
 
     <section class="hero">
-      <iframe class="films-hero-video" src="https://drive.google.com/file/d/1ck7JDEcAhsYvJRU6L2rU9tfYUObfu5RH/preview" allow="autoplay" allowfullscreen frameborder="0"></iframe>
+      <video class="films-hero-video" autoplay muted loop playsinline preload="auto" poster="assets/IMG_2338.PNG">
+        <source src="assets/varanasi.mp4" type="video/mp4">
+      </video>
       <div class="films-hero-overlay"></div>
       <div class="hero-content">
         <div class="hero-inner">
@@ -362,6 +379,7 @@
       <div class="films-grid">
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Video-81.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-01.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Video-81.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -379,6 +397,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Video-656.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-02.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Video-656.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -396,6 +415,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Video-423.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-03.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Video-423.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -413,6 +433,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Video-199.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-04.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Video-199.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -430,6 +451,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Paytm insider concert - Ibuiltthesky.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-05.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Paytm insider concert - Ibuiltthesky.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -447,6 +469,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Unmapped - vietnam movie.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-06.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Unmapped - vietnam movie.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -464,6 +487,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Indain ocean.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-07.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Indain ocean.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -481,6 +505,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Shankar mahadevan.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-08.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Shankar mahadevan.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -498,6 +523,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Biswa kalyan.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-09.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Biswa kalyan.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -515,6 +541,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/when chai met toast.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-10.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/when chai met toast.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -532,6 +559,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Kalari[ayattu.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-11.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Kalari[ayattu.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -549,6 +577,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="https://drive.google.com/file/d/1OpdMqYRNvGBbWNqIrH_75xdXZZYMAtHo/preview" data-type="iframe">
+          <img class="film-poster" src="assets/film/thumbs/film-12.jpg" alt="" loading="lazy">
           <video class="film-preview" muted loop playsinline preload="none"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -566,6 +595,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Product led offline activity.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-13.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Product led offline activity.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">
@@ -583,6 +613,7 @@
         </div>
 
         <div class="film-card film-card--playable reveal-card" data-video="assets/film/Product led - Visa shoot.mp4">
+          <img class="film-poster" src="assets/film/thumbs/film-14.jpg" alt="" loading="lazy">
           <video class="film-preview" src="assets/film/Product led - Visa shoot.mp4" muted loop playsinline preload="metadata"></video>
           <div class="film-card-overlay">
             <div class="film-card-top">

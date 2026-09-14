@@ -58,133 +58,169 @@
       margin-top: 20px;
     }
 
-    /* ── Explore theme section ── */
-    .explore-theme {
+    /* ── 3D Festival Carousel ── */
+    .carousel-section {
+      position: relative;
+      min-height: 100svh;
+      background: var(--bg);
       border-top: 1px solid var(--border);
-      padding: 80px 40px;
-      max-width: 1600px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: end;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 0;
+      overflow: visible;
     }
 
-    .explore-label {
+    .carousel-hud {
+      position: absolute;
+      top: 28px;
+      left: 40px;
+      right: 40px;
+      display: flex;
+      justify-content: space-between;
       font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.4em;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--primary);
-      display: block;
-      margin-bottom: 20px;
+      opacity: 0.42;
+      pointer-events: none;
     }
 
-    .explore-heading {
-      font-family: var(--font-display);
-      font-size: clamp(2.4rem, 4.5vw, 4.5rem);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -0.02em;
-    }
-
-    .explore-body {
-      font-size: 15px;
-      color: var(--muted);
-      line-height: 1.8;
-      max-width: 480px;
-      align-self: end;
-    }
-
-    @media (max-width: 768px) {
-      .explore-theme { grid-template-columns: 1fr; gap: 32px; padding: 60px 24px; }
-    }
-
-    /* ── Featured festivals list ── */
-    .festivals-list {
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 80px 40px;
-    }
-
-    .festivals-list-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 80px;
-      gap: 24px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
+    .carousel-label {
       font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.25em;
+      font-size: 0.58rem;
+      letter-spacing: 0.35em;
       text-transform: uppercase;
-      color: oklch(0.4 0.015 60);
-      margin-bottom: 0;
+      color: var(--primary);
+      margin-bottom: 52px;
+      opacity: 0.65;
     }
 
-    .festival-row {
-      display: grid;
-      grid-template-columns: 40px 1fr 1fr 80px;
-      gap: 24px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-      align-items: center;
-      transition: background 0.3s ease;
-      cursor: none;
+    .carousel-scene-wrap {
+      perspective: 1800px;
+      perspective-origin: 50% 50%;
+      width: 100%;
+      height: 400px;
+      position: relative;
+      overflow: visible;
     }
 
-    .festival-row:hover {
-      background: oklch(0.16 0.02 50 / 0.5);
-      margin: 0 -40px;
-      padding: 20px 40px;
+    .carousel-scene {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 0;
+      height: 0;
+      transform-style: preserve-3d;
+      cursor: grab;
     }
 
-    .festival-row:hover .f-arrow { opacity: 1; transform: translateX(0); }
+    .carousel-scene:active { cursor: grabbing; }
 
-    .festival-row .f-num {
+    .carousel-card {
+      position: absolute;
+      width: 200px;
+      height: 280px;
+      margin-left: -100px;
+      margin-top: -140px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.055);
+      border-radius: 2px;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.7);
+      transition: border-color 0.3s ease;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .carousel-card:hover { border-color: oklch(0.65 0.12 65 / 0.5); }
+
+    .carousel-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+      filter: grayscale(0.55) brightness(0.75);
+      transition: filter 0.4s ease;
+    }
+
+    .carousel-card:hover img { filter: grayscale(0) brightness(1); }
+
+    .carousel-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.12) 52%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 14px;
+      pointer-events: none;
+    }
+
+    .carousel-card-tag {
       font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      color: oklch(0.38 0.015 60);
+      font-size: 0.44rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 4px;
     }
 
-    .festival-row .f-name {
+    .carousel-card-name {
       font-family: var(--font-display);
-      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-size: 1rem;
       font-weight: 400;
+      line-height: 1.15;
+      color: #fff;
     }
 
-    .festival-row .f-location,
-    .festival-row .f-year {
+    .carousel-card-loc {
       font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--muted);
+      font-size: 0.44rem;
       letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.42);
+      margin-top: 3px;
     }
 
-    .festival-row .f-tag {
+    .carousel-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 52px;
+    }
+
+    .carousel-nav-btn {
+      background: none;
+      border: 1px solid oklch(0.28 0.02 50 / 0.5);
+      color: var(--text-muted);
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 0.58rem;
+      padding: 9px 22px;
+      cursor: pointer;
+      letter-spacing: 0.15em;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .carousel-nav-btn:hover { color: var(--primary); border-color: var(--primary); }
+
+    .carousel-hint {
+      font-family: var(--font-mono);
+      font-size: 0.5rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--primary);
-    }
-
-    .festival-row .f-arrow {
-      font-size: 14px;
-      color: var(--primary);
-      text-align: right;
-      opacity: 0;
-      transform: translateX(-6px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      color: var(--text-muted);
+      opacity: 0.32;
+      margin-top: 14px;
+      animation: hintBob 2.4s ease-in-out infinite;
     }
 
     @media (max-width: 768px) {
-      .festivals-list { padding: 60px 24px; }
-      .festivals-list-header { grid-template-columns: 1fr 1fr; }
-      .festivals-list-header .hide-sm,
-      .festival-row .f-num { display: none; }
-      .festival-row { grid-template-columns: 1fr 60px; }
-      .festival-row:hover { margin: 0 -24px; padding: 20px 24px; }
+      .carousel-scene-wrap { height: 240px; perspective: 900px; }
+      .carousel-card { width: 140px; height: 196px; margin-left: -70px; margin-top: -98px; }
+      .carousel-card-name { font-size: 0.78rem; }
+      .carousel-hud { font-size: 0.48rem; left: 16px; right: 16px; }
     }
 
     /* ══════════════════════════════════════
@@ -208,12 +244,13 @@
     }
 
     .fest-overlay-inner {
-      max-width: 1360px;
+      max-width: 1080px;
+      width: 100%;
       margin: 0 auto;
-      padding: 88px 60px 80px;
+      padding: 56px 44px 28px;
       display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 80px;
+      grid-template-columns: 1fr 260px;
+      gap: 36px;
       align-items: start;
       opacity: 0;
       transform: translateY(24px);
@@ -255,49 +292,183 @@
 
     .fest-close:hover { color: var(--fg); border-color: oklch(0.5 0.02 60 / 0.6); }
 
-    /* ── Gallery ── */
-    .fest-gallery { display: flex; flex-direction: column; gap: 6px; }
-
-    .fest-gallery-main {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      background: oklch(0.13 0.018 50);
+    /* ── Camera roll gallery ── */
+    .fest-gallery {
+      height: min(62vh, 560px);
       overflow: hidden;
-      position: relative;
+      border-radius: 2px;
     }
 
-    .fest-gallery-main img {
+    /* Fix height chain — festMainPhoto must fill the gallery */
+    #festMainPhoto {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      gap: 8px;
+    }
+
+    .fest-gallery-inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      gap: 8px;
+    }
+
+    .fest-gallery-main {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      min-height: 0;
+      border-radius: 2px;
+    }
+
+    /* Two stacked images for crossfade — both fill the container */
+    .fest-gallery-main-img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: opacity 0.75s ease;
     }
 
-    .fest-gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
+    /* Expand-to-fullscreen button */
+    .fest-gallery-expand {
+      position: absolute;
+      top: 10px; right: 10px;
+      width: 28px; height: 28px;
+      background: oklch(0.07 0.01 50 / 0.68);
+      border: 1px solid oklch(1 0 0 / 0.18);
+      color: oklch(1 0 0 / 0.85);
+      border-radius: 3px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 4;
+      opacity: 0;
+      transition: opacity 0.2s, background 0.15s;
     }
 
-    .fest-gallery-thumb {
-      aspect-ratio: 1;
-      background: oklch(0.13 0.018 50);
-      overflow: hidden;
+    .fest-gallery-main:hover .fest-gallery-expand { opacity: 1; }
+    .fest-gallery-expand:hover { background: oklch(0.22 0.01 50 / 0.85); }
+
+    /* Fullscreen image overlay */
+    .fest-fullscreen-overlay {
+      position: fixed; inset: 0;
+      z-index: 2000;
+      background: oklch(0.04 0.008 50 / 0.97);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
     }
 
-    .fest-gallery-thumb img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-      transition: transform 0.5s ease;
+    .fest-fullscreen-overlay.open {
+      opacity: 1; pointer-events: all;
     }
 
-    .fest-gallery-thumb:hover img { transform: scale(1.06); }
+    .fest-fullscreen-img {
+      max-width: 94vw; max-height: 94svh;
+      width: auto; height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .fest-fullscreen-close {
+      position: absolute; top: 20px; right: 28px;
+      background: none;
+      border: 1px solid oklch(0.35 0.02 50 / 0.55);
+      color: oklch(0.55 0.02 60);
+      padding: 8px 18px;
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.25em;
+      text-transform: uppercase; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .fest-fullscreen-close:hover { color: oklch(0.9 0 0); border-color: oklch(0.55 0.02 60 / 0.8); }
+
+    .fest-gallery-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: oklch(0.08 0.012 50 / 0.7);
+      border: 1px solid oklch(1 0 0 / 0.18);
+      color: oklch(1 0 0 / 0.9);
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 0.2s, background 0.15s;
+    }
+
+    .fest-gallery-main:hover .fest-gallery-nav-btn { opacity: 1; }
+    .fest-gallery-nav-btn:hover { background: oklch(0.18 0.012 50 / 0.85); }
+    .fest-gallery-prev { left: 10px; }
+    .fest-gallery-next { right: 10px; }
+
+    .fest-gallery-counter {
+      position: absolute;
+      bottom: 10px; right: 12px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: oklch(1 0 0 / 0.55);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Filmstrip */
+    .fest-filmstrip {
+      height: 58px;
+      overflow-x: auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      padding: 0 2px;
+      scrollbar-width: none;
+    }
+
+    .fest-filmstrip::-webkit-scrollbar { display: none; }
+
+    .fest-thumb {
+      width: 74px;
+      height: 50px;
+      object-fit: cover;
+      flex-shrink: 0;
+      cursor: pointer;
+      border-radius: 1px;
+      border: 1.5px solid transparent;
+      opacity: 0.4;
+      transition: opacity 0.18s, border-color 0.18s;
+    }
+
+    .fest-thumb.active {
+      opacity: 1;
+      border-color: var(--primary);
+    }
+
+    .fest-thumb:hover:not(.active) { opacity: 0.7; }
+
+    .fest-gallery-single {
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      display: block;
+    }
 
     /* ── Details panel ── */
     .fest-details {
       position: sticky;
-      top: 88px;
+      top: 56px;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+      scrollbar-width: none;
     }
+
+    .fest-details::-webkit-scrollbar { display: none; }
 
     .fest-details-tag {
       font-family: var(--font-mono);
@@ -363,19 +534,24 @@
       text-align: right;
     }
 
-    @media (max-width: 1024px) {
+    @media (max-width: 900px) {
       .fest-overlay-inner {
         grid-template-columns: 1fr;
-        padding: 80px 32px 64px;
-        gap: 48px;
+        padding: 56px 24px 40px;
+        gap: 28px;
+      }
+      .fest-gallery {
+        height: min(56vw, 340px);
       }
       .fest-details { position: static; }
-      .fest-close { right: 24px; }
+      .fest-close { right: 20px; top: 16px; }
     }
 
-    @media (max-width: 600px) {
-      .fest-gallery-grid { grid-template-columns: repeat(2, 1fr); }
-      .fest-overlay-inner { padding: 72px 20px 56px; }
+    @media (max-width: 480px) {
+      .fest-overlay-inner { padding: 52px 16px 32px; gap: 20px; }
+      .fest-gallery { height: 52vw; }
+      .fest-filmstrip { height: 44px; }
+      .fest-thumb { width: 58px; height: 40px; }
     }
 
   </style>
@@ -444,148 +620,21 @@
       </div>
     </section>
 
-    <div class="explore-theme reveal">
-      <div>
-        <span class="explore-label">Explore by theme</span>
-        <h2 class="explore-heading">Art &amp; Cultural<br>Festivals</h2>
+    <!-- ── 3D Festival Carousel ── -->
+    <section class="carousel-section" id="carouselSection">
+      <div class="carousel-hud">
+        <span>FESTIVAL.ARCHIVE // 15 STORIES</span>
+        <span>DRAG TO ROTATE · CLICK TO ENTER</span>
       </div>
-      <p class="explore-body">India is home to over 1,000 festivals.<br>Here are some rare, raw, and remarkable celebrations most people don't even know exist.</p>
-    </div>
-
-    <section class="festivals-list">
-      <div class="festivals-list-header" style="grid-template-columns: 40px 1fr 1fr 80px;">
-        <span></span>
-        <span>Festival</span>
-        <span class="hide-sm">Location</span>
-        <span>Type</span>
+      <p class="carousel-label">The Wardrobe</p>
+      <div class="carousel-scene-wrap" id="carouselWrap">
+        <div class="carousel-scene" id="carouselScene"></div>
       </div>
-
-      <div class="festival-row reveal" data-festival="faguli">
-        <span class="f-num">01</span>
-        <span class="f-name">Faguli Festival</span>
-        <span class="f-location">Chamoli, Uttarakhand</span>
-        <span class="f-tag">Ritual</span>
-        <span class="f-arrow">→</span>
+      <div class="carousel-nav">
+        <button class="carousel-nav-btn" id="carouselPrev">← Prev</button>
+        <button class="carousel-nav-btn" id="carouselNext">Next →</button>
       </div>
-      <div class="festival-row reveal" data-festival="wari">
-        <span class="f-num">02</span>
-        <span class="f-name">Wari Festival</span>
-        <span class="f-location">Pandharpur, Maharashtra</span>
-        <span class="f-tag">Cultural</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="ganesh">
-        <span class="f-num">03</span>
-        <span class="f-name">Ganesh Festival</span>
-        <span class="f-location">Mumbai, Maharashtra</span>
-        <span class="f-tag">Cultural</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="durga">
-        <span class="f-num">04</span>
-        <span class="f-name">Durga Puja Festival</span>
-        <span class="f-location">Kolkata, West Bengal</span>
-        <span class="f-tag">Cultural</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="theyyam">
-        <span class="f-num">05</span>
-        <span class="f-name">Theyyam Festival</span>
-        <span class="f-location">Kannur, Kerala</span>
-        <span class="f-tag">Ritual</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="widow_holi">
-        <span class="f-num">06</span>
-        <span class="f-name">Widow Holi</span>
-        <span class="f-location">Vrindavan, Uttar Pradesh</span>
-        <span class="f-tag">Cultural</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="mathura_holi">
-        <span class="f-num">07</span>
-        <span class="f-name">Mathura Holi</span>
-        <span class="f-location">Mathura, Uttar Pradesh</span>
-        <span class="f-tag">Cultural</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="raulane">
-        <span class="f-num">08</span>
-        <span class="f-name">Raulane Festival</span>
-        <span class="f-location">Maharashtra, India</span>
-        <span class="f-tag">Tribal</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="hornbill">
-        <span class="f-num">09</span>
-        <span class="f-name">Hornbill Festival</span>
-        <span class="f-location">Kisama, Nagaland</span>
-        <span class="f-tag">Tribal</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="thrissur">
-        <span class="f-num">10</span>
-        <span class="f-name">Thrissur Pooram Festival</span>
-        <span class="f-location">Thrissur, Kerala</span>
-        <span class="f-tag">Ritual</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="dahi_handi">
-        <span class="f-num">11</span>
-        <span class="f-name">Dahi Handi Festival</span>
-        <span class="f-location">Mumbai, Maharashtra</span>
-        <span class="f-tag">Cultural</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="dev_deepavali">
-        <span class="f-num">12</span>
-        <span class="f-name">Dev Deepavali Festival</span>
-        <span class="f-location">Varanasi, Uttar Pradesh</span>
-        <span class="f-tag">Spiritual</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="masan_holi">
-        <span class="f-num">13</span>
-        <span class="f-name">Masan Holi</span>
-        <span class="f-location">Varanasi, Uttar Pradesh</span>
-        <span class="f-tag">Ritual</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="bhootakola">
-        <span class="f-num">14</span>
-        <span class="f-name">Bhootakola Festival</span>
-        <span class="f-location">Tulunadu, Karnataka</span>
-        <span class="f-tag">Ritual</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="headhunter">
-        <span class="f-num">15</span>
-        <span class="f-name">Last Tattooed Headhunter</span>
-        <span class="f-location">Arunachal Pradesh</span>
-        <span class="f-tag">Tribal</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="losar">
-        <span class="f-num">16</span>
-        <span class="f-name">Losar Festival, Himachal</span>
-        <span class="f-location">Spiti Valley, Himachal</span>
-        <span class="f-tag">Cultural</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="dhuno_purano">
-        <span class="f-num">17</span>
-        <span class="f-name">Dhuno Porano Festival</span>
-        <span class="f-location">West Bengal, India</span>
-        <span class="f-tag">Spiritual</span>
-        <span class="f-arrow">→</span>
-      </div>
-      <div class="festival-row reveal" data-festival="kulasai">
-        <span class="f-num">18</span>
-        <span class="f-name">Kulasai Dasara Festival</span>
-        <span class="f-location">Kulasai, Tamil Nadu</span>
-        <span class="f-tag">Ritual</span>
-        <span class="f-arrow">→</span>
-      </div>
+      <p class="carousel-hint">Drag to spin &nbsp;·&nbsp; Click to step inside</p>
     </section>
 
     <section class="cta">
@@ -619,6 +668,12 @@
 
   <script src="script.js" defer></script>
 
+  <!-- ── Image fullscreen viewer ── -->
+  <div class="fest-fullscreen-overlay" id="festFullscreen">
+    <img class="fest-fullscreen-img" id="festFullscreenImg" src="" alt="">
+    <button class="fest-fullscreen-close" id="festFullscreenClose">✕ &nbsp; ESC</button>
+  </div>
+
   <!-- ── Festival full-screen overlay ── -->
   <div class="fest-overlay" id="festOverlay" aria-modal="true" role="dialog" aria-hidden="true">
     <button class="fest-close" id="festClose">✕ &nbsp;Close</button>
@@ -626,8 +681,7 @@
 
       <!-- Left: photo gallery -->
       <div class="fest-gallery" id="festGallery">
-        <div class="fest-gallery-main" id="festMainPhoto"></div>
-        <div class="fest-gallery-grid" id="festThumbGrid"></div>
+        <div id="festMainPhoto"></div>
       </div>
 
       <!-- Right: details -->
@@ -1036,21 +1090,42 @@
     /* ══════════════════════════════════════
        OVERLAY LOGIC
     ══════════════════════════════════════ */
-    const overlay    = document.getElementById('festOverlay');
-    const closeBtn   = document.getElementById('festClose');
-    const mainPhoto  = document.getElementById('festMainPhoto');
-    const thumbGrid  = document.getElementById('festThumbGrid');
-    const festTag    = document.getElementById('festTag');
-    const festName   = document.getElementById('festName');
+    const overlay     = document.getElementById('festOverlay');
+    const closeBtn    = document.getElementById('festClose');
+    const festTag     = document.getElementById('festTag');
+    const festName    = document.getElementById('festName');
     const festTagline = document.getElementById('festTagline');
-    const festDesc   = document.getElementById('festDesc');
-    const festMeta   = document.getElementById('festMeta');
+    const festDesc    = document.getElementById('festDesc');
+    const festMeta    = document.getElementById('festMeta');
+
+    let activeScrollTrack = null;
+    let festAutoStart     = null;
+
+    /* Fullscreen image viewer */
+    const fsOverlay = document.getElementById('festFullscreen');
+    const fsImg     = document.getElementById('festFullscreenImg');
+    const fsClose   = document.getElementById('festFullscreenClose');
+
+    function openFullscreen(src) {
+      fsImg.src = src;
+      fsOverlay.classList.add('open');
+      if (activeScrollTrack) activeScrollTrack.stop();
+    }
+
+    function closeFullscreen() {
+      fsOverlay.classList.remove('open');
+      if (festAutoStart) festAutoStart();
+    }
+
+    fsClose.addEventListener('click', closeFullscreen);
+    fsOverlay.addEventListener('click', function (e) {
+      if (e.target === fsOverlay) closeFullscreen();
+    });
 
     function openFestival(key) {
       const data = FESTIVALS[key];
       if (!data) return;
 
-      /* Populate details */
       festTag.textContent     = data.tag;
       festName.textContent    = data.name;
       festTagline.textContent = data.tagline;
@@ -1062,16 +1137,16 @@
           <span class="fest-meta-val">${m.value}</span>
         </div>`).join('');
 
-      /* Only real photos */
       const photos = data.photos.filter(p => p);
       const gallery = document.getElementById('festGallery');
       const inner   = document.querySelector('.fest-overlay-inner');
+      const mainPhoto = document.getElementById('festMainPhoto');
 
+      /* Stop any previous gallery */
+      if (activeScrollTrack) { activeScrollTrack.stop(); activeScrollTrack = null; }
       mainPhoto.innerHTML = '';
-      thumbGrid.innerHTML = '';
 
       if (photos.length === 0) {
-        /* No photos — hide gallery, single-column layout */
         gallery.style.display = 'none';
         inner.style.gridTemplateColumns = '1fr';
         inner.style.maxWidth = '720px';
@@ -1080,27 +1155,126 @@
         inner.style.gridTemplateColumns = '';
         inner.style.maxWidth = '';
 
-        /* Main photo */
-        const main = document.createElement('img');
-        main.src = photos[0];
-        main.alt = '';
-        main.loading = 'lazy';
-        mainPhoto.appendChild(main);
-
-        /* Thumbs — only if more than 1 photo */
-        const thumbs = photos.slice(1);
-        thumbGrid.style.display = thumbs.length ? '' : 'none';
-        thumbs.forEach(src => {
-          const wrap = document.createElement('div');
-          wrap.className = 'fest-gallery-thumb';
+        if (photos.length === 1) {
+          const mainDiv = document.createElement('div');
+          mainDiv.className = 'fest-gallery-main';
           const img = document.createElement('img');
-          img.src = src; img.alt = ''; img.loading = 'lazy';
-          wrap.appendChild(img);
-          thumbGrid.appendChild(wrap);
-        });
+          img.src = photos[0]; img.alt = ''; img.loading = 'lazy';
+          img.className = 'fest-gallery-main-img';
+          mainDiv.appendChild(img);
+          mainPhoto.appendChild(mainDiv);
+        } else {
+          /* Camera roll: big main image + nav arrows + filmstrip */
+          const mainDiv = document.createElement('div');
+          mainDiv.className = 'fest-gallery-main';
+
+          /* Two stacked images for true crossfade */
+          const imgBack = document.createElement('img');
+          imgBack.className = 'fest-gallery-main-img';
+          imgBack.src = photos[0]; imgBack.alt = '';
+          imgBack.style.zIndex = '1';
+          imgBack.style.opacity = '0';
+
+          const imgFront = document.createElement('img');
+          imgFront.className = 'fest-gallery-main-img';
+          imgFront.src = photos[0]; imgFront.alt = '';
+          imgFront.style.zIndex = '2';
+          imgFront.style.opacity = '1';
+
+          let front = imgFront, back = imgBack;
+
+          const prevBtn = document.createElement('button');
+          prevBtn.className = 'fest-gallery-nav-btn fest-gallery-prev';
+          prevBtn.innerHTML = '&#8592;';
+          prevBtn.setAttribute('aria-label', 'Previous');
+
+          const nextBtn = document.createElement('button');
+          nextBtn.className = 'fest-gallery-nav-btn fest-gallery-next';
+          nextBtn.innerHTML = '&#8594;';
+          nextBtn.setAttribute('aria-label', 'Next');
+
+          const counter = document.createElement('span');
+          counter.className = 'fest-gallery-counter';
+          counter.textContent = '1 / ' + photos.length;
+
+          /* Expand / fullscreen button */
+          const expandBtn = document.createElement('button');
+          expandBtn.className = 'fest-gallery-expand';
+          expandBtn.setAttribute('aria-label', 'View fullscreen');
+          expandBtn.innerHTML =
+            '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">' +
+            '<path d="M1 4V1h3M8 1h3v3M11 8v3H8M4 11H1V8"/></svg>';
+
+          mainDiv.appendChild(imgBack);
+          mainDiv.appendChild(imgFront);
+          mainDiv.appendChild(prevBtn);
+          mainDiv.appendChild(nextBtn);
+          mainDiv.appendChild(counter);
+          mainDiv.appendChild(expandBtn);
+
+          /* Filmstrip */
+          const filmstrip = document.createElement('div');
+          filmstrip.className = 'fest-filmstrip';
+
+          let currentIdx = 0;
+          let autoTimer  = null;
+
+          function startAuto() {
+            clearInterval(autoTimer);
+            autoTimer = setInterval(function () { showPhoto(currentIdx + 1); }, 3500);
+          }
+          function stopAuto() { clearInterval(autoTimer); autoTimer = null; }
+
+          festAutoStart     = startAuto;
+          activeScrollTrack = { stop: stopAuto };
+
+          const thumbs = photos.map(function (src, i) {
+            const t = document.createElement('img');
+            t.className = 'fest-thumb' + (i === 0 ? ' active' : '');
+            t.src = src; t.alt = ''; t.loading = 'lazy';
+            filmstrip.appendChild(t);
+            return t;
+          });
+
+          function showPhoto(idx) {
+            currentIdx = (idx + photos.length) % photos.length;
+
+            /* Crossfade: load new src on back layer, swap opacities */
+            back.src = photos[currentIdx];
+            back.style.opacity  = '1';
+            front.style.opacity = '0';
+            const tmp = front; front = back; back = tmp;
+
+            counter.textContent = (currentIdx + 1) + ' / ' + photos.length;
+            thumbs.forEach(function (t, i) {
+              t.classList.toggle('active', i === currentIdx);
+            });
+            thumbs[currentIdx].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+
+          thumbs.forEach(function (t, i) {
+            t.addEventListener('click', function () { showPhoto(i); startAuto(); });
+          });
+          prevBtn.addEventListener('click', function () { showPhoto(currentIdx - 1); startAuto(); });
+          nextBtn.addEventListener('click', function () { showPhoto(currentIdx + 1); startAuto(); });
+
+          /* Expand: open fullscreen, pause auto */
+          expandBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            openFullscreen(photos[currentIdx]);
+          });
+
+          /* Hover pauses auto-advance */
+          mainDiv.addEventListener('mouseenter', stopAuto);
+          mainDiv.addEventListener('mouseleave', startAuto);
+
+          startAuto();
+
+          mainPhoto.appendChild(mainDiv);
+          mainPhoto.appendChild(filmstrip);
+        }
       }
 
-      /* Open */
       overlay.setAttribute('aria-hidden', 'false');
       overlay.classList.add('open');
       overlay.scrollTop = 0;
@@ -1108,26 +1282,138 @@
     }
 
     function closeFestival() {
+      if (activeScrollTrack) { activeScrollTrack.stop(); activeScrollTrack = null; }
+      festAutoStart = null;
       overlay.classList.remove('open');
       overlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
 
-    /* Row clicks */
-    document.querySelectorAll('.festival-row[data-festival]').forEach(row => {
-      row.addEventListener('click', () => openFestival(row.dataset.festival));
-    });
-
     /* Close button + ESC */
     closeBtn.addEventListener('click', closeFestival);
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeFestival();
+      if (e.key === 'Escape') {
+        if (fsOverlay.classList.contains('open')) { closeFullscreen(); return; }
+        closeFestival();
+      }
     });
 
     /* Click outside content closes */
     overlay.addEventListener('click', e => {
       if (e.target === overlay) closeFestival();
     });
+
+  /* ── 3D Festival Carousel Engine ── */
+  (function () {
+    const CARDS = [
+      { key: 'theyyam',      name: 'Theyyam',           loc: 'Kannur, Kerala',          tag: 'Ritual',    src: 'assets/Festival photos/Theyyam/DSC08815.JPG' },
+      { key: 'masan_holi',   name: 'Masan Holi',         loc: 'Varanasi, UP',            tag: 'Ritual',    src: 'assets/Festival photos/Masaan holi/0BC524FB-5D7F-4A3E-8C6A-5068E0323119.jpg' },
+      { key: 'kulasai',      name: 'Kulasai Dasara',     loc: 'Kulasai, Tamil Nadu',     tag: 'Ritual',    src: 'assets/Festival photos/Kulasai dasara/IMG_2717_jpg.JPG' },
+      { key: 'wari',         name: 'Wari Festival',      loc: 'Pandharpur, Maharashtra', tag: 'Cultural',  src: 'assets/Festival photos/wari festival/DSC04355.JPG' },
+      { key: 'bhootakola',   name: 'Bhootakola',         loc: 'Tulunadu, Karnataka',     tag: 'Ritual',    src: 'assets/Festival photos/bhootakola/DSC_0074.jpg' },
+      { key: 'losar',        name: 'Losar Festival',     loc: 'Spiti Valley, Himachal',  tag: 'Cultural',  src: 'assets/Festival photos/Losar festival/DSC_0019.jpg' },
+      { key: 'thrissur',     name: 'Thrissur Pooram',    loc: 'Thrissur, Kerala',        tag: 'Ritual',    src: 'assets/Festival photos/Thrissur pooram/DSC00164.JPG' },
+      { key: 'hornbill',     name: 'Hornbill Festival',  loc: 'Kisama, Nagaland',        tag: 'Tribal',    src: 'assets/Festival photos/Hornbill festival/DSC00035.JPG' },
+      { key: 'durga',        name: 'Durga Puja',         loc: 'Kolkata, West Bengal',    tag: 'Cultural',  src: 'assets/Festival photos/durga puja/DSC03178.JPG' },
+      { key: 'widow_holi',   name: 'Widow Holi',         loc: 'Vrindavan, UP',           tag: 'Cultural',  src: 'assets/Festival photos/Widow holi/DSC_0032.jpg' },
+      { key: 'ganesh',       name: 'Ganesh Festival',    loc: 'Mumbai, Maharashtra',     tag: 'Cultural',  src: 'assets/Festival photos/Ganesh festival/DSC_0439.JPG' },
+      { key: 'dahi_handi',   name: 'Dahi Handi',         loc: 'Mumbai, Maharashtra',     tag: 'Cultural',  src: 'assets/Festival photos/Dahi handi/DSC01223.JPG' },
+      { key: 'faguli',       name: 'Faguli Festival',    loc: 'Chamoli, Uttarakhand',    tag: 'Ritual',    src: 'assets/Festival photos/faguli festival/DSC04985.JPG' },
+      { key: 'headhunter',   name: 'Last Headhunter',    loc: 'Arunachal Pradesh',       tag: 'Tribal',    src: 'assets/Festival photos/last tattooted headhunters/IMG_2720.PNG' },
+      { key: 'dhuno_purano', name: 'Dhuno Porano',       loc: 'West Bengal, India',      tag: 'Spiritual', src: 'assets/Festival photos/Dhuno porano/DSC03698.JPG' },
+    ];
+
+    const scene = document.getElementById('carouselScene');
+    const wrap  = document.getElementById('carouselWrap');
+    if (!scene || !wrap) return;
+
+    const N      = CARDS.length;
+    const SLOT   = 220;
+    const RADIUS = Math.round(SLOT * N / (2 * Math.PI));
+    const ANGLE  = 360 / N;
+
+    /* Rotation state — declared before card build so handlers can close over it */
+    let rot      = 0;
+    let target   = 0;
+    let dragging = false;
+    let dragX    = 0;
+    let dragged  = false;
+    let hovered  = false;   /* long-hover pause flag */
+    const AUTO   = 0.1;
+
+    /* Build cards */
+    CARDS.forEach(function (d, i) {
+      const ang  = ANGLE * i;
+      const card = document.createElement('div');
+      card.className = 'carousel-card';
+      card.dataset.key = d.key;
+      card.style.transform = `rotateY(${ang}deg) translateZ(${RADIUS}px)`;
+      card.innerHTML =
+        `<img src="${d.src}" alt="${d.name}" loading="lazy">` +
+        `<div class="carousel-card-overlay">` +
+          `<span class="carousel-card-tag">${d.tag}</span>` +
+          `<span class="carousel-card-name">${d.name}</span>` +
+          `<span class="carousel-card-loc">${d.loc}</span>` +
+        `</div>`;
+      /* Long hover (700ms) pauses the spin; mouseleave resumes */
+      let hoverTimer;
+      card.addEventListener('mouseenter', function () {
+        hoverTimer = setTimeout(function () { hovered = true; }, 700);
+      });
+      card.addEventListener('mouseleave', function () {
+        clearTimeout(hoverTimer);
+        hovered = false;
+      });
+      scene.appendChild(card);
+    });
+
+    function applyRot(r) {
+      scene.style.transform = `rotateY(${r}deg)`;
+    }
+    applyRot(0);
+
+    (function rafLoop() {
+      if (!dragging && !hovered) target += AUTO;
+      rot += (target - rot) * 0.055;
+      applyRot(rot);
+      requestAnimationFrame(rafLoop);
+    })();
+
+    /* Pointer drag — use window listeners so no capture needed */
+    wrap.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      dragged  = false;
+      dragX    = e.clientX;
+    });
+
+    window.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      const dx = e.clientX - dragX;
+      if (Math.abs(dx) > 4) dragged = true;
+      target -= dx * 0.3;
+      dragX = e.clientX;
+    });
+
+    window.addEventListener('pointerup', function () {
+      if (!dragging) return;
+      dragging = false;
+      setTimeout(function () { dragged = false; }, 80);
+    });
+
+    /* Click delegation on wrap (covers touch / pointer-click) */
+    wrap.addEventListener('click', function (e) {
+      if (dragged) return;
+      const c = e.target.closest('.carousel-card');
+      if (c && c.dataset.key) openFestival(c.dataset.key);
+    });
+
+    /* Prev / Next buttons */
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    if (prevBtn) prevBtn.addEventListener('click', () => { target -= ANGLE; });
+    if (nextBtn) nextBtn.addEventListener('click', () => { target += ANGLE; });
+
+  })();
   </script>
 </body>
 </html>
