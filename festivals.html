@@ -160,11 +160,17 @@
       object-fit: cover;
       display: block;
       pointer-events: none;
-      filter: grayscale(0.55) brightness(0.75);
+      filter: none;
       transition: filter 0.4s ease;
     }
 
-    .carousel-card:hover img { filter: grayscale(0) brightness(1); }
+    /* When the carousel is being hovered, tint all cards... */
+    .carousel-scene-wrap:hover .carousel-card img {
+      filter: grayscale(0.55) brightness(0.72);
+    }
+
+    /* ...except the one being hovered — restore original colors */
+    .carousel-card:hover img { filter: none; }
 
     .carousel-card-overlay {
       position: absolute;
