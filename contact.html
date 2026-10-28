@@ -14,14 +14,14 @@
   <meta property="og:site_name"   content="Roll No. 24" />
   <meta property="og:title"       content="Contact Swarnali Chakraborty — Roll No. 24 Photography" />
   <meta property="og:description" content="Get in touch with Swarnali Chakraborty to discuss festival coverage, documentary films, brand films and commercial photography projects." />
-  <meta property="og:image"       content="https://travelwithswarnali.in/assets/NAV01978.JPG" />
+  <meta property="og:image"       content="https://travelwithswarnali.in/assets/web/NAV01978.JPG" />
   <meta property="og:locale"      content="en_IN" />
 
   <!-- Twitter / X Cards -->
   <meta name="twitter:card"        content="summary_large_image" />
   <meta name="twitter:title"       content="Contact Swarnali Chakraborty — Roll No. 24 Photography" />
   <meta name="twitter:description" content="Get in touch with Swarnali Chakraborty to discuss festival coverage, documentary films, brand films and commercial photography projects." />
-  <meta name="twitter:image"       content="https://travelwithswarnali.in/assets/NAV01978.JPG" />
+  <meta name="twitter:image"       content="https://travelwithswarnali.in/assets/web/NAV01978.JPG" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -221,20 +221,150 @@
       color: oklch(0.4 0.015 60);
     }
 
+    /* ══════════════════════════════════════════════
+       CONTACT OPENER — short global map animation
+       A wireframe globe: rings draw, routes sweep,
+       pins land. Runs once, then settles.
+    ══════════════════════════════════════════════ */
+    .contact-hero {
+      position: relative;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 156px 40px 0;
+      min-height: 46vh;
+      display: flex;
+      align-items: center;
+    }
+
+    /* ── Globe as a fixed, full-screen backdrop ── */
+    .cg-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    /* Nudged right and up so the marker cluster clears the headline */
+    .cg-wrap {
+      position: relative;
+      width: min(104vh, 104vw);
+      max-width: none;
+      transform: translate(14%, -6%);
+    }
+    .cg-svg  { width: 100%; height: auto; display: block; overflow: visible; }
+
+    /* Everything else floats above it */
+    .site-header, main, .site-footer { position: relative; z-index: 2; }
+
+    /* Dimmed for background duty — the routes stay the brightest thing */
+    .cg-ocean  { fill: oklch(0.145 0.014 52); stroke: rgba(212,162,73,0.16); stroke-width: 0.7; }
+    .cg-land   { fill: rgba(212,162,73,0.085); stroke: rgba(212,162,73,0.15); stroke-width: 0.35; }
+    .cg-grat   { fill: none; stroke: rgba(212,162,73,0.05); stroke-width: 0.3; }
+    .cg-arc    { fill: none; stroke: var(--primary); stroke-width: 0.65; stroke-linecap: round; opacity: 0.8; }
+    .cg-pin    { fill: var(--primary); }
+    .cg-pin-halo { fill: none; stroke: var(--primary); stroke-width: 0.45; opacity: 0.45; }
+    .cg-hub    { fill: var(--primary); }
+    .cg-hub-ring { fill: none; stroke: var(--primary); stroke-width: 0.55; opacity: 0.5; }
+    .cg-label {
+      font-family: var(--font-mono); font-size: 5px;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      fill: oklch(0.80 0.02 70);
+    }
+
+    /* Veil: pools behind the headline on the left, and thickens toward the
+       bottom where the form sits, while leaving the upper right — the
+       marker cluster — mostly clear. */
+    .cg-veil {
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        radial-gradient(ellipse 46% 38% at 22% 36%,
+          oklch(0.13 0.018 50 / 0.94) 0%,
+          oklch(0.13 0.018 50 / 0.62) 52%,
+          transparent 82%),
+        linear-gradient(to bottom,
+          var(--bg) 0%,
+          oklch(0.13 0.018 50 / 0.12) 17%,
+          oklch(0.13 0.018 50 / 0.52) 50%,
+          oklch(0.13 0.018 50 / 0.88) 74%,
+          var(--bg) 100%);
+    }
+
+
+    /* The globe settles in; the rotation itself is driven in JS so the
+       routes and markers stay geographically correct as it turns. */
+    .cg-svg { opacity: 1; }
+    .cg-on .cg-svg { opacity: 0; transform: scale(0.94); }
+    .cg-on.cg-play .cg-svg {
+      opacity: 1; transform: none;
+      transition: opacity 0.9s ease, transform 1.1s cubic-bezier(0.23,1,0.32,1);
+    }
+    .cg-routes, .cg-markers { opacity: 1; }
+    .cg-on .cg-routes, .cg-on .cg-markers { opacity: 0; }
+    .cg-on.cg-play .cg-routes  { opacity: 1; transition: opacity 0.7s ease 0.55s; }
+    .cg-on.cg-play .cg-markers { opacity: 1; transition: opacity 0.7s ease 0.75s; }
+
+    .contact-lede {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.7vw, 1.35rem);
+      font-weight: 300;
+      font-style: italic;
+      color: oklch(0.68 0.02 70);
+      line-height: 1.6;
+      max-width: 46ch;
+      margin-top: 24px;
+    }
+
+    .contact-hero .contact-heading { margin-bottom: 0; }
+
     @media (max-width: 1024px) {
       .contact-wrap {
         grid-template-columns: 1fr;
         gap: 64px;
         padding: 120px 24px 80px;
       }
+      .contact-hero {
+        padding: 124px 24px 0;
+        min-height: 38vh;
+      }
+      .cg-wrap { width: min(118vh, 118vw); }
     }
 
     @media (max-width: 768px) {
       .form-row { grid-template-columns: 1fr; }
     }
+
+    /* Reduced motion: JS never adds .cg-on, so the globe simply renders
+       once, un-faded and stationary. Belt-and-braces here too. */
+    @media (prefers-reduced-motion: reduce) {
+      .cg-svg, .cg-routes, .cg-markers {
+        opacity: 1 !important; transform: none !important; transition: none !important;
+      }
+    }
   </style>
 </head>
 <body>
+
+  <!-- Globe backdrop — fixed behind the whole page -->
+  <div class="cg-bg" id="cgBg" aria-hidden="true">
+    <div class="cg-wrap" id="cgWrap">
+      <svg class="cg-svg" id="cgSvg" viewBox="0 0 400 400" fill="none"
+           role="img" aria-label="Rotating globe marking places shot: India, Sri Lanka, Thailand, Vietnam and Indonesia, each linked to India.">
+        <defs>
+          <clipPath id="cgClip"><circle cx="200" cy="200" r="170"/></clipPath>
+        </defs>
+        <circle class="cg-ocean" cx="200" cy="200" r="170"/>
+        <g clip-path="url(#cgClip)">
+          <path class="cg-land" id="cgLand" d=""/>
+          <path class="cg-grat" id="cgGrat" d=""/>
+          <g class="cg-routes"><path class="cg-arc" id="cgArcs" d=""/></g>
+          <g class="cg-markers" id="cgMarkers"></g>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="cg-veil" aria-hidden="true"></div>
 
   <div id="cursorCircle" class="cursor-circle"></div>
 
@@ -278,14 +408,25 @@
   </header>
 
   <main>
+
+    <!-- ═══════════ OPENER: global map animation ═══════════ -->
+    <section class="contact-hero">
+      <div class="contact-hero-copy">
+        <p class="contact-info-label">Get in touch</p>
+        <h1 class="contact-heading">
+          Available for 2026<br>bookings <em>globally.</em>
+        </h1>
+        <p class="contact-lede">
+          International projects and collaborations welcome — festival
+          coverage, brand films and commercial campaigns.
+        </p>
+      </div>
+    </section>
+
     <div class="contact-wrap">
 
       <!-- Left column: info -->
       <div class="contact-info reveal">
-        <p class="contact-info-label">Get in touch</p>
-        <h1 class="contact-heading">
-          Let's make<br>something<br><em>together.</em>
-        </h1>
 
         <div class="contact-details">
           <div class="detail-row">
@@ -308,7 +449,7 @@
 
         <div class="availability-badge">
           <span class="avail-dot"></span>
-          Available for 2026 bookings
+          Open for international projects
         </div>
       </div>
 
@@ -389,6 +530,197 @@
 
   <script src="script.js" defer></script>
   <script>
+    /* ══════════════════════════════════════════════════════════
+       CONTACT OPENER — rotating orthographic globe
+       Real coastlines (Natural Earth 110m, simplified) projected
+       every frame. Markers sit at true coordinates and the routes
+       are great circles, so anything on the far side genuinely
+       disappears as the globe turns.
+    ══════════════════════════════════════════════════════════ */
+    (function () {
+      var wrap = document.getElementById('cgWrap');
+      var svg  = document.getElementById('cgSvg');
+      if (!wrap || !svg) return;
+
+      var R = 170, CX = 200, CY = 200;
+      var PHI0 = 10 * Math.PI / 180;        /* camera tilt */
+      var lam0 = 92 * Math.PI / 180;        /* start centred on her region */
+
+      /* Hub first, then the places linked back to it */
+      /* dx/dy/anchor keep the labels from colliding — Thailand and
+         Vietnam sit only ~7 degrees apart, so they push opposite ways. */
+      var HUB = { name: 'India', lat: 22.5, lon: 79.0, dx: -13, dy: -8, anchor: 'end' };
+      var DESTS = [
+        { name: 'Sri Lanka', lat: 7.9,  lon: 80.8,  dx: -12, dy: 11, anchor: 'end' },
+        { name: 'Thailand',  lat: 15.0, lon: 101.0, dx: -11, dy: -7, anchor: 'end' },
+        { name: 'Vietnam',   lat: 18.0, lon: 105.8, dx: 12,  dy: -5, anchor: 'start' },
+        { name: 'Indonesia', lat: -6.2, lon: 106.8, dx: 12,  dy: 11, anchor: 'start' }
+      ];
+
+      var landEl = document.getElementById('cgLand');
+      var gratEl = document.getElementById('cgGrat');
+      var arcsEl = document.getElementById('cgArcs');
+      var markEl = document.getElementById('cgMarkers');
+      var NS = 'http://www.w3.org/2000/svg';
+
+      var sinP0 = Math.sin(PHI0), cosP0 = Math.cos(PHI0);
+
+      /* lat/lon -> screen, plus cosc: >0 means facing us */
+      function project(lon, lat) {
+        var la = lat * Math.PI / 180, lo = lon * Math.PI / 180;
+        var dl = lo - lam0;
+        var sinLa = Math.sin(la), cosLa = Math.cos(la);
+        var cosDl = Math.cos(dl), sinDl = Math.sin(dl);
+        var cosc = sinP0 * sinLa + cosP0 * cosLa * cosDl;
+        return [
+          CX + R * cosLa * sinDl,
+          CY - R * (cosP0 * sinLa - sinP0 * cosLa * cosDl),
+          cosc
+        ];
+      }
+
+      /* Build a path, breaking it wherever the line goes round the back */
+      function pathFrom(rings) {
+        var d = '', i, j, r, p, pen;
+        for (i = 0; i < rings.length; i++) {
+          r = rings[i]; pen = false;
+          for (j = 0; j < r.length; j++) {
+            p = project(r[j][0], r[j][1]);
+            if (p[2] > 0) {
+              d += (pen ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1);
+              pen = true;
+            } else { pen = false; }
+          }
+        }
+        return d;
+      }
+
+      /* Graticule every 30 degrees */
+      var GRAT = (function () {
+        var g = [], lon, lat, line;
+        for (lon = -180; lon < 180; lon += 30) {
+          line = [];
+          for (lat = -80; lat <= 80; lat += 4) line.push([lon, lat]);
+          g.push(line);
+        }
+        for (lat = -60; lat <= 60; lat += 30) {
+          line = [];
+          for (lon = -180; lon <= 180; lon += 4) line.push([lon, lat]);
+          g.push(line);
+        }
+        return g;
+      })();
+
+      /* Great-circle route between two points, as lat/lon samples */
+      function greatCircle(a, b, steps) {
+        function toVec(p) {
+          var la = p.lat * Math.PI / 180, lo = p.lon * Math.PI / 180;
+          return [Math.cos(la) * Math.cos(lo), Math.cos(la) * Math.sin(lo), Math.sin(la)];
+        }
+        var v1 = toVec(a), v2 = toVec(b);
+        var dot = Math.max(-1, Math.min(1, v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2]));
+        var om = Math.acos(dot), out = [], t, s1, s2, x, y, z, k;
+        if (om < 1e-6) return [[a.lon, a.lat]];
+        for (k = 0; k <= steps; k++) {
+          t = k / steps;
+          s1 = Math.sin((1 - t) * om) / Math.sin(om);
+          s2 = Math.sin(t * om) / Math.sin(om);
+          x = s1*v1[0] + s2*v2[0]; y = s1*v1[1] + s2*v2[1]; z = s1*v1[2] + s2*v2[2];
+          out.push([
+            Math.atan2(y, x) * 180 / Math.PI,
+            Math.asin(Math.max(-1, Math.min(1, z))) * 180 / Math.PI
+          ]);
+        }
+        return out;
+      }
+
+      var ROUTES = DESTS.map(function (d) { return greatCircle(HUB, d, 48); });
+      var LAND = null;
+
+      /* Markers are real SVG nodes so labels can ride along */
+      var markers = [HUB].concat(DESTS).map(function (pt, i) {
+        var g = document.createElementNS(NS, 'g');
+        var halo = document.createElementNS(NS, 'circle');
+        halo.setAttribute('class', i === 0 ? 'cg-hub-ring' : 'cg-pin-halo');
+        halo.setAttribute('r', i === 0 ? '10' : '7');
+        var dot = document.createElementNS(NS, 'circle');
+        dot.setAttribute('class', i === 0 ? 'cg-hub' : 'cg-pin');
+        dot.setAttribute('r', i === 0 ? '4.5' : '3');
+        var tx = document.createElementNS(NS, 'text');
+        tx.setAttribute('class', 'cg-label');
+        tx.setAttribute('text-anchor', pt.anchor || 'start');
+        tx.textContent = pt.name;
+        g.appendChild(halo); g.appendChild(dot); g.appendChild(tx);
+        markEl.appendChild(g);
+        return { pt: pt, g: g, halo: halo, dot: dot, tx: tx, hub: i === 0 };
+      });
+
+      function draw() {
+        if (LAND) landEl.setAttribute('d', pathFrom(LAND));
+        gratEl.setAttribute('d', pathFrom(GRAT));
+        arcsEl.setAttribute('d', pathFrom(ROUTES));
+
+        markers.forEach(function (m) {
+          var p = project(m.pt.lon, m.pt.lat);
+          if (p[2] <= 0.02) { m.g.setAttribute('opacity', '0'); return; }
+          var fade = Math.min(1, p[2] / 0.28);        /* soften near the limb */
+          m.g.setAttribute('opacity', fade.toFixed(3));
+          m.halo.setAttribute('cx', p[0]); m.halo.setAttribute('cy', p[1]);
+          m.dot.setAttribute('cx', p[0]);  m.dot.setAttribute('cy', p[1]);
+          m.tx.setAttribute('x', p[0] + (m.pt.dx || 11));
+          m.tx.setAttribute('y', p[1] + (m.pt.dy || 3.5));
+          m.tx.setAttribute('opacity', p[2] > 0.42 ? '1' : '0');
+        });
+      }
+
+      /* ── Load coastlines; the globe still works if this fails ── */
+      if (window.fetch) {
+        fetch('assets/land.json')
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (j) { if (j) { LAND = j; draw(); } })
+          .catch(function () { /* graticule-only globe is a fine fallback */ });
+      }
+
+      var reduce = false;
+      try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+
+      draw();
+
+      if (reduce) return;                 /* static globe, correctly drawn */
+
+      wrap.classList.add('cg-on');
+      var spinning = false, last = 0;
+      var SPEED = (2 * Math.PI) / 72000;  /* one turn per 72s */
+
+      function frame(ts) {
+        if (!spinning) return;
+        if (!last) last = ts;
+        var dt = ts - last;
+        if (dt > 28) {                    /* ~30fps is plenty for this */
+          lam0 += SPEED * dt;
+          last = ts;
+          draw();
+        }
+        requestAnimationFrame(frame);
+      }
+
+      function play() {
+        wrap.classList.add('cg-play');
+        if (spinning) return;
+        spinning = true; last = 0;
+        requestAnimationFrame(frame);
+      }
+
+      if (!('IntersectionObserver' in window)) { play(); return; }
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { play(); }
+          else { spinning = false; last = 0; }   /* idle when off-screen */
+        });
+      }, { threshold: 0.2 });
+      obs.observe(wrap);
+    })();
+
     function handleSubmit(e) {
       e.preventDefault();
       const btn = e.target.querySelector('.submit-btn');

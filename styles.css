@@ -852,3 +852,44 @@ body::after {
   html, body, a, button { cursor: auto; }
   .cursor-circle { display: none !important; }
 }
+
+/* ═══════════════════════════════════════════════════
+   IMAGE LOADING — smooth, non-blocking swap-in
+   Applied only to images the loader registers (script.js),
+   so anything with its own opacity animation is untouched.
+   ═══════════════════════════════════════════════════ */
+.img-fade {
+  opacity: 0;
+  transition: opacity 0.55s ease;
+}
+.img-fade.img-ready  { opacity: 1; }
+/* A failed image stays invisible — the container tone shows through.
+   It must never hold up layout, animation or interaction. */
+.img-fade.img-failed { opacity: 0; }
+
+/* Subtle shimmer on the image's container while it fetches */
+.is-img-loading { position: relative; }
+.is-img-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(240, 225, 200, 0.045) 50%,
+    transparent 80%
+  );
+  background-size: 200% 100%;
+  animation: imgShimmer 1.5s linear infinite;
+}
+@keyframes imgShimmer {
+  from { background-position:  100% 0; }
+  to   { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img-fade { transition: none; }
+  .is-img-loading::after { animation: none; opacity: 0.4; }
+}

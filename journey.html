@@ -3,24 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Journey — Roll No. 24 · Photography by Swarnali Chakraborty</title>
-  <meta name="description" content="The photographic journey of Swarnali Chakraborty — from first frame to here. A timeline of documentary photography across India and the world." />
+  <title>Marketing Journey — Roll No. 24 · Swarnali Chakraborty</title>
+  <meta name="description" content="The marketing journey of Swarnali Chakraborty — Rapido, Unacademy, S.P. Retail Ventures, Exploro Club and Scapia, mapped as one connected route." />
   <link rel="canonical" href="https://travelwithswarnali.in/journey.html" />
 
-  <!-- Open Graph -->
   <meta property="og:type"        content="website" />
   <meta property="og:url"         content="https://travelwithswarnali.in/journey.html" />
   <meta property="og:site_name"   content="Roll No. 24" />
-  <meta property="og:title"       content="Journey — Roll No. 24 · Photography by Swarnali Chakraborty" />
-  <meta property="og:description" content="The photographic journey of Swarnali Chakraborty — from first frame to here. A timeline of documentary photography across India and the world." />
-  <meta property="og:image"       content="https://travelwithswarnali.in/assets/NAV01978.JPG" />
+  <meta property="og:title"       content="Marketing Journey — Roll No. 24 · Swarnali Chakraborty" />
+  <meta property="og:description" content="Rapido, Unacademy, S.P. Retail Ventures, Exploro Club and Scapia — one connected career map." />
+  <meta property="og:image"       content="https://travelwithswarnali.in/assets/web/NAV01978.JPG" />
   <meta property="og:locale"      content="en_IN" />
 
-  <!-- Twitter / X Cards -->
   <meta name="twitter:card"        content="summary_large_image" />
-  <meta name="twitter:title"       content="Journey — Roll No. 24 · Photography by Swarnali Chakraborty" />
-  <meta name="twitter:description" content="The photographic journey of Swarnali Chakraborty — from first frame to here. A timeline of documentary photography across India and the world." />
-  <meta name="twitter:image"       content="https://travelwithswarnali.in/assets/NAV01978.JPG" />
+  <meta name="twitter:title"       content="Marketing Journey — Roll No. 24 · Swarnali Chakraborty" />
+  <meta name="twitter:description" content="Rapido, Unacademy, S.P. Retail Ventures, Exploro Club and Scapia — one connected career map." />
+  <meta name="twitter:image"       content="https://travelwithswarnali.in/assets/web/NAV01978.JPG" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,315 +27,389 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
-  :root {
-    --card-bg:    oklch(0.14 0.018 50);
-    --line:       rgba(212, 162, 73, 0.12);
-    --line-bright:rgba(212, 162, 73, 0.35);
+  /* ══════════════════════════════════════════════════════════
+     MARKETING JOURNEY — one 2.5D connected career map.
+     Nodes and connector paths are both generated from a single
+     data array in JS, so geometry can never drift apart.
+     Depth is faked with scale/blur/brightness over a perspective
+     floor: it reads dimensional while staying flat SVG + CSS.
+  ══════════════════════════════════════════════════════════ */
+  .mj {
+    --mj-ink:   #F3EBDD;
+    --mj-amber: var(--primary);
+    --mj-muted: #A99B8B;
+    --mj-rule:  #30251D;
   }
 
-  /* ═══ SCROLL RUNWAY ═══ */
-  .scroll-runway {
-    height: 700vh;
-    position: relative;
+  /* ── Scroll runway: static by default so no-JS / reduced-motion
+        visitors get the whole map at rest, not an empty scroll trap ── */
+  .jmap-runway { position: relative; height: auto; }
+  .jmap-stage {
+    position: static; width: 100%;
+    padding: 90px 0 70px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  html.js:not(.reduce-motion) .jmap-runway { height: 620vh; }
+  html.js:not(.reduce-motion) .jmap-stage {
+    position: sticky; top: 0;
+    height: 100vh; padding: 0; overflow: hidden;
   }
 
-  .pinned-scene {
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /* ── Opening title ── */
+  .jmap-title {
+    position: static; z-index: 8; text-align: center;
+    padding: 0 28px; margin-bottom: 48px; pointer-events: none;
+    will-change: opacity, transform;
   }
-
-  /* ═══ PERSPECTIVE GRID ═══ */
-  .grid-container {
-    position: absolute;
-    inset: 0;
-    perspective: 900px;
-    overflow: hidden;
-  }
-
-  .grid-plane {
-    position: absolute;
-    width: 200%; height: 200%;
-    left: -50%; top: 10%;
-    transform: rotateX(55deg);
-    transform-origin: center top;
-    opacity: 0;
-    transition: opacity 1.2s ease;
-  }
-  .grid-plane.visible { opacity: 1; }
-  .grid-plane svg { width: 100%; height: 100%; }
-
-  .vanish-lines {
-    position: absolute; inset: 0;
-    opacity: 0; transition: opacity 1s ease 0.3s;
-  }
-  .vanish-lines.visible { opacity: 1; }
-
-  .vanish-line {
-    position: absolute;
-    transform-origin: 50% 45%;
-    width: 200%; left: -50%; top: 45%;
-    height: 1px; background: var(--line);
-  }
-
-  /* ═══ HEADLINE ═══ */
-  .headline-container {
-    position: relative; z-index: 10;
-    text-align: center; pointer-events: none; padding: 0 24px;
-  }
-
-  .headline {
-    font-family: var(--font-display); font-weight: 400;
-    font-size: clamp(3rem, 8vw, 7.5rem);
-    line-height: 1.0; letter-spacing: -0.02em;
-  }
-
-  .headline .word {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(50px) scale(0.95);
-    filter: blur(8px);
-    transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
-                transform 0.8s cubic-bezier(0.23, 1, 0.32, 1),
-                filter 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-    margin: 0 0.12em;
-  }
-  .headline .word.visible {
-    opacity: 1; transform: translateY(0) scale(1); filter: blur(0);
-  }
-  .headline .word.italic { font-style: italic; color: var(--primary); }
-  .headline .break { display: block; }
-
-  .sub-tag {
+  html.js:not(.reduce-motion) .jmap-title { position: absolute; margin-bottom: 0; }
+  .jmap-eyebrow {
     font-family: var(--font-mono); font-size: 10px;
-    letter-spacing: 0.35em; text-transform: uppercase; color: var(--primary);
-    margin-top: 28px; opacity: 0; transform: translateY(20px);
-    transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--mj-amber); display: block; margin-bottom: 16px;
   }
-  .sub-tag.visible { opacity: 1; transform: translateY(0); }
-
-  /* ═══ FLOATING CARDS ═══ */
-  .floating-card {
-    position: absolute; border-radius: 14px; overflow: hidden;
-    background: var(--card-bg);
-    border: 1px solid rgba(212, 162, 73, 0.08);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03) inset;
-    opacity: 0;
-    transition: opacity 1s cubic-bezier(0.23,1,0.32,1),
-                transform 1.2s cubic-bezier(0.23,1,0.32,1);
-    z-index: 5; will-change: transform, opacity;
-  }
-  .floating-card.visible { opacity: 1; }
-
-  .card-brand {
-    width: clamp(180px, 18vw, 260px); top: 16%; left: 8%;
-    transform: translate(-80px,60px) rotate(-8deg) rotateY(15deg);
-  }
-  .card-brand.visible { transform: translate(0,0) rotate(-4deg) rotateY(5deg); }
-
-  .card-festival {
-    width: clamp(160px, 16vw, 230px); top: 12%; right: 6%;
-    transform: translate(80px,60px) rotate(12deg) rotateY(-15deg);
-  }
-  .card-festival.visible { transform: translate(0,0) rotate(6deg) rotateY(-5deg); }
-
-  .card-marketplace {
-    width: clamp(220px, 22vw, 320px); top: 22%; left: 50%;
-    transform: translateX(-50%) translateY(80px) scale(0.9); z-index: 8;
-  }
-  .card-marketplace.visible { transform: translateX(-50%) translateY(0) scale(1); }
-
-  .card-stats {
-    width: clamp(200px, 19vw, 270px); bottom: 18%; left: 6%;
-    transform: translate(-60px,40px) rotate(4deg);
-  }
-  .card-stats.visible { transform: translate(0,0) rotate(2deg); }
-
-  .card-film {
-    width: clamp(170px, 17vw, 240px); bottom: 12%; right: 5%;
-    transform: translate(80px,40px) rotate(-6deg) rotateY(-10deg);
-  }
-  .card-film.visible { transform: translate(0,0) rotate(-3deg) rotateY(-3deg); }
-
-  .card-img {
-    width: 100%; aspect-ratio: 4/5;
-    background-size: cover; background-position: center; position: relative;
-  }
-  .card-img-wide {
-    width: 100%; aspect-ratio: 16/10;
-    background-size: cover; background-position: center; position: relative;
-  }
-  .card-body { padding: 14px 16px; }
-  .card-body h4 {
-    font-family: var(--font-display); font-size: 18px;
-    font-weight: 400; line-height: 1.3; margin-bottom: 4px;
-  }
-  .card-body p {
-    font-family: var(--font-mono); font-size: 9px;
-    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
-  }
-
-  /* Stat badges */
-  .stat-badge {
-    position: absolute; padding: 6px 12px; border-radius: 8px;
-    font-family: var(--font-mono); font-size: 11px;
-    font-weight: 500; letter-spacing: 0.02em; white-space: nowrap;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-    opacity: 0;
-    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.23,1,0.32,1);
-    z-index: 15;
-  }
-  .stat-badge.visible { opacity: 1; }
-
-  .badge-1 { background: var(--primary); color: var(--bg); top: 30%; left: 30%; transform: translate(-20px,20px) scale(0.8); }
-  .badge-1.visible { transform: translate(0,0) scale(1); }
-
-  .badge-2 { background: oklch(0.15 0.018 50/0.9); border: 1px solid rgba(212,162,73,0.2); color: var(--fg); top: 55%; right: 18%; transform: translate(20px,20px) scale(0.8); }
-  .badge-2.visible { transform: translate(0,0) scale(1); }
-
-  .badge-3 { background: oklch(0.15 0.018 50/0.9); border: 1px solid rgba(212,162,73,0.2); color: var(--primary); bottom: 30%; left: 28%; transform: translate(-15px,15px) scale(0.8); }
-  .badge-3.visible { transform: translate(0,0) scale(1); }
-
-  .badge-4 { background: var(--primary); color: var(--bg); bottom: 22%; right: 28%; transform: translate(15px,10px) scale(0.8); }
-  .badge-4.visible { transform: translate(0,0) scale(1); }
-
-  .card-pill {
-    display: inline-block; padding: 5px 12px; border-radius: 20px;
-    font-family: var(--font-mono); font-size: 9px;
-    letter-spacing: 0.1em; text-transform: uppercase; margin-top: 8px;
-  }
-  .pill-gold { background: rgba(212,162,73,0.15); color: var(--primary); }
-  .pill-warm { background: rgba(180,100,60,0.15); color: #c87a50; }
-
-  .star-badge {
-    position: absolute; bottom: -10px; right: -8px;
-    background: #d4873a; color: white;
-    padding: 5px 10px; border-radius: 8px;
-    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-    display: flex; align-items: center; gap: 4px;
-  }
-
-  .stat-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
-  .stat-big  { font-family: var(--font-display); font-size: 28px; font-weight: 300; color: var(--primary); }
-  .stat-label { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
-
-  .stat-bar { height: 3px; background: rgba(212,162,73,0.1); border-radius: 2px; margin-top: 8px; overflow: hidden; }
-  .stat-bar-fill {
-    height: 100%; border-radius: 2px;
-    background: linear-gradient(90deg, var(--primary), #e8c170);
-    width: 0%; transition: width 1.5s cubic-bezier(0.23,1,0.32,1) 0.5s;
-  }
-  .stat-bar-fill.visible { width: 78%; }
-
-  .mini-chart { height: 40px; display: flex; align-items: flex-end; gap: 3px; margin-top: 10px; }
-  .mini-chart .bar {
-    flex: 1; background: rgba(212,162,73,0.2); border-radius: 2px 2px 0 0;
-    transform: scaleY(0); transform-origin: bottom;
-    transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
-  }
-  .mini-chart .bar.visible { transform: scaleY(1); }
-  .mini-chart .bar.accent { background: var(--primary); }
-
-  /* ═══ SEARCH BAR ═══ */
-  .search-bar-container {
-    position: absolute; bottom: 8%; left: 50%;
-    transform: translateX(-50%) translateY(30px);
-    opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease; z-index: 20;
-  }
-  .search-bar-container.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  .search-bar {
-    display: flex; align-items: center; gap: 12px;
-    background: oklch(1 0 0/0.08); border: 1px solid oklch(1 0 0/0.1);
-    border-radius: 12px; padding: 14px 24px; min-width: 380px;
-    backdrop-filter: blur(12px);
-  }
-  .search-bar svg { flex-shrink: 0; opacity: 0.4; }
-  .search-bar span { font-family: var(--font-body); font-size: 14px; color: var(--muted); white-space: nowrap; }
-
-  /* ═══ CONTENT BELOW ═══ */
-  .content-after { position: relative; z-index: 2; background: var(--bg); }
-
-  .section-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--line-bright), transparent);
-    max-width: 800px; margin: 0 auto;
-  }
-
-  .timeline-section { max-width: 900px; margin: 0 auto; padding: 120px 40px; }
-
-  .timeline-title {
+  .jmap-title h1 {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 400;
-    text-align: center; margin-bottom: 80px;
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    font-weight: 300; line-height: 1; letter-spacing: -0.02em;
+    color: var(--mj-ink); margin: 0 0 20px;
   }
-  .timeline-title.vis { opacity: 1; transform: none; }
-
-  .timeline-item {
-    display: grid; grid-template-columns: 80px 1px 1fr;
-    gap: 32px; margin-bottom: 64px;
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .timeline-item.vis { opacity: 1; transform: none; }
-
-  .tl-year { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; color: var(--primary); padding-top: 4px; text-align: right; }
-
-  .tl-line { background: linear-gradient(180deg, var(--primary), transparent); position: relative; }
-  .tl-line::before {
-    content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
-    width: 7px; height: 7px; border-radius: 50%; background: var(--primary);
+  .jmap-title h1 em { font-style: italic; color: var(--mj-amber); }
+  .jmap-title p {
+    font-family: var(--font-display); font-style: italic; font-weight: 300;
+    font-size: clamp(1rem, 1.8vw, 1.35rem);
+    color: var(--mj-muted); line-height: 1.55;
   }
 
-  .tl-content h3 { font-family: var(--font-display); font-size: 22px; font-weight: 400; margin-bottom: 6px; }
-  .tl-content p  { font-size: 14px; color: var(--muted); line-height: 1.6; max-width: 480px; }
+  /* ── The 3D world ── */
+  .jmap-world {
+    position: relative;
+    width: min(1240px, 94vw);
+    height: min(66vh, 600px);
+    perspective: 1250px;
+    perspective-origin: 50% 42%;
+    will-change: opacity, transform;
+  }
 
-  .journey-cta { text-align: center; padding: 80px 40px 120px; }
-  .journey-cta h2 { font-family: var(--font-display); font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 400; margin-bottom: 32px; }
-  .journey-cta .cta-link {
-    display: inline-block; font-family: var(--font-mono);
-    font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;
-    padding: 16px 32px; background: var(--primary); color: var(--bg);
-    text-decoration: none; transition: all 0.4s ease;
+  /* Perspective floor, tilted away from the camera */
+  .jmap-floor {
+    position: absolute;
+    left: -25%; right: -25%; top: 26%; bottom: -34%;
+    transform: rotateX(64deg);
+    transform-origin: 50% 0%;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right,  rgba(230,160,0,0.13) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(230,160,0,0.13) 1px, transparent 1px);
+    background-size: 7.5% 13%;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 26%, #000 62%, transparent 94%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 26%, #000 62%, transparent 94%);
   }
-  .journey-cta .cta-link:hover { background: transparent; color: var(--primary); box-shadow: inset 0 0 0 1px var(--primary); }
 
-  @media (max-width: 900px) {
-    .card-brand    { left: 3%; top: 14%; }
-    .card-festival { right: 2%; top: 10%; }
-    .card-stats    { left: 2%; bottom: 20%; }
-    .card-film     { right: 2%; bottom: 14%; }
-    .stat-badge    { font-size: 9px; padding: 5px 9px; }
-    .badge-1 { left: 22%; } .badge-2 { right: 10%; }
-    .badge-3 { left: 18%; } .badge-4 { right: 18%; }
+  /* Camera layer — nudged by scroll to feel like travel */
+  .jmap-camera {
+    position: absolute; inset: 0;
+    will-change: transform;
   }
-  @media (max-width: 700px) {
-    .search-bar { min-width: 280px; padding: 12px 18px; }
-    .search-bar span { font-size: 12px; }
+
+  .jmap-svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    overflow: visible; pointer-events: none;
   }
-  @media (max-width: 600px) {
-    .floating-card { display: none; }
-    .stat-badge    { display: none; }
-    .headline      { font-size: 2.8rem; }
-    .search-bar    { min-width: auto; width: 90vw; }
-    .timeline-item { grid-template-columns: 50px 1px 1fr; gap: 16px; }
-    .timeline-section { padding: 80px 20px; }
+  .jmap-base {
+    stroke: rgba(230,160,0,0.17); stroke-width: 1; fill: none;
+  }
+  .jmap-live {
+    stroke: var(--mj-amber); fill: none; stroke-linecap: round;
+    filter: drop-shadow(0 0 6px rgba(230,160,0,0.55));
+  }
+
+  /* ── Nodes ── */
+  .jmap-node {
+    position: absolute;
+    transform-origin: 50% 50%;
+    z-index: 4;
+    background: none; border: 0; padding: 0;
+    font: inherit; color: inherit; text-align: center;
+    cursor: pointer;
+    will-change: opacity, transform, filter;
+  }
+  .jmap-node:focus-visible { outline: 2px solid var(--mj-amber); outline-offset: 10px; border-radius: 4px; }
+
+  .jmap-dot {
+    position: relative; display: block;
+    width: 14px; height: 14px; margin: 0 auto;
+    border-radius: 50%;
+    border: 1.5px solid rgba(230,160,0,0.45);
+    background: var(--bg);
+  }
+  .jmap-dot::after {
+    content: ''; position: absolute; inset: 3px;
+    border-radius: 50%; background: var(--mj-amber); opacity: 1;
+  }
+  html.js:not(.reduce-motion) .jmap-dot::after { opacity: 0; }
+
+  .jmap-halo {
+    position: absolute; left: 50%; top: 7px;
+    width: 46px; height: 46px; margin: -23px 0 0 -23px;
+    border-radius: 50%; border: 1px solid rgba(230,160,0,0.5);
+    opacity: 0; pointer-events: none;
+  }
+
+  /* Plate that carries the text — slight tilt sells the depth */
+  .jmap-plate {
+    position: absolute; left: 50%; top: 26px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    padding: 9px 16px 10px;
+    border: 1px solid var(--mj-rule);
+    border-left: 2px solid var(--mj-amber);
+    background: oklch(0.155 0.022 52 / 0.92);
+    opacity: 1;
+  }
+  html.js:not(.reduce-motion) .jmap-plate { opacity: 0; }
+
+  .jmap-plate .ji-year {
+    font-family: var(--font-mono); font-size: 8.5px;
+    letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--mj-amber); display: block; margin-bottom: 4px;
+  }
+  .jmap-plate .ji-brand {
+    font-family: var(--font-display); font-size: 1.35rem;
+    font-weight: 500; color: var(--mj-ink);
+    display: block; line-height: 1;
+  }
+  .jmap-plate .ji-role {
+    font-family: var(--font-mono); font-size: 8px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--mj-muted); display: block; margin-top: 5px;
+  }
+  .jmap-plate .ji-more {
+    font-family: var(--font-mono); font-size: 7.5px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--mj-amber); display: block; margin-top: 7px; opacity: 0;
+  }
+  .jmap-node.is-active .jmap-plate .ji-more { opacity: 0.85; }
+
+  /* ── Node states (classes derived purely from scroll progress) ── */
+  html.js:not(.reduce-motion) .jmap-node { transition: opacity 0.4s ease, filter 0.4s ease; }
+  html.js:not(.reduce-motion) .jmap-dot,
+  html.js:not(.reduce-motion) .jmap-dot::after,
+  html.js:not(.reduce-motion) .jmap-plate,
+  html.js:not(.reduce-motion) .jmap-halo {
+    transition: opacity 0.42s ease, border-color 0.42s ease,
+                box-shadow 0.42s ease, transform 0.42s ease;
+  }
+  html.js:not(.reduce-motion) .jmap-node.is-visited .jmap-dot,
+  html.js:not(.reduce-motion) .jmap-node.is-active  .jmap-dot { border-color: rgba(230,160,0,0.95); }
+  html.js:not(.reduce-motion) .jmap-node.is-active  .jmap-dot { box-shadow: 0 0 18px rgba(230,160,0,0.55); }
+  html.js:not(.reduce-motion) .jmap-node.is-visited .jmap-dot::after { opacity: 0.8; }
+  html.js:not(.reduce-motion) .jmap-node.is-active  .jmap-dot::after { opacity: 1; }
+  html.js:not(.reduce-motion) .jmap-node.is-visited .jmap-plate { opacity: 0.45; }
+  html.js:not(.reduce-motion) .jmap-node.is-active  .jmap-plate { opacity: 1; }
+  html.js:not(.reduce-motion) .jmap-node.is-active  .jmap-halo  { opacity: 0.65; }
+
+  /* ── Readout + ticks ── */
+  .jmap-readout {
+    position: absolute; left: 50%; bottom: 5vh;
+    transform: translateX(-50%);
+    width: min(640px, 88vw); text-align: center;
+    z-index: 9; pointer-events: none;
+  }
+  .jmap-readout p {
+    font-family: var(--font-display); font-style: italic; font-weight: 300;
+    font-size: clamp(1rem, 1.7vw, 1.35rem);
+    color: #BCAE9D; line-height: 1.5; margin: 0; opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .jmap-ticks {
+    position: absolute; left: 50%; bottom: 2vh;
+    transform: translateX(-50%);
+    display: flex; gap: 9px; z-index: 9; pointer-events: none;
+  }
+  .jmap-tick { width: 24px; height: 2px; background: rgba(230,160,0,0.18); transition: background 0.35s ease; }
+  .jmap-tick.on { background: var(--mj-amber); }
+
+  .jmap-readout, .jmap-ticks { display: none; }
+  html.js:not(.reduce-motion) .jmap-readout { display: block; }
+  html.js:not(.reduce-motion) .jmap-ticks   { display: flex; }
+
+  /* ── Detail panel: the old timeline content, folded into the map ── */
+  .jmap-detail {
+    position: fixed; inset: 0; z-index: 3000;
+    background: oklch(0.05 0.01 50 / 0.93);
+    backdrop-filter: blur(5px);
+    display: flex; align-items: center; justify-content: center;
+    padding: 28px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .jmap-detail.open { opacity: 1; pointer-events: auto; }
+
+  .jmap-detail-card {
+    position: relative;
+    width: min(720px, 100%);
+    max-height: 86vh; overflow-y: auto;
+    background: oklch(0.145 0.02 52);
+    border: 1px solid var(--mj-rule);
+    border-left: 3px solid var(--mj-amber);
+    padding: clamp(28px, 4vw, 52px);
+    transform: translateY(14px);
+    transition: transform 0.35s cubic-bezier(0.23,1,0.32,1);
+  }
+  .jmap-detail.open .jmap-detail-card { transform: none; }
+
+  .jmap-detail-year {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--mj-amber); display: block; margin-bottom: 14px;
+  }
+  .jmap-detail-card h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 500; letter-spacing: -0.02em; line-height: 1;
+    color: var(--mj-ink); margin: 0 0 16px;
+  }
+  .jmap-detail-card h2 a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(230,160,0,0.3); }
+  .jmap-detail-card h2 a:hover, .jmap-detail-card h2 a:focus-visible { color: var(--mj-amber); border-bottom-color: var(--mj-amber); }
+
+  .jmap-detail-roles { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; padding: 0; list-style: none; }
+  .jmap-detail-roles li {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--mj-muted); border: 1px solid var(--mj-rule); padding: 6px 14px;
+  }
+  .jmap-detail-theme {
+    font-family: var(--font-display); font-style: italic; font-weight: 300;
+    font-size: clamp(1.05rem, 1.9vw, 1.4rem);
+    color: #BCAE9D; line-height: 1.5; margin: 0 0 26px;
+    padding-bottom: 22px; border-bottom: 1px solid var(--mj-rule);
+  }
+  .jmap-detail-body p {
+    font-size: 14.5px; color: var(--mj-muted);
+    line-height: 1.9; margin: 0 0 16px; max-width: 62ch;
+  }
+  .jmap-detail-body p:last-child { margin-bottom: 0; }
+
+  .jmap-detail-close {
+    position: absolute; top: 16px; right: 18px;
+    background: none; border: 1px solid var(--mj-rule);
+    color: var(--mj-muted); cursor: pointer;
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    padding: 9px 16px; min-height: 44px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+  .jmap-detail-close:hover, .jmap-detail-close:focus-visible { color: var(--mj-amber); border-color: var(--mj-amber); }
+
+  /* ── Static layout (no JS / reduced motion): readable stacked list ── */
+  .jmap-static-list { display: none; }
+  html:not(.js) .jmap-static-list,
+  html.reduce-motion .jmap-static-list {
+    display: block; max-width: 900px; margin: 0 auto; padding: 0 24px 90px;
+  }
+  .jmap-static-item { padding: 40px 0; border-bottom: 1px solid var(--mj-rule); }
+  .jmap-static-item .ji-year {
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--mj-amber); display: block; margin-bottom: 10px;
+  }
+  .jmap-static-item h2 {
+    font-family: var(--font-display); font-size: clamp(1.8rem,4vw,2.8rem);
+    font-weight: 500; color: var(--mj-ink); margin: 0 0 10px; line-height: 1;
+  }
+  .jmap-static-item h2 a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(230,160,0,0.3); }
+  .jmap-static-item .ji-role {
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--mj-muted); display: block; margin-bottom: 14px;
+  }
+  .jmap-static-item p { font-size: 14.5px; color: var(--mj-muted); line-height: 1.85; margin: 0 0 14px; max-width: 62ch; }
+
+  /* ── Case studies ── */
+  .mj-cases { border-top: 1px solid var(--mj-rule); padding: clamp(80px,11vh,130px) clamp(24px,5vw,64px); }
+  .mj-cases-inner { max-width: 1240px; margin: 0 auto; }
+  .mj-cases-head { margin-bottom: clamp(40px,6vh,72px); }
+  .mj-cases-head h2 {
+    font-family: var(--font-display); font-size: clamp(2rem,4vw,3.4rem);
+    font-weight: 300; color: var(--mj-ink); line-height: 1.1; margin-bottom: 14px;
+  }
+  .mj-cases-head p {
+    font-family: var(--font-display); font-style: italic; font-weight: 300;
+    font-size: clamp(1rem,1.6vw,1.25rem); color: var(--mj-muted);
+  }
+  .mj-cases-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(20px,2.5vw,36px); }
+  .mj-case {
+    display: block; text-decoration: none; color: inherit;
+    border: 1px solid var(--mj-rule); overflow: hidden;
+    background: var(--card-bg);
+    transition: border-color 0.4s ease, transform 0.5s cubic-bezier(0.23,1,0.32,1);
+  }
+  .mj-case:hover, .mj-case:focus-visible { border-color: rgba(230,160,0,0.45); transform: translateY(-4px); }
+  .mj-case:focus-visible { outline: 2px solid var(--mj-amber); outline-offset: 3px; }
+  .mj-case-img { aspect-ratio: 4/3; overflow: hidden; }
+  .mj-case-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.8s cubic-bezier(0.23,1,0.32,1); }
+  .mj-case:hover .mj-case-img img { transform: scale(1.03); }
+  .mj-case-body { padding: 20px 22px 24px; }
+  .mj-case-brand {
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.26em;
+    text-transform: uppercase; color: var(--mj-amber); display: block; margin-bottom: 10px;
+  }
+  .mj-case-title {
+    font-family: var(--font-display); font-size: clamp(1.15rem,1.7vw,1.45rem);
+    font-weight: 400; color: var(--mj-ink); line-height: 1.25;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+  }
+
+  /* ── Outside office hours ── */
+  .outside-hours { border-top: 1px solid var(--mj-rule); padding: clamp(80px,11vh,120px) clamp(24px,5vw,64px); }
+  .oh-inner { max-width: 1240px; margin: 0 auto; }
+  .oh-header { margin-bottom: 64px; }
+  .oh-header h2 { font-family: var(--font-display); font-size: clamp(2rem,4vw,3.4rem); font-weight: 300; line-height: 1.1; color: var(--mj-ink); }
+  .oh-header h2 em { font-style: italic; color: var(--mj-amber); }
+  .oh-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--mj-amber); display: block; margin-bottom: 18px; }
+  .oh-item { display: grid; grid-template-columns: 72px 1fr; gap: 0 48px; padding: 48px 0; border-bottom: 1px solid var(--mj-rule); align-items: start; }
+  .oh-item:first-of-type { border-top: 1px solid var(--mj-rule); }
+  .oh-icon { font-size: 38px; line-height: 1; padding-top: 4px; }
+  .oh-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--mj-amber); display: block; margin-bottom: 10px; }
+  .oh-title { font-family: var(--font-display); font-size: clamp(1.4rem,2.4vw,2.2rem); font-weight: 400; line-height: 1.05; margin-bottom: 10px; color: var(--mj-ink); }
+  .oh-desc { font-family: var(--font-display); font-size: clamp(0.95rem,1.4vw,1.15rem); font-weight: 300; font-style: italic; color: oklch(0.65 0.02 70); line-height: 1.6; max-width: 540px; }
+
+  @media (max-width: 860px) {
+    .jmap-world { height: min(58vh, 440px); }
+    .jmap-plate { padding: 7px 12px 8px; }
+    .jmap-plate .ji-brand { font-size: 0.92rem; }
+    .jmap-plate .ji-role  { display: none; }
+    .jmap-floor { background-size: 12% 16%; }
+    .mj-cases-grid { grid-template-columns: 1fr; }
+    .oh-item { grid-template-columns: 52px 1fr; gap: 0 26px; padding: 36px 0; }
+    .oh-icon { font-size: 28px; }
+  }
+  @media (max-width: 1199px) and (min-width: 861px) {
+    .mj-cases-grid { grid-template-columns: repeat(2,1fr); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .jmap-detail, .jmap-detail-card, .mj-case, .mj-case-img img { transition: none !important; }
   }
   </style>
 </head>
 <body>
 
+  <script>
+    /* Set before first paint so the map never flashes the wrong state. */
+    (function () {
+      var de = document.documentElement;
+      de.classList.add('js');
+      try {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          de.classList.add('reduce-motion');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <div id="cursorCircle" class="cursor-circle"></div>
 
-  <!-- ─── HEADER ─── -->
   <header class="site-header">
     <a href="index.html" class="logo logo-rec">
       <span class="rec-dot"></span> Roll No. <span class="slash">/</span> 24
@@ -347,332 +419,479 @@
         <li><a href="index.html">Index</a></li>
         <li><a href="films.html">Films</a></li>
         <li><a href="festivals.html">Festivals</a></li>
-        <li><a href="journey.html" class="active">Journey</a></li>
+        <li><a href="journey.html" class="active" aria-current="page">Journey</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
     <a href="contact.html" class="hire-link">Hire</a>
   </header>
 
-  <!-- ─── SCROLL-PINNED 3D SCENE ─── -->
-  <div class="scroll-runway" id="scrollRunway">
-    <div class="pinned-scene" id="pinnedScene">
+  <main class="mj">
 
-      <!-- Perspective Grid -->
-      <div class="grid-container">
-        <div class="grid-plane" id="gridPlane">
-          <svg viewBox="0 0 1000 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-            <line x1="0"   y1="60"  x2="1000" y2="60"  stroke="rgba(212,162,73,0.08)" stroke-width="0.5"/>
-            <line x1="0"   y1="140" x2="1000" y2="140" stroke="rgba(212,162,73,0.06)" stroke-width="0.5"/>
-            <line x1="0"   y1="240" x2="1000" y2="240" stroke="rgba(212,162,73,0.05)" stroke-width="0.5"/>
-            <line x1="0"   y1="360" x2="1000" y2="360" stroke="rgba(212,162,73,0.04)" stroke-width="0.5"/>
-            <line x1="0"   y1="500" x2="1000" y2="500" stroke="rgba(212,162,73,0.03)" stroke-width="0.5"/>
-            <line x1="100" y1="0"   x2="100"  y2="600" stroke="rgba(212,162,73,0.05)" stroke-width="0.5"/>
-            <line x1="250" y1="0"   x2="250"  y2="600" stroke="rgba(212,162,73,0.05)" stroke-width="0.5"/>
-            <line x1="400" y1="0"   x2="400"  y2="600" stroke="rgba(212,162,73,0.05)" stroke-width="0.5"/>
-            <line x1="500" y1="0"   x2="500"  y2="600" stroke="rgba(212,162,73,0.07)" stroke-width="0.5"/>
-            <line x1="600" y1="0"   x2="600"  y2="600" stroke="rgba(212,162,73,0.05)" stroke-width="0.5"/>
-            <line x1="750" y1="0"   x2="750"  y2="600" stroke="rgba(212,162,73,0.05)" stroke-width="0.5"/>
-            <line x1="900" y1="0"   x2="900"  y2="600" stroke="rgba(212,162,73,0.05)" stroke-width="0.5"/>
-          </svg>
+    <!-- ═══════════ THE CAREER MAP ═══════════
+         Oldest role sits deepest in the frame; the route walks
+         forward in time toward the viewer. Nodes and paths are
+         both built from JMAP_DATA so they stay in lockstep. -->
+    <div class="jmap-runway" id="jmapRunway">
+      <div class="jmap-stage">
+
+        <div class="jmap-title" id="jmapTitle">
+          <span class="jmap-eyebrow">My</span>
+          <h1>Marketing<br><em>Journey</em></h1>
+          <p>Different brands, different worlds.<br>Same love for stories.</p>
         </div>
 
-        <div class="vanish-lines" id="vanishLines">
-          <div class="vanish-line" style="transform:rotate(-25deg);"></div>
-          <div class="vanish-line" style="transform:rotate(-12deg);"></div>
-          <div class="vanish-line" style="transform:rotate(0deg);"></div>
-          <div class="vanish-line" style="transform:rotate(12deg);"></div>
-          <div class="vanish-line" style="transform:rotate(25deg);"></div>
-          <div class="vanish-line" style="transform:rotate(-6deg);opacity:0.5;"></div>
-          <div class="vanish-line" style="transform:rotate(6deg);opacity:0.5;"></div>
-          <div class="vanish-line" style="transform:rotate(18deg);opacity:0.4;"></div>
-          <div class="vanish-line" style="transform:rotate(-18deg);opacity:0.4;"></div>
+        <div class="jmap-world" id="jmapWorld">
+          <div class="jmap-floor" aria-hidden="true"></div>
+          <div class="jmap-camera" id="jmapCamera">
+            <svg class="jmap-svg" id="jmapSvg" viewBox="0 0 100 100"
+                 preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+            <!-- node buttons injected here -->
+          </div>
         </div>
+
+        <div class="jmap-readout" aria-hidden="true"><p id="jmapReadout"></p></div>
+        <div class="jmap-ticks" id="jmapTicks" aria-hidden="true"></div>
+
       </div>
+    </div>
 
-      <!-- Card 1: Brand / Portrait -->
-      <div class="floating-card card-brand" id="cardBrand">
-        <div class="card-img" style="background-image:url('assets/NAV01978.JPG');">
-          <div style="position:absolute;bottom:10px;right:10px;background:oklch(0.13 0.018 50/0.88);border-radius:6px;padding:4px 10px;">
-            <span style="font-family:var(--font-display);font-size:16px;letter-spacing:0.02em;">AaBb</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <h4>Brand Identity</h4>
-          <div class="card-pill pill-gold">Brand Building</div>
-        </div>
-      </div>
+    <!-- Readable fallback: no JS, or reduced motion -->
+    <div class="jmap-static-list" id="jmapStaticList"></div>
 
-      <!-- Card 2: Festival -->
-      <div class="floating-card card-festival" id="cardFestival">
-        <div class="card-img" style="background-image:url('assets/Festival photos/Theyyam/DSC08815.JPG');">
-          <div style="position:absolute;top:8px;left:8px;background:oklch(0.13 0.018 50/0.82);border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(212,162,73,0.8)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </div>
-          <div style="position:absolute;bottom:8px;right:8px;background:rgba(212,162,73,0.9);border-radius:6px;padding:3px 8px;">
-            <span style="font-family:var(--font-mono);font-size:9px;color:#1a1612;letter-spacing:0.05em;">▲ 110%</span>
-          </div>
-          <div style="position:absolute;bottom:8px;left:8px;background:oklch(0.13 0.018 50/0.88);border-radius:6px;padding:3px 8px;">
-            <span style="font-family:var(--font-mono);font-size:8px;color:var(--primary);letter-spacing:0.05em;">22k</span>
-          </div>
+    <!-- ═══════════ SELECTED CASE STUDIES ═══════════ -->
+    <section class="mj-cases" aria-label="Selected case studies">
+      <div class="mj-cases-inner">
+        <div class="mj-cases-head">
+          <h2>Selected Case Studies</h2>
+          <p>A few stories I'm proud to be part of.</p>
         </div>
-        <div class="card-body"><p>Engagement</p></div>
-      </div>
-
-      <!-- Card 3: Centre featured -->
-      <div class="floating-card card-marketplace" id="cardMarketplace">
-        <div class="card-img-wide" style="background-image:url('assets/Festival photos/Masaan holi/0BC524FB-5D7F-4A3E-8C6A-5068E0323119.jpg');border-radius:14px 14px 0 0;">
-          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(255,255,255,0.92);border-radius:10px;padding:8px 16px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,0.15);">
-            <span style="font-family:var(--font-display);font-size:28px;font-weight:300;color:#1a1612;">▲ 2.5x</span><br/>
-            <span style="font-family:var(--font-mono);font-size:9px;color:#8a7e6f;letter-spacing:0.1em;">Visibility</span>
-          </div>
-          <div class="star-badge">★ 4.5</div>
-        </div>
-        <div class="card-body">
-          <h4>Visual Storytelling</h4>
-          <div class="card-pill pill-warm">Festival Coverage</div>
-        </div>
-      </div>
-
-      <!-- Card 4: Stats -->
-      <div class="floating-card card-stats" id="cardStats">
-        <div style="padding:20px;">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-            <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#c87a50,#d4a249);display:flex;align-items:center;justify-content:center;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <div class="mj-cases-grid">
+          <a class="mj-case" href="contact.html">
+            <div class="mj-case-img">
+              <img src="assets/scapia-leapyear.jpg" width="800" height="600"
+                   alt="Still from the Scapia Leap Year campaign film" loading="lazy" decoding="async" />
             </div>
-            <div>
-              <div style="font-family:var(--font-mono);font-size:8px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;">Projects delivered</div>
-              <div style="font-family:var(--font-display);font-size:20px;">200+</div>
+            <div class="mj-case-body">
+              <span class="mj-case-brand">Scapia</span>
+              <span class="mj-case-title">Brand Campaign <span aria-hidden="true">→</span></span>
             </div>
+          </a>
+          <!-- PLACEHOLDER imagery — replace with approved Exploro Club visuals -->
+          <a class="mj-case" href="contact.html">
+            <div class="mj-case-img">
+              <img src="assets/journey/exploro-01.jpg" width="800" height="600"
+                   alt="Travel expedition photograph" loading="lazy" decoding="async" data-placeholder="true" />
+            </div>
+            <div class="mj-case-body">
+              <span class="mj-case-brand">Exploro Club</span>
+              <span class="mj-case-title">Brand Building <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+          <!-- PLACEHOLDER imagery — replace with approved Unacademy visuals -->
+          <a class="mj-case" href="contact.html">
+            <div class="mj-case-img">
+              <img src="assets/film/thumbs/film-02.jpg" width="800" height="600"
+                   alt="Social campaign frame" loading="lazy" decoding="async" data-placeholder="true" />
+            </div>
+            <div class="mj-case-body">
+              <span class="mj-case-brand">Unacademy</span>
+              <span class="mj-case-title">Social Campaign <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ OUTSIDE OFFICE HOURS ═══════════ -->
+    <section class="outside-hours">
+      <div class="oh-inner">
+        <div class="oh-header">
+          <span class="oh-label">Outside Office Hours</span>
+          <h2>Credentials<br><em>from the wild.</em></h2>
+        </div>
+        <div class="oh-item">
+          <div class="oh-icon">🌊</div>
+          <div>
+            <span class="oh-tag">2026 · Certification</span>
+            <h3 class="oh-title">PADI Advanced Open Water Diver</h3>
+            <p class="oh-desc">Because some stories begin 30 metres underwater.</p>
           </div>
-          <div class="stat-row">
-            <span class="stat-big">34.5%</span>
-            <span class="stat-label">growth YoY</span>
+        </div>
+        <div class="oh-item">
+          <div class="oh-icon">📸</div>
+          <div>
+            <span class="oh-tag">Ongoing · Photography</span>
+            <h3 class="oh-title">Festival Photographer</h3>
+            <p class="oh-desc">Featured across India's largest cultural celebrations, documenting traditions where culture meets chaos.</p>
           </div>
-          <div class="stat-bar"><div class="stat-bar-fill" id="statBarFill"></div></div>
-          <div class="mini-chart" id="miniChart">
-            <div class="bar" style="height:35%;"></div>
-            <div class="bar" style="height:50%;"></div>
-            <div class="bar" style="height:40%;"></div>
-            <div class="bar" style="height:65%;"></div>
-            <div class="bar" style="height:55%;"></div>
-            <div class="bar accent" style="height:85%;"></div>
-            <div class="bar accent" style="height:100%;"></div>
+        </div>
+        <div class="oh-item">
+          <div class="oh-icon">🎬</div>
+          <div>
+            <span class="oh-tag">Featured · Film</span>
+            <h3 class="oh-title">Solo Travel Filmmaker</h3>
+            <p class="oh-desc">Featured by Social Samosa for visual storytelling rooted in travel and culture.</p>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Card 5: Film -->
-      <div class="floating-card card-film" id="cardFilm">
-        <div class="card-img" style="background-image:url('assets/film/thumbs/film-01.jpg');">
-          <div style="position:absolute;inset:0;border:2px dashed rgba(100,150,255,0.35);margin:8px;border-radius:4px;pointer-events:none;"></div>
-          <div style="position:absolute;top:10px;right:10px;background:oklch(0.13 0.018 50/0.88);border-radius:6px;padding:3px 8px;">
-            <span style="font-family:var(--font-mono);font-size:9px;color:#6ea0ff;letter-spacing:0.05em;">▲ 30%</span>
-          </div>
-          <div style="position:absolute;bottom:10px;left:10px;background:oklch(0.13 0.018 50/0.88);border-radius:6px;padding:3px 8px;">
-            <span style="font-family:var(--font-mono);font-size:8px;color:var(--muted);letter-spacing:0.05em;">Organic Traffic</span>
-          </div>
-        </div>
-      </div>
+    <section class="cta">
+      <h3 class="reveal">Want to be part of the next chapter?</h3>
+      <a href="contact.html" class="cta-btn reveal">Start a project →</a>
+    </section>
 
-      <!-- Stat Badges -->
-      <div class="stat-badge badge-1" id="badge1">15 Festivals Covered</div>
-      <div class="stat-badge badge-2" id="badge2">200+ Brand Stories</div>
-      <div class="stat-badge badge-3" id="badge3">▲ Since 2016</div>
-      <div class="stat-badge badge-4" id="badge4">4 Countries</div>
+  </main>
 
-      <!-- Headline -->
-      <div class="headline-container" id="headlineContainer">
-        <h1 class="headline">
-          <span class="word" data-step="1">Building</span>
-          <span class="word" data-step="2">brands</span>
-          <span class="break"></span>
-          <span class="word italic" data-step="3">before</span>
-          <span class="word" data-step="3">it</span>
-          <span class="word" data-step="4">became</span>
-          <span class="break"></span>
-          <span class="word italic" data-step="5">my</span>
-          <span class="word" data-step="5">job.</span>
-        </h1>
-        <p class="sub-tag" id="subTag">Roll · 00 / The Journey</p>
-      </div>
-
-      <!-- Search bar -->
-      <div class="search-bar-container" id="searchBar">
-        <div class="search-bar">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <span>What story are we telling next?</span>
-        </div>
-      </div>
-
+  <!-- Detail panel — holds everything the old timeline used to carry -->
+  <div class="jmap-detail" id="jmapDetail" role="dialog" aria-modal="true"
+       aria-labelledby="jmapDetailTitle" hidden>
+    <div class="jmap-detail-card">
+      <button class="jmap-detail-close" id="jmapDetailClose" type="button">Close</button>
+      <span class="jmap-detail-year" id="jmapDetailYear"></span>
+      <h2 id="jmapDetailTitle"></h2>
+      <ul class="jmap-detail-roles" id="jmapDetailRoles"></ul>
+      <p class="jmap-detail-theme" id="jmapDetailTheme"></p>
+      <div class="jmap-detail-body" id="jmapDetailBody"></div>
     </div>
   </div>
 
-  <!-- ─── CONTENT BELOW ─── -->
-  <div class="content-after">
-    <div class="section-divider"></div>
-
-    <section class="timeline-section">
-      <h2 class="timeline-title" id="tlTitle">The path from passion to practice</h2>
-
-      <div class="timeline-item" data-tl>
-        <div class="tl-year">2016</div>
-        <div class="tl-line"></div>
-        <div class="tl-content">
-          <h3>First frame, first festival</h3>
-          <p>Started documenting Durga Puja with a borrowed camera. No brief, no client — just an obsession with light and crowds.</p>
-        </div>
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-headline">
+        <h3>Let's make something unforgettable.</h3>
+        <p>Available worldwide for festival coverage, brand films and commercial campaigns.</p>
       </div>
-
-      <div class="timeline-item" data-tl>
-        <div class="tl-year">2018</div>
-        <div class="tl-line"></div>
-        <div class="tl-content">
-          <h3>Brands started asking</h3>
-          <p>Word spread. Local fashion labels and hospitality brands began commissioning editorial shoots — the hobby became a craft.</p>
-        </div>
+      <div class="footer-col">
+        <p class="col-title">Studio</p>
+        <p class="studio-name">Swarnali Chakraborty</p>
+        <p>India · worldwide</p>
+        <a href="tel:+919073196040">+91 90731 96040</a>
       </div>
-
-      <div class="timeline-item" data-tl>
-        <div class="tl-year">2020</div>
-        <div class="tl-line"></div>
-        <div class="tl-content">
-          <h3>From stills to motion</h3>
-          <p>Picked up cinema. Brand films for lifestyle and beauty clients — same eye, new dimension.</p>
-        </div>
+      <div class="footer-col">
+        <p class="col-title">Elsewhere</p>
+        <a href="https://www.instagram.com/travelwithswarnali/" target="_blank" rel="noopener">@travelwithswarnali</a>
+        <a href="https://www.youtube.com/@travelwithswarnali" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.facebook.com/travelwithswarnali" target="_blank" rel="noopener">Facebook</a>
       </div>
-
-      <div class="timeline-item" data-tl>
-        <div class="tl-year">2022</div>
-        <div class="tl-line"></div>
-        <div class="tl-content">
-          <h3>Cross-border campaigns</h3>
-          <p>Shot across 4 countries. Festival coverage went from local pandals to international stages.</p>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-tl>
-        <div class="tl-year">Now</div>
-        <div class="tl-line"></div>
-        <div class="tl-content">
-          <h3>Roll No. 24</h3>
-          <p>A studio built on patience. End-to-end brand campaigns, editorial, product, and film — for brands that understand the value of waiting for the right frame.</p>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section class="journey-cta">
-      <h2>Ready to tell your brand's story?</h2>
-      <a href="contact.html" class="cta-link">Start a project →</a>
-    </section>
-
-    <footer class="site-footer">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <p class="col-title">The work</p>
-          <a href="films.html">Films</a>
-          <a href="festivals.html">Festivals</a>
-          <a href="journey.html">Journey</a>
-        </div>
-        <div class="footer-col">
-          <h3>Let's make something unforgettable.</h3>
-          <p>Available worldwide for festival coverage, brand films and commercial campaigns.</p>
-        </div>
-        <div class="footer-col">
-          <p class="col-title">Studio</p>
-          <p class="studio-name">Swarnali Chakraborty</p>
-          <p>India · worldwide</p>
-          <a href="tel:+919073196040">+91 90731 96040</a>
-        </div>
-        <div class="footer-col">
-          <p class="col-title">Elsewhere</p>
-          <a href="https://www.instagram.com/travelwithswarnali/" target="_blank" rel="noopener">@travelwithswarnali</a>
-          <a href="https://www.youtube.com/@travelwithswarnali" target="_blank" rel="noopener">YouTube</a>
-          <a href="https://www.facebook.com/travelwithswarnali" target="_blank" rel="noopener">Facebook</a>
-        </div>
-      </div>
-      <p class="footer-bottom">© 2026 — Swarnali Chakraborty · Shot on light &amp; memory</p>
-    </footer>
-  </div>
+    </div>
+    <p class="footer-bottom">© 2026 — Swarnali Chakraborty · Shot on light &amp; memory</p>
+  </footer>
 
   <script src="script.js" defer></script>
 
   <script>
+  /* ══════════════════════════════════════════════════════════
+     JOURNEY MAP
+     One data array drives the SVG geometry, the DOM nodes, the
+     static fallback and the detail panel. x/y are percentages of
+     the world box; d is depth (1 = farthest/oldest, 0 = nearest).
+  ══════════════════════════════════════════════════════════ */
+  var JMAP_DATA = [
+    {
+      key: 'rapido', x: 47, y: 17, d: 1.00,
+      year: 'Before 2020', brand: 'RAPIDO',
+      roles: ['Community & ORM Specialist'],
+      link: 'https://www.instagram.com/rapidoapp/?hl=en',
+      theme: 'Communities before campaigns.',
+      teaser: 'Marketing begins with listening.',
+      body: [
+        'Built Rapido’s online community through content, conversations and reputation management. Contributed to national campaigns including Women’s Day and IPL initiatives while growing visibility through community-first platforms like Quora.',
+        'This is where I learnt that every brand is ultimately built one conversation at a time.'
+      ]
+    },
+    {
+      key: 'unacademy', x: 60, y: 32, d: 0.74,
+      year: '2020 — 2022', brand: 'UNACADEMY',
+      roles: ['Social Media Strategist'],
+      link: 'https://www.instagram.com/unacademy/?hl=en',
+      theme: 'Where storytelling met scale.',
+      teaser: 'Worked on campaigns seen by millions.',
+      body: [
+        'From the Dhoni Film to Sachin Campaigns, IPL, Icon launches and retail store openings — I helped shape social conversations for one of India’s fastest-growing startups.',
+        'Collaborated closely with leadership on brand positioning while building reporting systems that made creative performance measurable.'
+      ]
+    },
+    {
+      key: 'spretail', x: 37, y: 49, d: 0.50,
+      year: '2022', brand: 'S.P. RETAIL',
+      roles: ['Digital Marketing Manager'],
+      link: 'https://www.instagram.com/crocodile_india/?hl=en',
+      theme: 'Learning that marketing isn’t just about ads.',
+      teaser: 'Two UK brands, business goals tied to performance marketing.',
+      body: [
+        'Built integrated campaigns across online and offline channels, improved ROI by over 20%, mentored teams and introduced processes that made campaigns faster, smarter and more measurable.'
+      ]
+    },
+    {
+      key: 'exploro', x: 67, y: 67, d: 0.24,
+      year: '2023 — 2024', brand: 'EXPLORO CLUB',
+      roles: ['Brand Marketing Manager'],
+      link: 'https://www.exploro.club/',
+      theme: 'Building a travel brand from the ground up.',
+      teaser: 'Early-stage startups don’t give you departments. They give you ownership.',
+      body: [
+        'Defined Exploro’s brand voice while building operational systems from scratch. Planned expeditions across multiple destinations, managed partnerships, onboarded travellers, coordinated vendors and turned logistics into seamless experiences.',
+        'Helped shape not just the marketing — but how the company operated.'
+      ]
+    },
+    {
+      key: 'scapia', x: 31, y: 86, d: 0.00,
+      year: '2024 — Present', brand: 'SCAPIA',
+      roles: ['Brand Strategist', 'Brand Video Producer'],
+      link: 'https://www.instagram.com/getscapia/?hl=en',
+      theme: 'Turning ideas into brand moments.',
+      teaser: 'Some campaigns live online. The memorable ones spill into real life.',
+      body: [
+        'Led end-to-end production for IPL campaigns across RCB and Gujarat Titans, transforming strategy into live experiences.',
+        'Produced cultural campaigns featuring Shankar Mahadevan, built creator collaborations with Biswa Kalyan Rath, When Chai Met Toast, and Indian Ocean — while owning everything from concept notes to shoot days, production logistics and final delivery.',
+        'Created Leap Year — an experiential campaign that turned a digital insight into a real-world brand story.'
+      ]
+    }
+  ];
+  </script>
+
+  <script>
   (function () {
-    var runway          = document.getElementById('scrollRunway');
-    var gridPlane       = document.getElementById('gridPlane');
-    var vanishLines     = document.getElementById('vanishLines');
-    var words           = document.querySelectorAll('.headline .word');
-    var subTag          = document.getElementById('subTag');
-    var searchBar       = document.getElementById('searchBar');
-    var cardBrand       = document.getElementById('cardBrand');
-    var cardFestival    = document.getElementById('cardFestival');
-    var cardMarketplace = document.getElementById('cardMarketplace');
-    var cardStats       = document.getElementById('cardStats');
-    var cardFilm        = document.getElementById('cardFilm');
-    var badge1          = document.getElementById('badge1');
-    var badge2          = document.getElementById('badge2');
-    var badge3          = document.getElementById('badge3');
-    var badge4          = document.getElementById('badge4');
-    var statBarFill     = document.getElementById('statBarFill');
-    var miniChart       = document.getElementById('miniChart');
-    var chartBars       = miniChart ? miniChart.querySelectorAll('.bar') : [];
+    'use strict';
 
-    function getProgress() {
-      var rect  = runway.getBoundingClientRect();
-      var total = runway.offsetHeight - window.innerHeight;
-      return Math.max(0, Math.min(1, -rect.top / total));
+    var DATA = window.JMAP_DATA || JMAP_DATA;
+    var de   = document.documentElement;
+
+    /* ── Build the static fallback list for every visitor ── */
+    (function buildStatic() {
+      var host = document.getElementById('jmapStaticList');
+      if (!host) return;
+      var html = '';
+      DATA.forEach(function (n) {
+        html += '<div class="jmap-static-item">' +
+                  '<span class="ji-year">' + n.year + '</span>' +
+                  '<h2><a href="' + n.link + '" target="_blank" rel="noopener">' + n.brand + '</a></h2>' +
+                  '<span class="ji-role">' + n.roles.join(' · ') + '</span>' +
+                  '<p><em>' + n.theme + '</em></p>' +
+                  n.body.map(function (p) { return '<p>' + p + '</p>'; }).join('') +
+                '</div>';
+      });
+      host.innerHTML = html;
+    })();
+
+    /* ── Detail panel (works regardless of motion preference) ── */
+    var detail      = document.getElementById('jmapDetail');
+    var detailClose = document.getElementById('jmapDetailClose');
+    var lastFocus   = null;
+
+    function openDetail(n) {
+      if (!detail) return;
+      document.getElementById('jmapDetailYear').textContent  = n.year;
+      document.getElementById('jmapDetailTitle').innerHTML   =
+        '<a href="' + n.link + '" target="_blank" rel="noopener">' + n.brand + '</a>';
+      document.getElementById('jmapDetailRoles').innerHTML   =
+        n.roles.map(function (r) { return '<li>' + r + '</li>'; }).join('');
+      document.getElementById('jmapDetailTheme').textContent = n.theme;
+      document.getElementById('jmapDetailBody').innerHTML    =
+        n.body.map(function (p) { return '<p>' + p + '</p>'; }).join('');
+      lastFocus = document.activeElement;
+      detail.hidden = false;
+      /* next frame so the transition runs */
+      requestAnimationFrame(function () { detail.classList.add('open'); });
+      if (detailClose) detailClose.focus();
+    }
+    function closeDetail() {
+      if (!detail) return;
+      detail.classList.remove('open');
+      setTimeout(function () { detail.hidden = true; }, 350);
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    if (detailClose) detailClose.addEventListener('click', closeDetail);
+    if (detail) {
+      detail.addEventListener('click', function (e) { if (e.target === detail) closeDetail(); });
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && detail && !detail.hidden) closeDetail();
+    });
+
+    /* Reduced motion / no JS: the static list is the experience. */
+    if (de.classList.contains('reduce-motion')) {
+      document.querySelectorAll('.jmap-static-item h2 a').forEach(function (a, i) {
+        a.addEventListener('click', function (e) {
+          if (e.metaKey || e.ctrlKey) return;
+          e.preventDefault(); openDetail(DATA[i]);
+        });
+      });
+      return;
     }
 
-    function update() {
-      var p = getProgress();
+    /* ══════════ Scroll-scrubbed map ══════════ */
+    var runway  = document.getElementById('jmapRunway');
+    var world   = document.getElementById('jmapWorld');
+    var camera  = document.getElementById('jmapCamera');
+    var svg     = document.getElementById('jmapSvg');
+    var title   = document.getElementById('jmapTitle');
+    var readout = document.getElementById('jmapReadout');
+    var ticksEl = document.getElementById('jmapTicks');
+    if (!runway || !world || !camera || !svg || !title) return;
 
-      gridPlane.classList.toggle('visible',   p > 0.02);
-      vanishLines.classList.toggle('visible', p > 0.06);
+    var SEGS = DATA.length - 1;
 
-      words.forEach(function (w) {
-        var step      = parseInt(w.dataset.step);
-        var threshold = 0.08 + step * 0.1;
-        w.classList.toggle('visible', p > threshold);
-      });
+    /* Depth → how big and how present a node reads */
+    function scaleOf(d) { return 0.60 + (1 - d) * 0.52; }
 
-      cardBrand.classList.toggle('visible',       p > 0.20);
-      cardMarketplace.classList.toggle('visible', p > 0.30);
-      cardFestival.classList.toggle('visible',    p > 0.35);
-      cardStats.classList.toggle('visible',       p > 0.45);
-      cardFilm.classList.toggle('visible',        p > 0.50);
+    /* ── Generate SVG geometry and node buttons from the same data ── */
+    var baseG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    var liveG = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    var livePaths = [];
 
-      badge1.classList.toggle('visible', p > 0.40);
-      badge2.classList.toggle('visible', p > 0.50);
-      badge3.classList.toggle('visible', p > 0.55);
-      badge4.classList.toggle('visible', p > 0.60);
-
-      subTag.classList.toggle('visible',    p > 0.60);
-      searchBar.classList.toggle('visible', p > 0.70);
-
-      statBarFill.classList.toggle('visible', p > 0.50);
-      chartBars.forEach(function (b) { b.classList.toggle('visible', p > 0.50); });
-
-      requestAnimationFrame(update);
+    function curve(a, b) {
+      var dy = (b.y - a.y) * 0.55;
+      return 'M ' + a.x + ' ' + a.y +
+             ' C ' + a.x + ' ' + (a.y + dy) + ', ' + b.x + ' ' + (b.y - dy) +
+             ', ' + b.x + ' ' + b.y;
     }
 
-    requestAnimationFrame(update);
+    for (var s = 0; s < SEGS; s++) {
+      var dStr = curve(DATA[s], DATA[s + 1]);
+      var far  = (DATA[s].d + DATA[s + 1].d) / 2;      /* thinner when further away */
 
-    /* Timeline intersection reveals */
-    var tlItems  = document.querySelectorAll('[data-tl]');
-    var tlTitle  = document.getElementById('tlTitle');
+      var bp = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      bp.setAttribute('d', dStr);
+      bp.setAttribute('class', 'jmap-base');
+      bp.setAttribute('vector-effect', 'non-scaling-stroke');
+      bp.setAttribute('stroke-width', (0.7 + (1 - far) * 0.6).toFixed(2));
+      baseG.appendChild(bp);
 
-    var tlObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('vis'); tlObs.unobserve(e.target); }
-      });
-    }, { threshold: 0.15 });
+      var lp = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      lp.setAttribute('d', dStr);
+      lp.setAttribute('class', 'jmap-live');
+      lp.setAttribute('pathLength', '1');
+      lp.setAttribute('vector-effect', 'non-scaling-stroke');
+      lp.setAttribute('stroke-width', (0.9 + (1 - far) * 0.9).toFixed(2));
+      lp.style.strokeDasharray = '1';
+      lp.style.strokeDashoffset = '1';
+      liveG.appendChild(lp);
+      livePaths.push(lp);
+    }
+    svg.appendChild(baseG);
+    svg.appendChild(liveG);
 
-    tlItems.forEach(function (i) { tlObs.observe(i); });
-    if (tlTitle) tlObs.observe(tlTitle);
+    var nodeEls = DATA.map(function (n, i) {
+      var sc = scaleOf(n.d);
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'jmap-node';
+      btn.setAttribute('data-node', String(i));
+      btn.style.left = n.x + '%';
+      btn.style.top  = n.y + '%';
+      btn.style.transform = 'translate(-50%,-50%) scale(' + sc.toFixed(3) + ')';
+      btn.style.zIndex = String(10 + Math.round((1 - n.d) * 10));
+      btn.innerHTML =
+        '<span class="jmap-halo" aria-hidden="true"></span>' +
+        '<span class="jmap-dot" aria-hidden="true"></span>' +
+        '<span class="jmap-plate">' +
+          '<span class="ji-year">' + n.year + '</span>' +
+          '<span class="ji-brand">' + n.brand + '</span>' +
+          '<span class="ji-role">' + n.roles.join(' · ') + '</span>' +
+          '<span class="ji-more">Read more</span>' +
+        '</span>';
+      btn.setAttribute('aria-label', n.brand + ', ' + n.year + ', ' + n.roles.join(', ') + '. Open details.');
+      btn.addEventListener('click', function () { openDetail(n); });
+      camera.appendChild(btn);
+      return btn;
+    });
+
+    /* Ticks, one per milestone */
+    if (ticksEl) {
+      ticksEl.innerHTML = DATA.map(function () { return '<span class="jmap-tick"></span>'; }).join('');
+    }
+    var ticks = ticksEl ? [].slice.call(ticksEl.children) : [];
+
+    /* ── Scroll → state. Pure function of progress, both directions. ── */
+    var START = 0.14, END = 0.94, DRAW = 0.70;
+    function clamp(v, a, b) { return v < a ? a : (v > b ? b : v); }
+    function range(p, a, b) { return clamp((p - a) / (b - a), 0, 1); }
+    function ease(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+
+    var prevActive = null, prevOff = [], prevLit = -1;
+
+    function render() {
+      var rect = runway.getBoundingClientRect();
+      var scrollable = runway.offsetHeight - window.innerHeight;
+      var p = clamp(-rect.top / Math.max(scrollable, 1), 0, 1);
+
+      /* Title out, world in */
+      var tOut = range(p, 0, 0.085);
+      title.style.opacity    = String(1 - tOut);
+      title.style.transform  = 'translateY(' + (-30 * tOut).toFixed(1) + 'px) scale(' + (1 - 0.07 * tOut).toFixed(4) + ')';
+      title.style.visibility = tOut >= 1 ? 'hidden' : 'visible';
+
+      var wIn = range(p, 0.05, 0.15);
+      world.style.opacity = wIn.toFixed(4);
+
+      /* Segment + local position */
+      var started = p >= START;
+      var raw = (p - START) / ((END - START) / SEGS);
+      var seg, t;
+      if (raw <= 0)        { seg = 0;        t = 0; }
+      else if (raw >= SEGS){ seg = SEGS - 1; t = 1; }
+      else                 { seg = Math.floor(raw); t = raw - seg; }
+
+      for (var i = 0; i < SEGS; i++) {
+        var f = !started ? 0 : i < seg ? 1 : i > seg ? 0 : ease(clamp(t / DRAW, 0, 1));
+        var off = (1 - f).toFixed(4);
+        if (prevOff[i] !== off) { livePaths[i].style.strokeDashoffset = off; prevOff[i] = off; }
+      }
+
+      var arrived = !started ? 0 : (t >= DRAW ? seg + 1 : seg);
+      if (p >= END) arrived = SEGS;
+      arrived = clamp(arrived, 0, DATA.length - 1);
+
+      /* -1 = journey not begun. Must be part of the key, or the first
+         node never lights on the way down. */
+      var active = started ? arrived : -1;
+
+      if (active !== prevActive) {
+        for (var n = 0; n < nodeEls.length; n++) {
+          nodeEls[n].classList.toggle('is-active',  n === active);
+          nodeEls[n].classList.toggle('is-visited', active >= 0 && n < active);
+        }
+        if (readout) {
+          readout.textContent   = active >= 0 ? (DATA[active].teaser || '') : '';
+          readout.style.opacity = active >= 0 ? '1' : '0';
+        }
+        prevActive = active;
+      }
+
+      /* Camera drifts toward the node in play — sells travel through depth */
+      if (camera) {
+        var cur  = DATA[Math.max(active, 0)];
+        var driftX = (50 - cur.x) * 0.10;
+        var driftY = (50 - cur.y) * 0.10;
+        var zoom   = 1 + range(p, START, END) * 0.05;
+        camera.style.transform =
+          'translate(' + driftX.toFixed(2) + '%, ' + driftY.toFixed(2) + '%) scale(' + zoom.toFixed(4) + ')';
+      }
+
+      var lit = started ? active + 1 : 0;
+      if (lit !== prevLit) {
+        for (var k = 0; k < ticks.length; k++) ticks[k].classList.toggle('on', k < lit);
+        prevLit = lit;
+      }
+    }
+
+    var queued = false;
+    function onScroll() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () { queued = false; render(); });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () {
+      prevActive = null; prevOff = []; prevLit = -1;
+      onScroll();
+    }, { passive: true });
+    window.addEventListener('orientationchange', onScroll, { passive: true });
+
+    render();
   })();
   </script>
 
